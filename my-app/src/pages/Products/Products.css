@@ -1,0 +1,161 @@
+.product-heading-section {
+  width: 100%;
+  padding: 80px 0px 20px 0px;
+  text-align: center;
+  background: #fff;
+}
+
+.product-heading-section .main-heading {
+  font-size: 52px;
+  font-weight: 800;
+  color: #000;
+  margin-bottom: 15px;
+}
+
+.product-heading-section .main-heading .red {
+  color: #e60000;
+}
+
+.product-heading-section .sub-heading {
+  font-size: 20px;
+  color: #555;
+  margin-top: 10px;
+  max-width: 850px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+
+
+
+
+
+
+
+.product-page {
+  display: flex;
+  gap: 40px;
+  padding: 40px 50px;
+  background: #fff;
+}
+
+/* LEFT SIDEBAR */
+.product-left {
+  width: 260px;
+  background: #f7f7f7;
+  padding: 25px;
+  border-radius: 12px;
+}
+
+.sidebar-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.sidebar-list {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar-list li {
+  padding: 12px 15px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  background: #fff;
+  border: 1px solid #ddd;
+  transition: 0.3s;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.sidebar-list li:hover {
+  border-color: #d62828;
+}
+
+.sidebar-list li.active {
+  background: #ffe5e5;
+  border: 2px solid #d62828;
+}
+
+/* RIGHT CONTENT */
+.product-right {
+  flex: 1;
+}
+
+.label {
+  color: #d62828;
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+.title {
+  font-size: 38px;
+  font-weight: 800;
+  margin-bottom: 15px;
+}
+
+.desc {
+  font-size: 18px;
+  color: #444;
+  line-height: 1.7;
+  margin-bottom: 25px;
+}
+
+.benefits-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.benefits-list {
+  list-style: disc;
+  margin-left: 20px;
+  margin-bottom: 25px;
+}
+
+.benefits-list li {
+  margin-bottom: 10px;
+  font-size: 17px;
+  color: #333;
+}
+
+/* Buttons */
+.btn-row {
+  display: flex;
+  gap: 15px;
+}
+
+.details-btnn {
+  padding: 10px 22px;
+  border-radius: 8px;
+  background: #222;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+
+.demo-btn {
+  padding: 10px 22px;
+  border-radius: 8px;
+  background: #d62828;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  .product-page {
+    flex-direction: column;
+  }
+
+  .product-left {
+    width: 100%;
+  }
+}

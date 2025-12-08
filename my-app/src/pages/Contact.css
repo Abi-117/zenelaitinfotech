@@ -1,0 +1,220 @@
+/* ================= CONTACT PAGE MAIN ================= */
+.contact-page {
+  min-height: 100vh;
+  justify-content: center;
+}
+
+.contact-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 6rem 1rem 2rem;
+}
+
+/* ================ HERO SECTION ================== */
+.contact-hero {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.contact-hero h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.contact-hero p {
+  font-size: 1.2rem;
+  color: #555;
+}
+
+/* ================ GRID MAIN ================ */
+.contact-grid {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+/* LEFT COLUMN */
+.left-column {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 55%;
+}
+
+/* RIGHT COLUMN */
+.contact-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* =============== FORM CARD =============== */
+.contact-form-card {
+  flex: 1;
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+.contact-form-card h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.contact-form-card label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.contact-form-card input,
+.contact-form-card textarea {
+  margin-top: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  outline: none;
+}
+
+.contact-form-card button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  border: none;
+  background-color: #d62828;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+/* =============== RIGHT SIDE =============== */
+.contact-image img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.contact-info-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+.contact-info-card h2 {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+}
+
+.info-item {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.info-icon {
+  font-size: 1.5rem;
+  color: #d62828;
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+.business-hours-card {
+  background: linear-gradient(135deg, #f9e2e2, #ffd1b3);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+/* =============== MAP SECTION =============== */
+.map-page {
+  text-align: center;
+  padding: 2rem;
+}
+
+.map-container {
+  margin-top: 1.5rem;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+/* ===================== RESPONSIVE ====================== */
+
+/* ----------- TABLETS BELOW 1024px ----------- */
+@media (max-width: 1024px) {
+  .contact-grid {
+    flex-direction: column;
+  }
+
+  .left-column {
+    width: 100%;
+  }
+
+  .contact-image img {
+    height: 230px;
+  }
+}
+
+/* ----------- MOBILE BELOW 768px ----------- */
+@media (max-width: 768px) {
+  .contact-hero h1 {
+    font-size: 2.4rem;
+  }
+
+  .contact-hero p {
+    font-size: 1rem;
+  }
+
+  .contact-form-card {
+    padding: 1.5rem;
+  }
+
+  .contact-image img {
+    height: 200px;
+  }
+
+  .info-item {
+    align-items: flex-start;
+  }
+}
+
+/* ----------- SMALL MOBILES BELOW 480px ----------- */
+@media (max-width: 480px) {
+  .contact-hero h1 {
+    font-size: 2rem;
+  }
+
+  .contact-hero p {
+    font-size: 0.9rem;
+  }
+
+  .contact-form-card input,
+  .contact-form-card textarea {
+    font-size: 0.9rem;
+    padding: 0.65rem 0.9rem;
+  }
+
+  .contact-form-card button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .info-item {
+    flex-direction: row;
+  }
+
+  .contact-info-card h2 {
+    font-size: 1.4rem;
+  }
+}

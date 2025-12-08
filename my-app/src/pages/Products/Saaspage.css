@@ -1,0 +1,414 @@
+/* -----------------------------------
+   HERO SECTION
+----------------------------------- */
+.saas-hero {
+  width: 100%;
+  max-width: 1200px;
+  padding: 100px 0px 50px 30px;
+  display: flex;
+  background: linear-gradient(135deg, #f8f9ff 0%, #eef0ff 50%, #ffffff 100%);
+  text-align: justify;
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.saas-hero::before,
+.saas-hero::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.25;
+}
+
+.saas-hero::before {
+  width: 350px;
+  height: 350px;
+  background: #d62828;
+  top: -80px;
+  left: -80px;
+}
+
+.saas-hero::after {
+  width: 300px;
+  height: 300px;
+  background: #4158d0;
+  bottom: -60px;
+  right: -60px;
+}
+
+.hero-saascontent {
+  max-width: 1050px;
+  z-index: 2;
+  animation: fadeUp 0.8s ease;
+}
+
+.saas-content h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.saas-content .subtitle {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 2rem;
+}
+
+/* Buttons */
+.hero-buttons button {
+  padding: 10px 20px;
+  margin: 0 10px;
+  border-radius: 6px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-demo {
+  background-color: #d62828;
+  color: #fff;
+}
+
+.btn-products {
+  background-color: #f77f00;
+  color: #fff;
+}
+
+.btn-demo:hover,
+.btn-products:hover,
+.details-btn:hover {
+  opacity: 0.9;
+}
+
+/* CTA Button */
+.details-btn {
+  padding: 10px 25px;
+  background-color: #0070f3;
+  color: #fff;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  margin-top: 1rem;
+}
+
+/* -----------------------------------
+   DASHBOARD SECTION
+----------------------------------- */
+.saas-dashboard {
+  margin: 3rem auto;
+  padding: 2rem;
+  max-width: 1100px;
+
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+.saas-dashboard h2 {  
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  color: #d62828;
+}
+
+/* -----------------------------------
+   KEY FEATURES SECTION
+----------------------------------- */
+.key-featureslisted {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.key-features-img {
+  width: 100%;
+  max-width: 450px;
+  opacity: 0.85;
+  border-radius: 12px;
+}
+
+/* List */
+.key-featureslisted ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.key-featureslisted ul li {
+  position: relative;
+  font-size: 16px;
+  margin-bottom: 12px;
+  padding-left: 28px;
+  opacity: 0;
+  transform: translateY(15px);
+  animation: fadeInUp 0.6s forwards;
+}
+
+.key-featureslisted ul li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #d62828;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/* List animation delays */
+.key-featureslisted ul li:nth-child(1) { animation-delay: 0.2s; }
+.key-featureslisted ul li:nth-child(2) { animation-delay: 0.4s; }
+.key-featureslisted ul li:nth-child(3) { animation-delay: 0.6s; }
+.key-featureslisted ul li:nth-child(4) { animation-delay: 0.8s; }
+.key-featureslisted ul li:nth-child(5) { animation-delay: 1s; }
+.key-featureslisted ul li:nth-child(6) { animation-delay: 1.2s; }
+.key-featureslisted ul li:nth-child(7) { animation-delay: 1.4s; }
+.key-featureslisted ul li:nth-child(8) { animation-delay: 1.6s; }
+.key-featureslisted ul li:nth-child(9) { animation-delay: 1.8s; }
+.key-featureslisted ul li:nth-child(10) { animation-delay: 2s; }
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Decoration */
+.key-featureslisted::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 80px;
+  height: 80px;
+  opacity: 0.1;
+}
+.perfect-for{
+
+  padding: 1rem 4rem;
+
+}
+.perfect-for
+ h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #d62828;}
+
+/* -----------------------------------
+   AUDIENCE SECTION
+----------------------------------- */
+.audience-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.audience-card {
+  flex: 1 1 30%;
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  max-width: 300px;
+}
+
+/* -----------------------------------
+   MOBILE RESPONSIVE
+----------------------------------- */
+@media (max-width: 768px) {
+
+  /* HERO */
+  .saas-hero {
+    padding: 70px 20px 40px 20px;
+    flex-direction: column;
+    text-align: justify;
+  }
+
+  .hero-saascontent {
+    max-width: 90%;
+    margin: 0 auto;
+  }
+
+  .saas-content h1 {
+    font-size: 2.2rem;
+  }
+
+  .saas-content .subtitle {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-buttons button {
+    width: 100%;
+    max-width: 260px;
+    margin: 6px auto;
+    display: block;
+  }
+
+  /* KEY FEATURES */
+  /* KEY FEATURES */
+.key-featureslisted {
+  flex-direction: column-reverse;
+  text-align: justify;
+  gap: 1.5rem;
+}
+
+.key-features-img {
+  max-width: 85%;
+}
+
+/* FIXED BULLET ALIGNMENT */
+.key-featureslisted ul li {
+  padding-left: 28px; /* keep spacing */
+}
+
+.key-featureslisted ul li::before {
+  left: 0; /* stay left */
+  top: 0;
+  transform: none; /* remove centering */
+  position: absolute;
+}
+
+
+  /* AUDIENCE */
+  .audience-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .audience-card {
+    max-width: 90%;
+  }
+}
+.why-saas {
+  max-width: 1200px;
+  margin: 3rem auto;
+  padding: 2.5rem;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.4);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);}
+
+.why-saas h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: #d62828;
+  margin-bottom: 1.8rem;
+}
+
+.why-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.why-card {
+  flex: 1 1 250px;
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+/* Table Styling */
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.1);
+  transition: 0.3s ease;
+}
+
+/* Header */
+.compare-table th {
+  background: linear-gradient(135deg, #f4f4f4, #fafafa);
+  font-weight: 700;
+  color: #2c2c2c;
+  padding: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid #e4e4e4;
+  
+
+}
+
+/* Rows */
+.compare-table td {
+  padding:1rem;
+  font-size: 16px;
+  color: #333;
+  background: #fff;
+  
+ 
+}
+
+/* Row Hover Highlight */
+.compare-table tbody tr:hover td {
+  background: #fff7f7;
+}
+
+/* Left Column Highlight (Feature column) */
+.compare-table td:first-child {
+  font-weight: 600;
+
+}
+
+/* Zebra striping */
+.compare-table tbody tr:nth-child(even) td {
+  background: #fcfcfc;
+}
+
+/* Soft Bottom Border */
+.compare-table td {
+  border-bottom: 1px solid #eee;
+}
+
+/* Last row border remove */
+.compare-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .compare-table th,
+  .compare-table td {
+    font-size: 14px;
+    padding: 0.8rem;
+  }
+}
+.saas-testimonials {
+  max-width: 1100px;
+  margin: 3rem auto;
+  padding: 2rem;
+}
+
+.saas-testimonials h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: #d62828;
+  margin-bottom: 2rem;
+}
+
+.testimonial-grid {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.testimonial-card {
+  flex: 1 1 280px;
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  font-style: italic;
+}

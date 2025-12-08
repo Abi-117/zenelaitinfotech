@@ -1,0 +1,378 @@
+/* ---------------- HERO SECTION ---------------- */
+
+.crm-hero {
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+  padding: 100px 40px 60px 40px;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, #f8f9ff 0%, #eef0ff 50%, #ffffff 100%);
+  text-align: justify;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background glow shapes */
+.crm-hero::before,
+.crm-hero::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.25;
+}
+
+.crm-hero::before {
+  width: 350px;
+  height: 350px;
+  background: #d62828;
+  top: -80px;
+  left: -80px;
+}
+
+.crm-hero::after {
+  width: 300px;
+  height: 300px;
+  background: #4158d0;
+  bottom: -60px;
+  right: -60px;
+}
+
+/* HERO TEXT */
+.crm-hero h1 {
+  font-size: 2.8rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  z-index: 2;
+}
+
+.crm-hero h2 {
+  font-size: 1.8rem;
+  color: #d62828;
+  margin-bottom: 1.5rem;
+  z-index: 2;
+}
+
+.crm-hero .subtitle {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+  max-width: 1200px;
+  z-index: 2;
+}
+
+/* HERO BUTTONS */
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  z-index: 2;
+}
+
+.hero-buttons button {
+  padding: 12px 25px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.btn-demo {
+  background-color: #d62828;
+  color: #fff;
+  box-shadow: 0 5px 14px rgba(214, 40, 40, 0.3);
+}
+
+.btn-services {
+  background-color: #f77f00;
+  color: #fff;
+}
+
+.btn-demo:hover,
+.btn-services:hover {
+  transform: translateY(-3px);
+  opacity: 0.9;
+}
+
+
+/* ---------------- CRM BENEFITS SECTION ---------------- */
+
+.crm-benefits {
+  margin: 1rem auto;
+  padding: 2rem;
+  max-width: 1100px;
+  background: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+.crm-benefits h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #d62828;
+}
+
+/* 2 Column Layout */
+.crm-benefits-wrapper {
+ display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.crm-benefits-img {
+  width: 100%;
+  max-width: 430px;
+  height: 300px;
+  opacity: 0.9;
+  border-radius: 12px;
+}
+
+/* Bullet List */
+.crm-benefits ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.crm-benefits ul li {
+position: relative;
+  font-size: 18px;
+  margin-bottom: 12px;
+  padding-left: 28px;
+  opacity: 0;
+  transform: translateY(15px);
+  animation: fadeInUp 0.6s forwards;
+}
+
+.crm-benefits-wrapper ul li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  color: #d62828;
+  font-weight: bold;
+
+}
+
+.crm-benefits ul li:nth-child(1) { animation-delay: 0.2s; }
+.crm-benefits ul li:nth-child(2) { animation-delay: 0.4s; }
+.crm-benefits ul li:nth-child(3) { animation-delay: 0.6s; }
+.crm-benefits ul li:nth-child(4) { animation-delay: 0.8s; }
+.crm-benefits ul li:nth-child(5) { animation-delay: 1s; }
+.crm-benefits ul li:nth-child(6) { animation-delay: 1.2s; }
+
+@keyframes fadeInUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.crm-perfect-for {
+   padding: 1rem 4rem; /* a bit more spacing for emphasis */
+
+}
+
+.crm-perfect-for h2 {
+ font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #d62828;
+
+}
+
+.audience-grid {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center; /* center cards */
+}
+
+.audience-card {
+  flex: 1 1 250px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08); /* slightly deeper shadow */
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.audience-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+.audience-card h4 {
+  margin-bottom: 0.8rem;
+}
+
+.audience-card p {
+  color: #555555;
+  line-height: 1.5;
+}
+
+.crm-cta {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: #f1f1f1;
+}
+
+.details-btn {
+  padding: 12px 28px;
+  background-color: #0070f3;
+  color: #fff;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  margin-top: 1rem;
+}
+
+.details-btn:hover {
+  opacity: 0.9;
+}
+
+
+/* ---------------- RESPONSIVE ---------------- */
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .crm-hero {
+    padding: 70px 20px 40px 20px;
+    flex-direction: column;
+    text-align: justify;
+  }
+
+  .crm-benefits-wrapper {
+   flex-direction: column;
+    text-align: justify;
+ 
+  }
+
+  .crm-benefits-img {
+    margin: auto;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+
+  .crm-hero {
+    padding: 70px 20px;
+  }
+
+  .crm-hero h1 {
+    font-size: 2rem;
+  }
+
+  .crm-hero h2 {
+    font-size: 1.4rem;
+  }
+
+  .crm-hero .subtitle {
+    font-size: 1rem;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .hero-buttons button {
+    width: 100%;
+    max-width: 260px;
+  }
+
+  .crm-benefits-img {
+    max-width: 80%;
+  }
+
+  .crm-benefits-wrapper ul {
+    text-align: justify;
+  }
+
+  .crm-benefits-wrapper ul li {
+   padding-left: 28px; 
+  }
+
+  .crm-benefits-wrapper ul li::before {
+  
+    transform: translateX(-50%);
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+
+  .crm-hero h1 {
+    font-size: 1.7rem;
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+  }
+
+  .hero-buttons button {
+    padding: 10px 18px;
+    font-size: 14px;
+  }
+}
+.why-erp {
+  max-width: 1100px;
+  margin: 2rem auto;
+  padding: 2rem;
+}
+
+.why-erp h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: #d62828;
+  margin-bottom: 1.8rem;
+}
+
+.why-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.why-card {
+  flex: 1 1 200px;       /* smaller than 250px */    
+  background: #ffffff;
+  padding: 1.2rem;       /* reduced padding */
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.why-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+.why-card h4 {
+  margin-bottom: 0.6rem; /* slightly smaller spacing */
+  color: #d62828;
+  font-size: 1.1rem;     /* optional: smaller font like CRM */
+}
+
+.why-card p {
+  color: #555555;
+  line-height: 1.4;      /* slightly tighter line height */
+  font-size: 0.95rem;    /* smaller than original */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .why-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .why-card {
+    flex: 1 1 80%;
+    max-width: 90%;
+  }
+}

@@ -1,0 +1,162 @@
+/* ---------------- LOGO ---------------- */
+.logo {
+  height: 70px;
+  width: 120px;
+  object-fit: contain;
+  margin-left: 20px;
+}
+
+/* ---------------- NAVBAR CONTAINER ---------------- */
+.nav-container {
+  width: 100%;
+  background: white;
+  padding: 8px 0;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  justify-content: center;
+}
+
+/* ---------------- NAV CONTENT ---------------- */
+.nav-content {
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* ---------------- NAV LINKS ---------------- */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  font-size: 17px;
+  font-weight: 500;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: #111;
+  transition: 0.3s;
+}
+
+.nav-links li:hover a {
+  color: #d62828;
+}
+
+.nav-links .active a {
+  color: #d62828;
+  font-weight: 600;
+}
+
+/* ---------------- BUTTON ---------------- */
+.btn {
+  padding: 12px 30px;
+  border: none;
+  border-radius: 8px;
+  background-color: #d62828;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background-color: #4285f4;
+}
+
+/* ---------------- HAMBURGER MENU ---------------- */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+}
+
+.hamburger .line {
+  width: 25px;
+  height: 3px;
+  background-color: #111;
+  transition: all 0.3s ease;
+}
+
+/* Hamburger animation when open */
+.hamburger.open .line:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.open .line:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.open .line:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* ---------------- MOBILE RESPONSIVE ---------------- */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
+    background: white;
+    position: absolute;
+    top: 45px; /* navbar height */
+    left: 0;
+    right: 0;
+    padding: 15px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    z-index: 998;
+  }
+
+  .nav-links.active {
+    display: flex !important; /* force show on mobile */
+  }
+
+  .nav-links li {
+    margin: 5px 0;
+  }
+
+  .btn {
+    width: 90%;
+    max-width: 300px;
+    margin: 10px auto;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .nav-content {
+    justify-content: space-between;
+    position: relative;
+  }
+
+  .logo {
+    height: 55px;
+  }
+}
+
+/* ---------------- GENERIC LINK ---------------- */
+.linkcolour {
+  text-decoration: none;
+  color: #fff;
+}
+
+/* Prevent horizontal overflow */
+body {
+  overflow-x: hidden;
+}
