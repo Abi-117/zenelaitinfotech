@@ -45,7 +45,7 @@
 }
 
 .footer-logo {
-  width: 90px;
+  width: 100px;
   height: 40px;
   border-radius: 20px;
   background-color: white;
@@ -53,10 +53,11 @@
 }
 
 .footerlogo {
-  width: 50px;
-  height: 20px;
-  border-radius: 10px;
+  width: 100px;
+  height: 80px;
+  border-radius: 50px;
   object-fit: cover;
+
 }
 
 .footer-text {
@@ -70,15 +71,17 @@
 .footer-bottom {
   text-align: center;
   font-size: 13px;
-  padding: 8px 0px 0px 0px ;
   color: #555;
   background-color: #fdecec;
+  height: 30px;
+  align-items: center;
+  padding-top: 10px;
 }
 
 .footer-para {
   display: flex;
-  justify-content: center;
-  text-align: center;
+  color: white;
+ 
 }
 
 /* ---------------- RESPONSIVE ---------------- */

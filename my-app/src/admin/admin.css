@@ -1,0 +1,87 @@
+.admin-dashboard {
+  background: #f5f5f5;
+  min-height: 100vh;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+/* NAVBAR */
+.admin-navbar {
+  background: linear-gradient(to right, #0c0000, #6a0000);
+  padding: 20px 40px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admin-navbar .logo {
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.admin-nav-links {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+
+.admin-nav-links li {
+  cursor: pointer;
+  font-size: 18px;
+  transition: 0.3s;
+}
+
+.admin-nav-links li:hover {
+  color: #ff4d4d;
+}
+
+.logout-btn {
+  background: #ff1a1a;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.logout-btn:hover {
+  background: #cc0000;
+}
+
+/* TITLE */
+.admin-title {
+  text-align: center;
+  margin: 40px 0;
+  font-size: 32px;
+  color: #222;
+}
+
+/* CARDS */
+.admin-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  width: 90%;
+  margin: auto;
+}
+
+.admin-card {
+  background: white;
+  padding: 40px 20px;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transition: 0.3s;
+  border-left: 6px solid #ff2b2b;
+}
+
+.admin-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}

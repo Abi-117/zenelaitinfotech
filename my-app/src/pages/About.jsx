@@ -8,6 +8,7 @@ import { Target, Eye, Award, Users } from "lucide-react";
 const AboutHero = () => {
  useEffect(() => {
   const elements = document.querySelectorAll(".fade-slide, .about-stroybg");
+  
 
   const observer = new IntersectionObserver(
     (entries) => {

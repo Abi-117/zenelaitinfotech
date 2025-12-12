@@ -21,6 +21,17 @@ export default function Footer() {
             Leading provider of enterprise software
             solutions for businesses worldwide.
           </p>
+          <p className="footer-para"
+          style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+          Developed by{" "}
+          <a
+            href="https://www.blizzencreations.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img className="footerlogo" src={Logo1} alt="Blizzen Creations" />
+          </a>
+  </p>
         </div>
 
         {/* PRODUCTS */}
@@ -61,22 +72,8 @@ export default function Footer() {
       </div>
 
       <div className="footer-bottom">
-  © 2025 Zenelait. All Rights Reserved.
-
-  <p
-    className="footer-para"
-    style={{ display: "flex", alignItems: "center", gap: "5px" }}
-  >
-    Developed by{" "}
-    <a
-      href="https://www.blizzencreations.com/"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <img className="footerlogo" src={Logo1} alt="Blizzen Creations" />
-    </a>
-  </p>
-</div>
+          © 2025 Zenelait. All Rights Reserved.
+     </div>
 
     </footer>
   );

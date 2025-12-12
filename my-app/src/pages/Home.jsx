@@ -77,7 +77,7 @@ export default function Home() {
     Smart, Scalable Solutions for Your Business.
   </p>
 
-  <button className="explore-btn" onClick={() => navigate("/contact")}>
+  <button className="explore-btn" onClick={() => navigate("/about")}>
     <span>Explore More</span>
     <span className="arrow-circle">→</span>
   </button>
