@@ -1,4 +1,517 @@
+/* FULL WIDTH HERO BACKGROUND ANIMATION */
+.body
+{
+  width: 100%;
+}
+.hero-container-full {
+  width: 100%;
+  padding: 100px 0px;
+  border-bottom: 3px solid #ff2a2a;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(300deg, #ffffff, #4d0202 40%, #000);
+  /* Modern Black–Red Gradient */
+  transition: 0.6s ease;
+}
+/* Parent container animation */
+.slide-in {
+  display: inline-block;
+}
+
+.slide-in .line {
+  color: white;
+  opacity: 0;
+  transform: translateX(-30px);
+  animation: slideFade 0.9s ease forwards;
+}
+
+/* Delay for each line */
+.slide-in .line:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.slide-in .line:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.slide-in .line:nth-child(3) {
+  animation-delay: 0.5s;
+}
+
+/* Highlight word appears last */
+.highlight {
+  opacity: 0;
+  animation: fadeUp 0.9s ease forwards;
+  animation-delay: 0.8s;
+}
+
+/* Keyframes */
+@keyframes slideFade {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Rotating neon glow border */
+.hero-container-full::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 15px;
+  background: linear-gradient(120deg, #ff0000, #ffffff, #111);
+  filter: blur(12px);
+  opacity: 0.1;
+  animation: rotateGlow 4s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes rotateGlow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(180deg); }
+}
+
+/* Inner content */
+.hero-inner {
+   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 40px;
+}
+.hero-inner:hover .text-block {
+  transform: translateY(-8px);
+  transition: 0.6s ease;
+}
+.right-info-box {
+  width:35%;
+  padding: 25px;
+  background: transparent;
+  border-left: 3px solid #ff0033;
+  border-radius: 8px;
+  color: #ddd;
+  font-size: 1rem;
+  line-height: 1.6;
+  backdrop-filter: blur(4px);
+  transition: 0.4s ease;
+ margin-right: 150px;
+}
+
+/* Hover effect (Accenture-style) */
+.right-info-box:hover {
+  background: transparent;
+  transform: translateX(8px);
+}
+
+.title
+{
+  font-size: 5rem !important;        /* BIG heading */
+  font-weight: 800;
+  line-height: 1.1;
+  color: #fff;  
+ 
+}
+.title .highlight {
+  color: #ff0033;          /* red highlight */
+}
+.button-row {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeIn 1s ease forwards;
+  animation-delay: 0.7s;
+}
+.explore-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  font-weight: 600;
+  color: white;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  margin-top: 24px;
+  position: relative;
+}
+
+.arrow-circle {
+  width: 36px;
+  height: 36px;
+ 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s ease;
+}
+/* Initial position + animation setup */
+.slide-right {
+  opacity: 0;
+  transform: translateX(60px);
+  animation: slideFromRight 0.9s ease-out forwards;
+  animation-delay: 0.4s; /* optional delay */
+}
+
+/* Slide animation */
+@keyframes slideFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Text styling (optional smoothness) */
+.right-info-box p {
+  font-size: 18px;
+  line-height: 28px;
+  color: #fff;
+}
+
+/* Keep your existing explore-btn CSS */
+
+/* Hover Animation */
+.explore-btn:hover .arrow-circle {
+         /* Fill becomes red */
+  color: #fff;                     /* Arrow becomes white */
+  transform: translateX(5px);      /* small movement */
+}
+.about-container {
+  text-align: center;
+  padding: 80px 20px;
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeUp 0.8s ease-out forwards;
+  animation-delay: 0.3s;
+}
+.about-title {
+  font-size: 36px;
+  font-weight: 800;
+  position: relative;
+  display: inline-block;
+  margin-bottom: 25px;
+  color: #d62828;
+}
+
+.about-title::after {
+  content: "";
+  width: 60px;
+  height: 4px;
+  background: #d62828; 
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -10px;
+  border-radius: 4px;
+}
+.about-text {
+  max-width: 800px;
+  margin: 0 auto 60px;
+  color: #7a7878;
+  font-size: 18px;
+  line-height: 28px;
+  animation: fadeIn 1s ease-out forwards;
+  opacity: 0;
+  animation-delay: 0.5s;
+}
+.features-row {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.feature-card {
+  width: 300px;
+  padding: 20px 10px;
+  background: #111;
+  border-radius: 14px;
+  text-align: center;
+  transition: 0.4s ease;
+  border: 1px solid #222;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeUp 0.8s ease forwards;
+}
+
+.feature-card:nth-child(1) { animation-delay: 0.6s; }
+.feature-card:nth-child(2) { animation-delay: 0.75s; }
+.feature-card:nth-child(3) { animation-delay: 0.9s; }
+
+.feature-card:hover {
+  transform: translateY(-10px);
+  border-color: #d62828;
+  box-shadow: 0 0 20px rgba(255, 28, 43, 0.3);
+}
+.feature-icon {
+  font-size: 40px;
+  color: #d62828;
+  margin-bottom: 15px;
+  transition: 0.3s;
+}
+
+.feature-card:hover .feature-icon {
+  transform: scale(1.15);
+  color: #e72640;
+}
+.feature-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.feature-desc {
+  font-size: 15px;
+  margin-top: 8px;
+  color: #c1c1c1;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+/* ----------------- Service----------------- */
+.services-banner-section {
+ 
+}
+
+.services-banner-title {
+  font-size: 38px;
+  font-weight: 700;
+  color: #ffffff;
+  text-align: center;
+}
+
+.services-banner-subtitle {
+  text-align: center;
+  color: #ffffff;
+  margin-bottom: 40px;
+  font-size: 18px;
+}
+
+/* Horizontal scroll row */
+.services-banner-row {
+    display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 20px;
+  
+  
+
+}
+.services-banner-row::-webkit-scrollbar {
+  display: none;
+}
+.services-banner-nav {
+  display: flex;
+  gap: 35px;
+  margin-left: 20px;
+  justify-content: flex-start;
+}
+
+.nav-btn {
+  width: 55px;
+  height: 55px;
+  background: #222;
+  color: #fff;
+  border: none;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s ease;
+}
+
+.nav-btn:hover {
+  background: #c40000; /* red hover */
+  transform: scale(1.05);
+}
+
+/* Tall banner item */
+.services-banner-item {
+  min-width: 250px;
+  height: 350px;
+ 
+  padding: 10px 10px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: 0.4s ease;
+  width: 250px;
+}
+
+.services-banner-item:hover {
+  transform: scale(1.05);
+}
+
+/* Overlay */
+.services-banner-overlay {
+  position: absolute;
+  inset: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  background: linear-gradient(
+    180deg,
+    rgba(0,0,0,0) 20%,
+    rgba(180,0,0,0.75) 100%
+  );
+
+  opacity: 0;
+  transform: translateY(40px);
+  transition: 0.4s ease;
+}
+
+.services-banner-item:hover .services-banner-overlay{
+  opacity: 1;
+  transform: translateY(0);
+}
+.service-img{
+ object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+/* Text */
+.services-banner-overlay h3 {
+  color: #fff;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 8px;
+
+}
+
+.services-banner-overlay p {
+  color: #eee;
+  font-size: 16px;
+}
+
+.services-learn {
+  margin-top: 10px;
+  color: white;
+  font-weight: 600;
+  display: inline-block;
+  transition: 0.3s ease;
+}
+
+.services-learn:hover {
+  color: #ff3c3c;
+}
+/*--------------why-----------*/
+/* Section Main Style */
+.zen-why-box {
+  opacity: 0;
+  transform: translateY(40px) scale(0.95);
+  transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  color: #c1c1c1;
+
+}
+
+.zen-why-box.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.zen-why {
+  padding: 60px 20px;
+  background: transparent;
+  text-align: center;
+  background-color: #000;
+  height: 400px;
+  width: 1000px;
+  margin: 100px;
+  justify-content: center;
+  border-radius: 10px;
+}
+.zen-why-heading {
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 40px;
+  color: #ffffff;
+}
+
+.zen-why-container {
+  max-width: 800px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  text-align: justify;
+  
+}
+.zen-why-box {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: all 0.6s ease-out;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.zen-why-box.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+.zen-why-icon {
+  font-size: 22px;
+  color: #ff4b4b;
+  flex-shrink: 0;
+}
+.zen-why-box p {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 500;
+  color: #ffffff;
+}
+.zen-why-box p {
+  position: relative;
+  cursor: default;
+}
+
+.zen-why-box p::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0%;
+  height: 2px;
+  background: #ff4b4b;
+  transition: width 0.3s ease;
+}
+
+.zen-why-box:hover p::after {
+  width: 100%;
+}
+
+
+
+
+
 /* ----------------- HERO ANIMATIONS ----------------- */
+/*----
 .hero-container {
   width: 100%;
   padding: 60px 0px 50px 0px;
@@ -112,8 +625,8 @@
 .animated-img:hover {
   transform: scale(1.06);
 }
-
-/* ----------------- ABOUT SECTION ----------------- */
+*/
+/* ----------------- ABOUT SECTION ----------------- 
 .about-container {
   text-align: center;
   padding: 40px 20px;
@@ -139,7 +652,7 @@
   color: #333;
 }
 
-/* Features */
+/* Features 
 .features-row {
   display: flex;
   flex-direction: row;
@@ -182,7 +695,8 @@
   color: #fffdd0;
 }
 
-/* ----------------- SERVICES SECTION ----------------- */
+*/
+/* ----------------- SERVICES SECTION ----------------
 .services-section {
   text-align: center;
   padding: 70px 20px;
@@ -221,7 +735,7 @@
   font-weight: 600;
   text-decoration: none;
 }
-
+*/
 /* ----------------- WHY SECTION ----------------- */
 .why-title {
   text-align: center;

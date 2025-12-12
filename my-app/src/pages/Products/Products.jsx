@@ -52,7 +52,7 @@ export default function Products() {
     },
     crm: {
       label: "Software Smart CRM Software to Manage Leads, Increase Sales & Retain Customers",
-      title: "CRM — Customer Relationship Management",
+      title: "Customer Relationship Management",
       desc: `Zenelait’s CRM Software is designed to help businesses in Chennai and across India automate their sales pipeline, lead follow-ups, and customer engagement. With a centralized database and real-time insights, your sales team can convert leads faster and build long-term customer relationships.
 Whether you are a startup, SME, or enterprise, our CRM enables you to streamline communication, improve productivity, and make data-driven decisions.`,
       benefits: [

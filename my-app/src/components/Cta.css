@@ -1,45 +1,78 @@
 .cta {
   width: 100%;
-  padding: 20px 0px 20px 0px;
-  background: #fdecec;
+  padding: 50px 0;
+  background: black;
   display: flex;
   justify-content: center;
-  margin-top: 50px;
-  border-radius: 10px;
-  margin-bottom: 10px;
+  margin-top: 60px;
+  border-radius: 16px;
+  margin-bottom: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Soft Glow on Background */
+.cta::before {
+  content: "";
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  background: rgba(255, 0, 0, 0.15);
+  filter: blur(120px);
+  top: -40px;
+  right: -40px;
+  pointer-events: none;
 }
 
 .cta-container {
   text-align: center;
   max-width: 800px;
   width: 100%;
+  padding: 0 20px;
+  animation: fadeIn 0.8s ease-out forwards;
 }
 
 .cta-title {
-  font-size: 36px;
-  font-weight: 700;
+  font-size: 40px;
+  font-weight: 800;
   color: #d62828;
   margin-bottom: 15px;
+  letter-spacing: -1px;
 }
 
 .cta-subtext {
-  font-size: 18px;
-  color: #000000;
-  margin-bottom: 30px;
+  font-size: 20px;
+  color: #b6b6b6;
+  margin-bottom: 35px;
 }
 
+/* Button */
 .cta-btn {
-  padding: 15px 35px;
+  padding: 15px 40px;
   background: #111;
   color: white;
   font-size: 18px;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
   transition: 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 .cta-btn:hover {
-  background: #222;
-  transform: translateY(-3px);
+  background: #d62828;
+  transform: translateY(-4px);
+  box-shadow: 0 6px 15px rgba(214, 40, 40, 0.4);
+}
+
+/* smooth fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

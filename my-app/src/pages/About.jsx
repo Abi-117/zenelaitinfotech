@@ -1,29 +1,67 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./About.css";
 import Team from "../assets/about-image.jpg";
 
 import Footer from "../components/Footer";
 import { Target, Eye, Award, Users } from "lucide-react";
 
-export default function About() {
+const AboutHero = () => {
+ useEffect(() => {
+  const elements = document.querySelectorAll(".fade-slide, .about-stroybg");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("reveal");
+          entry.target.classList.add("show");
+        }
+      });
+    },
+    { threshold: 0.2 }
+  );
+
+  elements.forEach((el) => observer.observe(el));
+
+  return () => observer.disconnect();
+}, []);
+
+  
+
+
   return (
     <div className="about-page">
       {/* Heading Section */}
-      <div className="about-hero">
-        <h1 className="about-title">
-          <span className="black">About</span> <span className="red">Zenelait</span>
-        </h1>
-        <p className="about-subtitle">
-          Zenelait Infotech is a leading product-based software company in Anna Nagar, Chennai, delivering innovative and scalable digital solutions. We specialize in SaaS products, ERP & CRM, Billing software, LMS solutions, and custom web & mobile applications that empower businesses and educational institutions to grow faster.
-With expertise in automation, cloud technology, and UI/UX engineering, we create high-performance software that simplifies workflows, boosts efficiency, and drives digital transformation.
-Our mission is to provide smart, secure, and scalable technology that helps organizations automate tasks, enhance customer experience, and stay ahead in a digital world.
-      </p>
-      </div>
+      <section className="about-hero-section fade-slide">
+  <div className="about-hero-inner">
 
-      {/* Image Section */}
-      <div className="about-image-box">
-        <img src={Team} alt="Our Team" className="about-image" />
-      </div>
+    {/* LEFT IMAGE */}
+    <div className="about-hero-image image-card">
+      <img src={Team} alt="Team" className="image-effect" />
+    </div>
+
+    {/* RIGHT CONTENT */}
+    <div className="about-hero-content">
+      <h1 className="about-main-title">
+        <span>About</span> <span className="red-accent">Zenelait</span>
+      </h1>
+
+      <p className="about-main-text">
+        Zenelait Infotech is a leading product-based software company in Anna Nagar, Chennai,
+        delivering innovative and scalable digital solutions. We specialize in SaaS products,
+        ERP & CRM, Billing software, LMS solutions, and custom applications that empower 
+        businesses and educational institutions to grow faster.
+      </p>
+
+      <p className="about-main-text">
+        With expertise in automation, cloud tech, and UI/UX engineering, we create 
+        high-performance software that boosts efficiency and accelerates digital transformation.
+      </p>
+    </div>
+
+  </div>
+</section>
+<section className="about-stroybg">
 
       {/* Story Section */}
       <div className="about-story">
@@ -44,6 +82,7 @@ Our mission is to provide smart, secure, and scalable technology that helps orga
            helping organizations stay ahead in the ever-evolving digital world.
         </p>
       </div>
+      </section>
 
       {/* Mission & Vision */}
       <div className="mission-vision">
@@ -70,7 +109,7 @@ Our mission is to provide smart, secure, and scalable technology that helps orga
 
       {/* Values */}
       <div className="values-section">
-        <h2 className="section-title">Our Core Values</h2>
+        <h2 className="section-title1">Our Core Values</h2>
 
         <div className="values-grid">
           <div className="value-card">
@@ -107,3 +146,4 @@ Our mission is to provide smart, secure, and scalable technology that helps orga
     </div>
   );
 }
+export default AboutHero;

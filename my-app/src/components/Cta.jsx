@@ -4,6 +4,23 @@ import { useNavigate } from "react-router-dom";
 
 const CTA = () => {
    const navigate = useNavigate();
+   {(() => {
+  setTimeout(() => {
+    const cta = document.querySelector(".cta");
+
+    function animateCTA() {
+      if (!cta) return;
+      const rect = cta.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 100) {
+        cta.classList.add("show");
+      }
+    }
+
+    window.addEventListener("scroll", animateCTA);
+    animateCTA();
+  }, 300);
+})()}
+
   return (
     <section className="cta">
       <div className="cta-container">
