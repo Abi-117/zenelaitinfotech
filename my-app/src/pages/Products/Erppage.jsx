@@ -1,116 +1,84 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer";
-import "./Erppage.css";
 import CTA from "../../components/Cta";
-import Erpimage from "../../assets/erp-service.jpg";
+import "./Erppage.css";
+import axios from "axios";
 
-import Erppg from "../../assets/Erpbg.jpeg";
 export default function Erppage() {
   const navigate = useNavigate();
+  const [erp, setErp] = useState(null);
+
+  useEffect(() => {
+    axios.get("http://localhost:5000/api/erp")
+      .then(res => setErp(res.data))
+      .catch(() => setErp(null));
+  }, []);
+
+  if (!erp) return null;
 
   return (
     <div className="erp-page">
+      {/* HERO */}
       <section className="erp-hero">
         <div className="hero-erpcontent">
-          <h2>ERP Systems</h2>
-          <p className="subtitle">
-          Our ERP system helps businesses manage all operations in one place. Streamline workflows, improve productivity,
-           and get real-time insights for smarter decision-making.
-          </p>
+          <h2>{erp.heroTitle}</h2>
+          <p className="subtitle">{erp.heroText}</p>
+
           <div className="hero-buttons">
-            <button
-              className="btn-demo"
-              onClick={() => navigate("/contact")}
-            >
+            <button className="btn-demo" onClick={() => navigate("/contact")}>
               Request Demo
             </button>
-             <button
-            className="btn-products"
-            onClick={() => {
-              window.open("https://wa.me/919884264816", "_blank");
-            }}
-          >
-            More Details
-          </button>
+            <button
+              className="btn-products"
+              onClick={() => window.open(erp.whatsapp, "_blank")}
+            >
+              More Details
+            </button>
           </div>
         </div>
       </section>
 
-      {/* Key Features */}
+      {/* FEATURES */}
       <section className="erp-features">
-         <button className="back-btn" onClick={() => navigate(-1)}>
-   ← Back
-</button>
-  <h2>Key Features</h2>
- 
-  <div className="key-featureslist">
-    <ul>
-      <li>Centralized Dashboard – Manage all departments from a single platform</li>
-      <li>Accounts & Finance Management – Billing, invoicing, expenses, and GST reporting.</li>
-      <li>HR & Payroll System – Staff profiles, attendance, and salary processing.</li>
-      <li>Inventory & Stock Management – Track items, stock levels, and purchase orders.</li>
-      <li>Sales & CRM Integration – Manage leads, customer data, and sales reports</li>
-      <li>Project & Task Management – Assign tasks, monitor progress, and track deadlines.</li>
-      <li>Purchase & Vendor Management – Manage suppliers, quotations, and approvals.</li>
-      <li>Reports & Analytics – Real-time business insights to support decisions.</li>
-    </ul>
-    <img
-      src={Erppg} 
-      alt="ERP decoration"
-      className="key-features-img"
-    />
-  </div>
-</section>
+        <button className="back-btn" onClick={() => navigate(-1)}>← Back</button>
+        <h2>{erp.featuresTitle}</h2>
 
+        <div className="key-featureslist">
+          <ul>
+            {erp.features.map((f, i) => <li key={i}>{f}</li>)}
+          </ul>
+          <img src={erp.featureImage} alt="ERP" className="key-features-img" />
+        </div>
+      </section>
 
-      {/* Perfect For */}
+      {/* PERFECT FOR */}
       <section className="erp-perfect-for">
         <h2>Perfect For</h2>
         <div className="audience-grid">
-          <div className="audience-card">
-            <h4>Growing Businesses (SMBs)</h4>
-            <p>Upgrade from spreadsheets to a smart ERP that boosts productivity instantly.</p>
-          </div>
-          <div className="audience-card">
-            <h4>Large Enterprises</h4>
-            <p>Connect branches, automate approvals, and manage complex processes effortlessly.</p>
-          </div>
-          <div className="audience-card">
-            <h4>Decision Makers</h4>
-            <p>Get actionable insights, cost control, and audit-ready financial accuracy.</p>
-          </div>
+          {erp.perfectFor.map((p, i) => (
+            <div className="audience-card" key={i}>
+              <h4>{p.title}</h4>
+              <p>{p.text}</p>
+            </div>
+          ))}
         </div>
       </section>
+
+      {/* WHY ERP */}
       <section className="why-erp">
-  <h2>Why Choose Zenelait ERP?</h2>
-  <div className="why-grid">
-    <div className="why-card">
-      <h4>Unified Operations</h4>
-      <p>Manage finance, HR, inventory, and sales all from a single centralized platform.</p>
-    </div>
-    <div className="why-card">
-      <h4>Boost Productivity</h4>
-      <p>Automate repetitive tasks and workflows to save time and reduce errors.</p>
-    </div>
-    <div className="why-card">
-      <h4>Data-Driven Insights</h4>
-      <p>Analyze real-time reports to make informed decisions for growth and efficiency.</p>
-    </div>
-    <div className="why-card">
-      <h4>Seamless Integration</h4>
-      <p>Connect ERP with CRM, email, accounting software, and other business tools easily.</p>
-    </div>
-  </div>
-</section>
+        <h2>{erp.whyTitle}</h2>
+        <div className="why-grid">
+          {erp.why.map((w, i) => (
+            <div className="why-card" key={i}>
+              <h4>{w.title}</h4>
+              <p>{w.text}</p>
+            </div>
+          ))}
+        </div>
+      </section>
 
-
-
-
-      {/* Call to Action */}
-      
-    <CTA></CTA>
-
+      <CTA />
       <Footer />
     </div>
   );

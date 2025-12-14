@@ -1,0 +1,128 @@
+/* Page wrapper */
+.admin-page {
+  padding: 90px 30px 30px;
+  background: #f5f7fb;
+  min-height: 100vh;
+  font-family: "Inter", sans-serif;
+}
+
+/* Headings */
+.admin-page h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #1f2937;
+}
+
+.admin-page h2 {
+  margin-top: 35px;
+  margin-bottom: 15px;
+  font-size: 20px;
+  color: #111827;
+}
+
+/* Inputs & textarea */
+.admin-page input,
+.admin-page textarea {
+  width: 100%;
+  max-width: 500px;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  background: #fff;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.admin-page textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.admin-page input:focus,
+.admin-page textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+/* Buttons */
+.admin-page button {
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: none;
+  background: #2563eb;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.admin-page button:hover {
+  background: #1e40af;
+  transform: translateY(-1px);
+}
+
+.admin-page button:active {
+  transform: translateY(0);
+}
+
+/* Message list */
+.admin-page > div {
+  margin-bottom: 15px;
+}
+
+/* Individual message card */
+.admin-page div[key] {
+  display: none;
+}
+
+/* Message card styling */
+.admin-message-card {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 16px 18px;
+  margin-bottom: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.admin-message-card b {
+  display: block;
+  font-size: 15px;
+  color: #111827;
+  margin-bottom: 5px;
+}
+
+.admin-message-card p {
+  font-size: 14px;
+  color: #374151;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+/* Delete button */
+.admin-message-card button {
+  background: #dc2626;
+}
+
+.admin-message-card button:hover {
+  background: #b91c1c;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .admin-page {
+    padding: 80px 15px 20px;
+  }
+
+  .admin-page h1 {
+    font-size: 24px;
+  }
+
+  .admin-page input,
+  .admin-page textarea {
+    max-width: 100%;
+  }
+}

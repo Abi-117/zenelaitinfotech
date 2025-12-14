@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./admin.css";
+import "./adminNavbarEdit.css"
 import AdminHeader from "./AdminHeader";
 
 export default function AdminNavbarEdit() {

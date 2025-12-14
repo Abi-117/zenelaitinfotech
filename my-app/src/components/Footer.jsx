@@ -1,49 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Footer.css";
-import Logo1 from "../assets/blizzen.png";
 import { Link } from "react-router-dom";
-import Footerlogo from "../assets/logo1.png";
+import axios from "axios";
 
 export default function Footer() {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/api/footer")
+      .then((res) => setData(res.data));
+  }, []);
+
   return (
     <footer className="footer">
       <div className="footer-container">
 
-        {/* LOGO + TEXT */}
+        {/* LOGO */}
         <div className="footer-col">
           <a href="/">
-          <img
-            src={Footerlogo}
-            alt="Zenelait Logo"
-            className="footer-logo"
-          /></a>
-          <p className="footer-text">
-            Leading provider of enterprise software
-            solutions for businesses worldwide.
-          </p>
-          <p className="footer-para"
-          style={{ display: "flex", alignItems: "center", gap: "5px" }}>
-          Developed by{" "}
-          <a
-            href="https://www.blizzencreations.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img className="footerlogo" src={Logo1} alt="Blizzen Creations" />
+            <img
+              src={data?.logo}
+              alt="Footer Logo"
+              className="footer-logo"
+            />
           </a>
-  </p>
+          <p className="footer-text">{data?.description}</p>
         </div>
 
         {/* PRODUCTS */}
         <div className="footer-col">
           <h3 className="footer-title">Products</h3>
           <ul>
-            <li>
-            <Link to="/products/saas" className="footer-link">SaaS Solutions</Link></li>
-            <li><Link to="/products/erp"  className="footer-link">ERP Systems</Link></li>
-             <li><Link to="/products/lms"  className="footer-link">Learning Management</Link></li>
-             <li><Link to="/products/billing"  className="footer-link">Billing Software</Link></li>
-             <li><Link to="/products/crm"  className="footer-link">Customer Relationship Management </Link> </li>
+            {(data?.products || []).map((p, i) => (
+              <li key={i}>
+                <Link to={p.link} className="footer-link">
+                  {p.label}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
 
@@ -51,30 +46,46 @@ export default function Footer() {
         <div className="footer-col">
           <h3 className="footer-title">Company</h3>
           <ul>
-            <li><Link to="/" className="footer-link">Home</Link></li>
-             <li><Link to="/about" className="footer-link">About</Link></li>
-            <li><Link to="/products" className="footer-link">Product </Link></li>
-             <li><Link to="/service" className="footer-link">Service</Link></li>
-              <li><Link to="/contact" className="footer-link">Contact </Link></li>
+            {(data?.company || []).map((c, i) => (
+              <li key={i}>
+                <Link to={c.link} className="footer-link">
+                  {c.label}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
 
-        {/* CONTACT INFO */}
+        {/* CONTACT */}
         <div className="footer-col">
           <h3 className="footer-title">Contact Info</h3>
           <ul>
-            <li>Anna Nagar, Chennai</li>
-            <li>+91 9884264816</li>
-            <li>zenelaitinfotech@gmail.com</li>
+            <li>{data?.address}</li>
+            <li>{data?.phone}</li>
+            <li>{data?.email}</li>
           </ul>
         </div>
 
       </div>
 
       <div className="footer-bottom">
-          © 2025 Zenelait. All Rights Reserved.
-     </div>
+        {data?.copyrightText}
 
+        <p className="footer-para">
+          Developed by{" "}
+          <a
+            href={data?.developerLink}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              className="footerlogo"
+              src={data?.developerLogo}
+              alt="Developer"
+            />
+          </a>
+        </p>
+      </div>
     </footer>
   );
 }

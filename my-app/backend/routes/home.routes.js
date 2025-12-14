@@ -1,9 +1,16 @@
 import express from "express";
-import { getHome, updateHome } from "../controllers/home.controller.js";
+import {
+  getHome,
+  saveHome,
+  deleteService,
+  deleteWhy,
+} from "../controllers/home.controller.js";
 
 const router = express.Router();
 
 router.get("/", getHome);
-router.put("/", updateHome);
+router.post("/", saveHome);
+router.delete("/service/:id", deleteService);
+router.delete("/why/:id", deleteWhy);
 
 export default router;

@@ -1,117 +1,147 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import "./AdminHome.css";
 import AdminHeader from "./AdminHeader";
-
 export default function AdminHome() {
-  const [data, setData] = useState({
-    hero: {
-      line1: "",
-      line2: "",
-      line3: "",
-      highlight: "",
-      rightText: "",
-      exploreText: ""
-    },
-    about: { title: "", text: "" },
-    features: [],
+  const [home, setHome] = useState({
+    heroTitle: "",
+    heroSubtitle: "",
+    aboutTitle: "",
+    aboutText: "",
     services: [],
-    whyChooseUs: [],
+    whyChoose: [],
   });
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/home").then(res => {
-      if (res.data) setData(res.data);
+    axios.get("http://localhost:5000/api/home").then((res) => {
+      if (res.data) setHome(res.data);
     });
   }, []);
 
-  const update = () => {
-    axios.put("http://localhost:5000/api/home", data).then(() => {
-      alert("Home Updated");
+  const saveChanges = () => {
+    axios
+      .put("http://localhost:5000/api/home", home)
+      .then(() => alert("Home updated successfully"));
+  };
+
+  const addService = () => {
+    setHome({
+      ...home,
+      services: [
+        ...home.services,
+        { title: "", description: "", image: "", link: "" },
+      ],
+    });
+  };
+
+  const addWhy = () => {
+    setHome({
+      ...home,
+      whyChoose: [...home.whyChoose, { text: "" }],
     });
   };
 
   return (
     <>
     <AdminHeader/>
-    <div className="admin-wrapper">
-      <h1>Home Page Editor</h1>
+    <div className="admin-home">
+      <h1>Home Page Admin</h1>
 
       {/* HERO */}
-      <h2>Hero Section</h2>
-      <input placeholder="Line 1" value={data.hero.line1}
-        onChange={e => setData({...data, hero:{...data.hero, line1:e.target.value}})}
-      />
-      <input placeholder="Line 2" value={data.hero.line2}
-        onChange={e => setData({...data, hero:{...data.hero, line2:e.target.value}})}
-      />
-      <input placeholder="Line 3" value={data.hero.line3}
-        onChange={e => setData({...data, hero:{...data.hero, line3:e.target.value}})}
-      />
-      <input placeholder="Highlight" value={data.hero.highlight}
-        onChange={e => setData({...data, hero:{...data.hero, highlight:e.target.value}})}
-      />
-      <textarea placeholder="Right Side Text" value={data.hero.rightText}
-        onChange={e => setData({...data, hero:{...data.hero, rightText:e.target.value}})}
-      />
-      <input placeholder="Explore Button Text" value={data.hero.exploreText}
-        onChange={e => setData({...data, hero:{...data.hero, exploreText:e.target.value}})}
-      />
+      <section>
+        <h2>Hero Section</h2>
+        <input
+          value={home.heroTitle}
+          onChange={(e) => setHome({ ...home, heroTitle: e.target.value })}
+          placeholder="Hero Title"
+        />
+        <textarea
+          value={home.heroSubtitle}
+          onChange={(e) => setHome({ ...home, heroSubtitle: e.target.value })}
+          placeholder="Hero Subtitle"
+        />
+      </section>
 
       {/* ABOUT */}
-      <h2>About Section</h2>
-      <input placeholder="About Title" value={data.about.title}
-        onChange={e => setData({...data, about:{...data.about, title:e.target.value}})}
-      />
-      <textarea placeholder="About Text" value={data.about.text}
-        onChange={e => setData({...data, about:{...data.about, text:e.target.value}})}
-      />
+      <section>
+        <h2>About Section</h2>
+        <input
+          value={home.aboutTitle}
+          onChange={(e) => setHome({ ...home, aboutTitle: e.target.value })}
+        />
+        <textarea
+          value={home.aboutText}
+          onChange={(e) => setHome({ ...home, aboutText: e.target.value })}
+        />
+      </section>
 
-      {/* FEATURES */}
-      <h2>Features</h2>
-      {data.features.map((f, i) => (
-        <div key={i}>
-          <input value={f.title} placeholder="Title"
-            onChange={e => {
-              const copy = [...data.features];
-              copy[i].title = e.target.value;
-              setData({...data, features: copy});
-            }}
-          />
-          <input value={f.description} placeholder="Description"
-            onChange={e => {
-              const copy = [...data.features];
-              copy[i].description = e.target.value;
-              setData({...data, features: copy});
-            }}
-          />
-          <input value={f.icon} placeholder="Icon Name"
-            onChange={e => {
-              const copy = [...data.features];
-              copy[i].icon = e.target.value;
-              setData({...data, features: copy});
-            }}
-          />
-        </div>
-      ))}
+      {/* SERVICES */}
+      <section>
+        <h2>Services</h2>
+        {home.services.map((s, i) => (
+          <div className="admin-card" key={i}>
+            <input
+              placeholder="Title"
+              value={s.title}
+              onChange={(e) => {
+                const arr = [...home.services];
+                arr[i].title = e.target.value;
+                setHome({ ...home, services: arr });
+              }}
+            />
+            <textarea
+              placeholder="Description"
+              value={s.description}
+              onChange={(e) => {
+                const arr = [...home.services];
+                arr[i].description = e.target.value;
+                setHome({ ...home, services: arr });
+              }}
+            />
+            <input
+              placeholder="Image URL"
+              value={s.image}
+              onChange={(e) => {
+                const arr = [...home.services];
+                arr[i].image = e.target.value;
+                setHome({ ...home, services: arr });
+              }}
+            />
+            <input
+              placeholder="Link"
+              value={s.link}
+              onChange={(e) => {
+                const arr = [...home.services];
+                arr[i].link = e.target.value;
+                setHome({ ...home, services: arr });
+              }}
+            />
+          </div>
+        ))}
+        <button onClick={addService}>+ Add Service</button>
+      </section>
 
-      {/* WHY US */}
-      <h2>Why Choose Us</h2>
-      {data.whyChooseUs.map((w, i) => (
-        <div key={i}>
-          <input value={w.text} placeholder="Text"
-            onChange={e => {
-              const copy = [...data.whyChooseUs];
-              copy[i].text = e.target.value;
-              setData({...data, whyChooseUs: copy});
+      {/* WHY CHOOSE */}
+      <section>
+        <h2>Why Choose</h2>
+        {home.whyChoose.map((w, i) => (
+          <input
+            key={i}
+            value={w.text}
+            onChange={(e) => {
+              const arr = [...home.whyChoose];
+              arr[i].text = e.target.value;
+              setHome({ ...home, whyChoose: arr });
             }}
           />
-        </div>
-      ))}
+        ))}
+        <button onClick={addWhy}>+ Add Point</button>
+      </section>
 
-      {/* SAVE */}
-      <button onClick={update}>Save All</button>
+      <button className="save-btn" onClick={saveChanges}>
+        Save Changes
+      </button>
     </div>
-    
     </>
   );
 }

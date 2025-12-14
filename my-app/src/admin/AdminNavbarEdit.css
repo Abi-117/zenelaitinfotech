@@ -1,0 +1,80 @@
+/* AdminNavbarEdit.css */
+
+.admin-edit {
+  max-width: 900px;
+  margin: 100px auto 40px;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.admin-edit h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #1f2937;
+  font-size: 26px;
+}
+
+/* Form container */
+.admin-form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+/* Labels */
+.admin-form label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  margin-top: 10px;
+}
+
+/* Inputs */
+.admin-form input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 15px;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+.admin-form input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* Save Button */
+.save-btn {
+  margin-top: 25px;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.save-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .admin-edit {
+    margin: 80px 15px 30px;
+    padding: 20px;
+  }
+
+  .admin-edit h2 {
+    font-size: 22px;
+  }
+}

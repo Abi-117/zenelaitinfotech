@@ -1,100 +1,153 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./adminAbout.css";
+import "./AdminAbout.css";
 import AdminHeader from "./AdminHeader";
 
 export default function AdminAbout() {
-  const [formData, setFormData] = useState({
-    title: "",
-    subtitle: "",
-    description: "",
+  const [about, setAbout] = useState({
+    heroTitle: "",
+    heroText1: "",
+    heroText2: "",
+    heroImage: "",
+    storyTitle: "",
+    storyParas: [],
+    missionText: "",
+    visionText: "",
+    values: [],
   });
 
-  const [image, setImage] = useState(null);
-  const [preview, setPreview] = useState("");
-
   useEffect(() => {
-    fetchAbout();
+    axios.get("http://localhost:5000/api/about").then((res) => {
+      if (res.data) setAbout(res.data);
+    });
   }, []);
 
-  const fetchAbout = async () => {
-    const res = await axios.get("http://localhost:5000/api/about");
-    if (res.data) {
-      setFormData({
-        title: res.data.title,
-        subtitle: res.data.subtitle,
-        description: res.data.description,
-      });
-
-      if (res.data.image) {
-        setPreview(`http://localhost:5000/${res.data.image}`);
-      }
-    }
-  };
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleImage = (e) => {
-    const file = e.target.files[0];
-    setImage(file);
-    setPreview(URL.createObjectURL(file));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const updateData = new FormData();
-    updateData.append("title", formData.title);
-    updateData.append("subtitle", formData.subtitle);
-    updateData.append("description", formData.description);
-    if (image) updateData.append("image", image);
-
-    await axios.put("http://localhost:5000/api/about/update", updateData);
-    alert("Updated Successfully!");
+  const save = () => {
+    axios.put("http://localhost:5000/api/about", about)
+      .then(() => alert("About page updated"));
   };
 
   return (
     <>
-    <AdminHeader/>
-    <div className="admin-about-container">
-      <h2>About Page Editor</h2>
+    <AdminHeader />
+    <div className="admin-about">
+      <h1>About Page Admin</h1>
 
-      <form className="admin-about-form" onSubmit={handleSubmit}>
-        
-        <label>Title</label>
+      {/* HERO */}
+      <section>
+        <h2>Hero Section</h2>
         <input
-          type="text"
-          name="title"
-          value={formData.title}
-          onChange={handleChange}
+          value={about.heroTitle}
+          onChange={(e) => setAbout({ ...about, heroTitle: e.target.value })}
+          placeholder="Hero Title"
         />
-
-        <label>Subtitle</label>
-        <input
-          type="text"
-          name="subtitle"
-          value={formData.subtitle}
-          onChange={handleChange}
-        />
-
-        <label>Description</label>
         <textarea
-          name="description"
-          value={formData.description}
-          onChange={handleChange}
-        ></textarea>
+          value={about.heroText1}
+          onChange={(e) => setAbout({ ...about, heroText1: e.target.value })}
+          placeholder="Paragraph 1"
+        />
+        <textarea
+          value={about.heroText2}
+          onChange={(e) => setAbout({ ...about, heroText2: e.target.value })}
+          placeholder="Paragraph 2"
+        />
+        <input
+          value={about.heroImage}
+          onChange={(e) => setAbout({ ...about, heroImage: e.target.value })}
+          placeholder="Image URL"
+        />
+      </section>
 
-        <label>Image</label>
-        <input type="file" onChange={handleImage} />
-
-        {preview && <img src={preview} className="about-image-preview" />}
-
-        <button type="submit" className="admin-about-btn">
-          Update About
+      {/* STORY */}
+      <section>
+        <h2>Our Story</h2>
+        <input
+          value={about.storyTitle}
+          onChange={(e) => setAbout({ ...about, storyTitle: e.target.value })}
+        />
+        {about.storyParas.map((p, i) => (
+          <textarea
+            key={i}
+            value={p}
+            onChange={(e) => {
+              const arr = [...about.storyParas];
+              arr[i] = e.target.value;
+              setAbout({ ...about, storyParas: arr });
+            }}
+          />
+        ))}
+        <button
+          onClick={() =>
+            setAbout({ ...about, storyParas: [...about.storyParas, ""] })
+          }
+        >
+          + Add Paragraph
         </button>
-      </form>
+      </section>
+
+      {/* MISSION / VISION */}
+      <section>
+        <h2>Mission</h2>
+        <textarea
+          value={about.missionText}
+          onChange={(e) => setAbout({ ...about, missionText: e.target.value })}
+        />
+        <h2>Vision</h2>
+        <textarea
+          value={about.visionText}
+          onChange={(e) => setAbout({ ...about, visionText: e.target.value })}
+        />
+      </section>
+
+      {/* VALUES */}
+      <section>
+        <h2>Core Values</h2>
+        {about.values.map((v, i) => (
+          <div key={i} className="admin-card">
+            <input
+              value={v.title}
+              placeholder="Title"
+              onChange={(e) => {
+                const arr = [...about.values];
+                arr[i].title = e.target.value;
+                setAbout({ ...about, values: arr });
+              }}
+            />
+            <textarea
+              value={v.text}
+              placeholder="Text"
+              onChange={(e) => {
+                const arr = [...about.values];
+                arr[i].text = e.target.value;
+                setAbout({ ...about, values: arr });
+              }}
+            />
+            <input
+              value={v.icon}
+              placeholder="Icon (Award / Users / Target)"
+              onChange={(e) => {
+                const arr = [...about.values];
+                arr[i].icon = e.target.value;
+                setAbout({ ...about, values: arr });
+              }}
+            />
+          </div>
+        ))}
+        <button
+          onClick={() =>
+            setAbout({
+              ...about,
+              values: [...about.values, { title: "", text: "", icon: "" }],
+            })
+          }
+        >
+          + Add Value
+        </button>
+      </section>
+
+      <button className="save-btn" onClick={save}>
+        Save About Page
+      </button>
     </div>
     </>
   );

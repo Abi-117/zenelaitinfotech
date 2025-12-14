@@ -1,0 +1,62 @@
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import AdminHeader from "./AdminHeader";
+import "./AdminAbout.css";
+
+export default function AdminContact() {
+  const [data, setData] = useState({
+    heroTitle: "",
+    heroText: "",
+    address: "",
+    phone: "",
+    email: "",
+    businessHours: "",
+    mapUrl: "",
+    image: "",
+  });
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/api/contact-page")
+      .then((res) => res.data && setData(res.data));
+  }, []);
+
+  const save = () => {
+    axios
+      .put("http://localhost:5000/api/contact-page", data)
+      .then(() => alert("Contact page updated"));
+  };
+
+  return (
+    <>
+      <AdminHeader />
+      <div className="admin-about">
+        <h1>Contact Page Admin</h1>
+
+        <section>
+          <h2>Hero Section</h2>
+          <input value={data.heroTitle} onChange={(e) => setData({ ...data, heroTitle: e.target.value })} placeholder="Hero Title" />
+          <textarea value={data.heroText} onChange={(e) => setData({ ...data, heroText: e.target.value })} placeholder="Hero Text" />
+        </section>
+
+        <section>
+          <h2>Contact Info</h2>
+          <textarea value={data.address} onChange={(e) => setData({ ...data, address: e.target.value })} placeholder="Address" />
+          <input value={data.phone} onChange={(e) => setData({ ...data, phone: e.target.value })} placeholder="Phone" />
+          <input value={data.email} onChange={(e) => setData({ ...data, email: e.target.value })} placeholder="Email" />
+        </section>
+
+        <section>
+          <h2>Other</h2>
+          <textarea value={data.businessHours} onChange={(e) => setData({ ...data, businessHours: e.target.value })} placeholder="Business Hours" />
+          <input value={data.mapUrl} onChange={(e) => setData({ ...data, mapUrl: e.target.value })} placeholder="Google Map Embed URL" />
+          <input value={data.image} onChange={(e) => setData({ ...data, image: e.target.value })} placeholder="Image URL" />
+        </section>
+
+        <button className="save-btn" onClick={save}>
+          Save Contact Page
+        </button>
+      </div>
+    </>
+  );
+}

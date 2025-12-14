@@ -22,6 +22,13 @@ export default function AdminHeader() {
         <li><Link to="/admin/products">Products</Link></li>
         <li><Link to="/admin/service">Service</Link></li>
         <li><Link to="/admin/contacts">Contacts</Link></li>
+        <li><Link to="/admin/contact-inbox">Contact Inbox</Link></li>
+        <li><Link to="/admin/saas">saas</Link></li>
+        <li><Link to="/admin/lms">Lms</Link></li>
+        <li><Link to="/admin/erp">Erp</Link></li>
+        <li><Link to="/admin/crm">Crm</Link></li>
+        <li><Link to="/admin/billing">Billing</Link></li>
+
         <li><Link to="/admin/footer">Footer</Link></li>
       </ul>
 

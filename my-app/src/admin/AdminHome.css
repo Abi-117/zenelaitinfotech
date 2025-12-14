@@ -1,0 +1,36 @@
+.admin-home {
+  padding: 30px;
+}
+
+.admin-home h1 {
+  margin-bottom: 20px;
+}
+
+section {
+  background: #fff;
+  padding: 20px;
+  margin-bottom: 25px;
+  border-radius: 8px;
+}
+
+input,
+textarea {
+  width: 100%;
+  margin: 8px 0;
+  padding: 10px;
+}
+
+.admin-card {
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 10px;
+}
+
+.save-btn {
+  background: #e11d48;
+  color: #fff;
+  padding: 12px 30px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
