@@ -1,86 +1,113 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./Products.css";
+import Footer from "../../components/Footer";
 import CTA from "../../components/Cta";
 
 export default function Products() {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
-  const [active, setActive] = useState("");
+  const [activeProduct, setActiveProduct] = useState("billing");
 
+  /* 🔹 FETCH PRODUCTS FROM BACKEND */
   useEffect(() => {
-    axios.get("http://localhost:5000/api/products").then((res) => {
-      setProducts(res.data);
-      setActive(res.data[0]?.slug);
-    });
+    fetch("http://localhost:5000/api/products")
+      .then((res) => res.json())
+      .then((data) => {
+        setProducts(data);
+
+        // default product
+        if (data.length > 0) {
+          setActiveProduct(data[0].productId);
+        }
+      })
+      .catch((err) => console.error(err));
   }, []);
 
-  const current = products.find((p) => p.slug === active);
+  /* 🔹 PRODUCT LIST (LEFT SIDEBAR) */
+  const productList = products.map((p) => ({
+    id: p.productId,
+    name: p.title,
+  }));
 
-  if (!current) return null;
+  /* 🔹 ACTIVE PRODUCT DATA */
+  const activeData = products.find(
+    (p) => p.productId === activeProduct
+  );
 
   return (
     <div className="product-topic">
+      {/* HEADING */}
       <div className="product-heading-section">
         <h1 className="main-heading">
           <span className="black">Our</span>{" "}
           <span className="red">Products</span>
         </h1>
         <p className="sub-heading">
-          Smart Software Solutions Built for Growth
+          Smart Software Solutions Built for Growth, Automation & Performance
         </p>
       </div>
 
       <div className="product-page">
-        {/* LEFT */}
+        {/* LEFT SIDEBAR */}
         <div className="product-left">
           <h2 className="sidebar-title">Products</h2>
           <ul className="sidebar-list">
-            {products.map((p) => (
+            {productList.map((item) => (
               <li
-                key={p._id}
-                className={active === p.slug ? "active" : ""}
-                onClick={() => setActive(p.slug)}
+                key={item.id}
+                className={activeProduct === item.id ? "active" : ""}
+                onClick={() => setActiveProduct(item.id)}
               >
-                {p.name}
+                {item.name}
               </li>
             ))}
           </ul>
         </div>
 
-        {/* RIGHT */}
+        {/* RIGHT CONTENT */}
         <div className="product-right">
-          <p className="label">{current.label}</p>
-          <h1 className="title">{current.title}</h1>
-          <p className="desc">{current.desc}</p>
+          {!activeData ? (
+            <p>Loading...</p>
+          ) : (
+            <>
+              <p className="label">{activeData.label}</p>
 
-          <h3 className="benefits-title">Key Benefits</h3>
-          <ul className="benefits-list">
-            {current.benefits.map((b, i) => (
-              <li key={i}>{b}</li>
-            ))}
-          </ul>
+              <h1 className="title">{activeData.title}</h1>
 
-          <div className="btn-row">
-            <button
-              className="details-btnn"
-              onClick={() => navigate(`/products/${current.slug}`)}
-            >
-              View Details
-            </button>
+              <p className="desc">{activeData.desc}</p>
 
-            <button
-              className="demo-btn"
-              onClick={() => navigate("/contact")}
-            >
-              Request Demo
-            </button>
-          </div>
+              <h3 className="benefits-title">Key Benefits:</h3>
+              <ul className="benefits-list">
+                {activeData.benefits.map((b, i) => (
+                  <li key={i}>{b}</li>
+                ))}
+              </ul>
+
+              <div className="btn-row">
+                <button
+                  className="details-btnn"
+                  onClick={() =>
+                    navigate(`/products/${activeData.productId}`)
+                  }
+                >
+                  View Details
+                </button>
+
+                <button
+                  className="demo-btn"
+                  onClick={() => navigate("/contact")}
+                >
+                  Request Demo
+                </button>
+              </div>
+            </>
+          )}
         </div>
       </div>
 
       <CTA />
+     
     </div>
   );
 }

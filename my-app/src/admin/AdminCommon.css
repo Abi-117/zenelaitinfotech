@@ -1,0 +1,135 @@
+/* PAGE WRAPPER */
+.admin-page {
+  max-width: 1000px;
+  margin: 90px auto 40px;
+  padding: 25px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* PAGE TITLE */
+.admin-page h1 {
+  font-size: 28px;
+  margin-bottom: 25px;
+  color: #1f2937;
+}
+
+/* SECTION TITLES */
+.admin-page h3 {
+  margin-top: 35px;
+  margin-bottom: 12px;
+  font-size: 18px;
+  color: #374151;
+}
+
+/* INPUTS */
+.admin-page input,
+.admin-page textarea {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+  transition: border 0.2s ease;
+}
+
+.admin-page textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+.admin-page input:focus,
+.admin-page textarea:focus {
+  border-color: #2563eb;
+}
+
+/* ROW (input + delete button) */
+.row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.row input {
+  flex: 1;
+}
+
+/* CARD ROW (PerfectFor / WhyChoose) */
+.card-row {
+  display: grid;
+  grid-template-columns: 1fr 2fr auto;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+/* BUTTONS */
+.admin-page button {
+  padding: 10px 16px;
+  background: #2563eb;
+  border: none;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.admin-page button:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+/* DELETE BUTTON */
+.admin-page button:nth-child(2),
+.card-row button {
+  background: #ef4444;
+}
+
+.admin-page button:nth-child(2):hover,
+.card-row button:hover {
+  background: #dc2626;
+}
+
+/* ADD BUTTONS */
+.admin-page > button:not(.save-btn) {
+  margin-top: 8px;
+  background: #10b981;
+}
+
+.admin-page > button:not(.save-btn):hover {
+  background: #059669;
+}
+
+/* SAVE BUTTON */
+.save-btn {
+  margin-top: 35px;
+  width: 100%;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+}
+
+.save-btn:hover {
+  background: linear-gradient(135deg, #1d4ed8, #1e3a8a);
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .admin-page {
+    margin: 70px 12px;
+    padding: 20px;
+  }
+
+  .card-row {
+    grid-template-columns: 1fr;
+  }
+
+  .save-btn {
+    font-size: 15px;
+  }
+}

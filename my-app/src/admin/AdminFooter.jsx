@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import AdminHeader from "./AdminHeader";
-import "./AdminAbout.css";
+//import "./AdminAbout.css";
 
 export default function AdminFooter() {
   const [footer, setFooter] = useState({

@@ -1,0 +1,88 @@
+.admin-product {
+  padding: 30px;
+  background: #f4f6f8;
+  min-height: 100vh;
+}
+
+.admin-product h1 {
+  margin-bottom: 20px;
+}
+
+.admin-product-layout {
+  display: flex;
+  gap: 20px;
+}
+
+/* SIDEBAR */
+.admin-product-sidebar {
+  width: 220px;
+  background: #111;
+  color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.admin-product-sidebar h3 {
+  margin-bottom: 10px;
+}
+
+.admin-product-sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.admin-product-sidebar li {
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.admin-product-sidebar li:hover,
+.admin-product-sidebar li.active {
+  background: #e63946;
+}
+
+/* FORM */
+.admin-product-form {
+  flex: 1;
+  background: #fff;
+  padding: 25px;
+  border-radius: 8px;
+}
+
+.admin-product-form label {
+  display: block;
+  margin-top: 15px;
+  font-weight: 600;
+}
+
+.admin-product-form input,
+.admin-product-form textarea {
+  width: 100%;
+  margin-top: 5px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.add-btn {
+  margin-top: 10px;
+  background: #444;
+  color: #fff;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.save-btn {
+  margin-top: 20px;
+  background: #e63946;
+  color: #fff;
+  padding: 12px;
+  width: 100%;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}

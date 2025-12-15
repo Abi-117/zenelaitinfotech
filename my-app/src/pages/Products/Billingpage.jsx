@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Footer from "../../components/Footer";
 import CTA from "../../components/Cta";
 import "./Billingpage.css";
 import Billingimg from "../../assets/billingbg.jpeg";
@@ -92,38 +91,11 @@ export default function Billingpage() {
         </div>
       </section>
 
-      {/* INDUSTRIES */}
-      <section className="billing-industries">
-        <h2>Industries We Serve</h2>
-        <div className="industry-grid">
-          {billing.industries.map((ind, i) => (
-            <span key={i}>{ind}</span>
-          ))}
-        </div>
-      </section>
-
-      {/* REPORTS */}
-      <section className="billing-reports">
-        <h2>Powerful Reports & Analytics</h2>
-        <p>{billing.reportsSubtitle}</p>
-
-        <div className="report-grid">
-          {billing.reports.map((r, i) => (
-            <div className="report-card" key={i}>
-              {r}
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* SUPPORT */}
-      <section className="billing-support">
-        <h2>{billing.supportTitle}</h2>
-        <p>{billing.supportDesc}</p>
-      </section>
+  
+     
+      
 
       <CTA />
-      <Footer />
     </div>
   );
 }

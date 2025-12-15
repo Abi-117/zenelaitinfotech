@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./adminNavbarEdit.css"
+import "./AdminNavbarEdit.css"
 import AdminHeader from "./AdminHeader";
+import "./AdminNavbarEdit.css";
 
 export default function AdminNavbarEdit() {
   const [form, setForm] = useState({

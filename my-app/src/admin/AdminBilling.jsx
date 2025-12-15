@@ -3,6 +3,8 @@ import axios from "axios";
 import AdminHeader from "./AdminHeader";
 import "./AdminBilling.css";
 
+const API = "http://localhost:5000";
+
 export default function AdminBilling() {
   const [billing, setBilling] = useState({
     title: "",
@@ -10,25 +12,48 @@ export default function AdminBilling() {
     benefits: [],
     perfectFor: [],
     why: [],
-    industries: [],
-    reportsSubtitle: "",
-    reports: [],
-    supportTitle: "",
-    supportDesc: ""
   });
 
-  useEffect(() => {
-    axios.get("http://localhost:5000/api/billing")
-      .then(res => res.data && setBilling(res.data));
-  }, []);
-
-  const save = () => {
-    axios.put("http://localhost:5000/api/billing", billing)
-      .then(() => alert("Billing page updated"));
+  /* FETCH */
+  const fetchBilling = async () => {
+    try {
+      const res = await axios.get(`${API}/api/billing`);
+      if (res.data) setBilling(res.data);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
-  const addItem = (field, value = "") =>
-    setBilling({ ...billing, [field]: [...billing[field], value] });
+  useEffect(() => {
+    fetchBilling();
+  }, []);
+
+  /* SAVE */
+  const save = async () => {
+    try {
+      await axios.put(`${API}/api/billing`, billing);
+      alert("Billing page updated");
+      fetchBilling();
+    } catch (err) {
+      console.error(err);
+      alert("Save failed");
+    }
+  };
+
+  /* ADD / REMOVE HELPERS */
+  const addBenefit = () => {
+    setBilling({
+      ...billing,
+      benefits: [...billing.benefits, ""],
+    });
+  };
+
+  const addCard = (field) => {
+    setBilling({
+      ...billing,
+      [field]: [...billing[field], { title: "", desc: "" }],
+    });
+  };
 
   const removeItem = (field, index) => {
     const arr = [...billing[field]];
@@ -39,19 +64,25 @@ export default function AdminBilling() {
   return (
     <>
       <AdminHeader />
+
       <div className="admin-page">
         <h1>Billing Page Admin</h1>
 
+        {/* TITLE */}
         <input
           placeholder="Title"
           value={billing.title}
-          onChange={e => setBilling({ ...billing, title: e.target.value })}
+          onChange={(e) =>
+            setBilling({ ...billing, title: e.target.value })
+          }
         />
 
         <textarea
           placeholder="Subtitle"
           value={billing.subtitle}
-          onChange={e => setBilling({ ...billing, subtitle: e.target.value })}
+          onChange={(e) =>
+            setBilling({ ...billing, subtitle: e.target.value })
+          }
         />
 
         {/* BENEFITS */}
@@ -60,16 +91,18 @@ export default function AdminBilling() {
           <div key={i} className="row">
             <input
               value={b}
-              onChange={e => {
+              onChange={(e) => {
                 const arr = [...billing.benefits];
                 arr[i] = e.target.value;
                 setBilling({ ...billing, benefits: arr });
               }}
             />
-            <button onClick={() => removeItem("benefits", i)}>❌</button>
+            <button type="button" onClick={() => removeItem("benefits", i)}>
+              ❌
+            </button>
           </div>
         ))}
-        <button onClick={() => addItem("benefits")}>+ Add Benefit</button>
+        <button onClick={addBenefit}>+ Add Benefit</button>
 
         {/* PERFECT FOR */}
         <h3>Perfect For</h3>
@@ -78,7 +111,7 @@ export default function AdminBilling() {
             <input
               placeholder="Title"
               value={p.title}
-              onChange={e => {
+              onChange={(e) => {
                 const arr = [...billing.perfectFor];
                 arr[i].title = e.target.value;
                 setBilling({ ...billing, perfectFor: arr });
@@ -87,7 +120,7 @@ export default function AdminBilling() {
             <input
               placeholder="Description"
               value={p.desc}
-              onChange={e => {
+              onChange={(e) => {
                 const arr = [...billing.perfectFor];
                 arr[i].desc = e.target.value;
                 setBilling({ ...billing, perfectFor: arr });
@@ -96,9 +129,7 @@ export default function AdminBilling() {
             <button onClick={() => removeItem("perfectFor", i)}>❌</button>
           </div>
         ))}
-        <button onClick={() => addItem("perfectFor", { title: "", desc: "" })}>
-          + Add Card
-        </button>
+        <button onClick={() => addCard("perfectFor")}>+ Add Card</button>
 
         {/* WHY */}
         <h3>Why Choose</h3>
@@ -107,7 +138,7 @@ export default function AdminBilling() {
             <input
               placeholder="Title"
               value={w.title}
-              onChange={e => {
+              onChange={(e) => {
                 const arr = [...billing.why];
                 arr[i].title = e.target.value;
                 setBilling({ ...billing, why: arr });
@@ -116,7 +147,7 @@ export default function AdminBilling() {
             <input
               placeholder="Description"
               value={w.desc}
-              onChange={e => {
+              onChange={(e) => {
                 const arr = [...billing.why];
                 arr[i].desc = e.target.value;
                 setBilling({ ...billing, why: arr });
@@ -125,9 +156,7 @@ export default function AdminBilling() {
             <button onClick={() => removeItem("why", i)}>❌</button>
           </div>
         ))}
-        <button onClick={() => addItem("why", { title: "", desc: "" })}>
-          + Add Card
-        </button>
+        <button onClick={() => addCard("why")}>+ Add Card</button>
 
         {/* SAVE */}
         <button className="save-btn" onClick={save}>

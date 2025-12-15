@@ -1,132 +1,148 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import AdminHeader from "./AdminHeader";
 import "./AdminErp.css";
 
-export default function AdminErp() {
-  const [loading, setLoading] = useState(true);
+const API = "http://localhost:5000";
 
-  const [form, setForm] = useState({
+export default function AdminErp() {
+  const [erp, setErp] = useState({
     heroTitle: "",
     heroText: "",
-    whatsapp: "",
-    featuresTitle: "",
-    features: "",
-    whyTitle: "",
-    why: "",
+    features: [],
+    perfectFor: [],
+    why: [],
   });
 
-  /* FETCH ERP DATA */
-  useEffect(() => {
-    axios
-      .get("http://localhost:5000/api/erp")
-      .then((res) => {
-        const data = res.data;
-        setForm({
-          heroTitle: data.heroTitle || "",
-          heroText: data.heroText || "",
-          whatsapp: data.whatsapp || "",
-          featuresTitle: data.featuresTitle || "",
-          features: (data.features || []).join("\n"),
-          whyTitle: data.whyTitle || "",
-          why: (data.why || []).join("\n"),
-        });
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error(err);
-        setLoading(false);
-      });
-  }, []);
-
-  /* HANDLE CHANGE */
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  /* SAVE ERP DATA */
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const payload = {
-      ...form,
-      features: form.features.split("\n"),
-      why: form.why.split("\n"),
-    };
-
+  /* FETCH */
+  const fetchErp = async () => {
     try {
-      await axios.put("http://localhost:5000/api/erp", payload);
-      alert("ERP Page Updated Successfully ✅");
-    } catch (error) {
-      console.error(error);
-      alert("Update Failed ❌");
+      const res = await axios.get(`${API}/api/erp`);
+      if (res.data) setErp(res.data);
+    } catch (err) {
+      console.error(err);
     }
   };
 
-  if (loading) return <h2>Loading ERP Data...</h2>;
+  useEffect(() => {
+    fetchErp();
+  }, []);
+
+  /* SAVE */
+  const save = async () => {
+    try {
+      await axios.put(`${API}/api/erp`, erp);
+      alert("ERP page updated");
+      fetchErp();
+    } catch (err) {
+      console.error(err);
+      alert("Save failed");
+    }
+  };
+
+  const addCard = (field) => {
+    setErp({ ...erp, [field]: [...erp[field], { title: "", desc: "" }] });
+  };
+
+  const removeItem = (field, index) => {
+    const arr = [...erp[field]];
+    arr.splice(index, 1);
+    setErp({ ...erp, [field]: arr });
+  };
 
   return (
-    <div className="admin-erp">
-      <h1>Admin – ERP Page</h1>
+    <>
+      <AdminHeader />
 
-      <form onSubmit={handleSubmit} className="admin-form">
-        {/* HERO */}
-        <label>Hero Title</label>
+      <div className="admin-page">
+        <h1>ERP Page Admin</h1>
+
         <input
-          name="heroTitle"
-          value={form.heroTitle}
-          onChange={handleChange}
+          placeholder="Hero Title"
+          value={erp.heroTitle}
+          onChange={e => setErp({ ...erp, heroTitle: e.target.value })}
         />
 
-        <label>Hero Description</label>
         <textarea
-          name="heroText"
-          value={form.heroText}
-          onChange={handleChange}
+          placeholder="Hero Text"
+          value={erp.heroText}
+          onChange={e => setErp({ ...erp, heroText: e.target.value })}
         />
 
-        <label>WhatsApp Link</label>
-        <input
-          name="whatsapp"
-          value={form.whatsapp}
-          onChange={handleChange}
-        />
+        <h3>Features</h3>
+        {erp.features.map((f, i) => (
+          <div key={i} className="row">
+            <input
+              value={f}
+              onChange={e => {
+                const arr = [...erp.features];
+                arr[i] = e.target.value;
+                setErp({ ...erp, features: arr });
+              }}
+            />
+            <button onClick={() => removeItem("features", i)}>❌</button>
+          </div>
+        ))}
+        <button onClick={() => setErp({ ...erp, features: [...erp.features, ""] })}>
+          + Add Feature
+        </button>
 
-        {/* FEATURES */}
-        <label>Features Title</label>
-        <input
-          name="featuresTitle"
-          value={form.featuresTitle}
-          onChange={handleChange}
-        />
+        <h3>Perfect For</h3>
+        {erp.perfectFor.map((p, i) => (
+          <div key={i} className="card-row">
+            <input
+              placeholder="Title"
+              value={p.title}
+              onChange={e => {
+                const arr = [...erp.perfectFor];
+                arr[i].title = e.target.value;
+                setErp({ ...erp, perfectFor: arr });
+              }}
+            />
+            <input
+              placeholder="Description"
+              value={p.desc}
+              onChange={e => {
+                const arr = [...erp.perfectFor];
+                arr[i].desc = e.target.value;
+                setErp({ ...erp, perfectFor: arr });
+              }}
+            />
+            <button onClick={() => removeItem("perfectFor", i)}>❌</button>
+          </div>
+        ))}
+        <button onClick={() => addCard("perfectFor")}>+ Add Card</button>
 
-        <label>Features (one per line)</label>
-        <textarea
-          name="features"
-          rows="6"
-          value={form.features}
-          onChange={handleChange}
-        />
+        <h3>Why Choose</h3>
+        {erp.why.map((w, i) => (
+          <div key={i} className="card-row">
+            <input
+              placeholder="Title"
+              value={w.title}
+              onChange={e => {
+                const arr = [...erp.why];
+                arr[i].title = e.target.value;
+                setErp({ ...erp, why: arr });
+              }}
+            />
+            <input
+              placeholder="Description"
+              value={w.desc}
+              onChange={e => {
+                const arr = [...erp.why];
+                arr[i].desc = e.target.value;
+                setErp({ ...erp, why: arr });
+              }}
+            />
+            <button onClick={() => removeItem("why", i)}>❌</button>
+          </div>
+        ))}
+        <button onClick={() => addCard("why")}>+ Add Card</button>
 
-        {/* WHY ERP */}
-        <label>Why ERP Title</label>
-        <input
-          name="whyTitle"
-          value={form.whyTitle}
-          onChange={handleChange}
-        />
-
-        <label>Why ERP Points (one per line)</label>
-        <textarea
-          name="why"
-          rows="6"
-          value={form.why}
-          onChange={handleChange}
-        />
-
-        <button type="submit" className="save-btn">
+        <button className="save-btn" onClick={save}>
           Save ERP Page
         </button>
-      </form>
-    </div>
+      </div>
+    </>
   );
 }

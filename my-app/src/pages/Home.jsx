@@ -1,17 +1,21 @@
 import "./Home.css";
 import React, { useEffect, useState } from "react";
-import { FaBolt, FaUserFriends, FaBullseye, FaCheckCircle } from "react-icons/fa";
+import {
+  FaBolt,
+  FaUserFriends,
+  FaBullseye,
+  FaCheckCircle,
+} from "react-icons/fa";
 import { useNavigate, Link } from "react-router-dom";
-
-import Saas from "../assets/saas1.jpeg";
-import Erp from "../assets/erp.jpeg";
-import Lms from "../assets/lms.jpeg";
-import Crm from "../assets/Crm.jpeg";
-import Billing from "../assets/billing.jpeg";
-import Website from "../assets/website.jpeg";
-
 import CTA from "../components/Cta";
-import Footer from "../components/Footer";
+
+
+/* fallback images */
+import Lms from "../assets/lms.jpeg";
+import Erp from "../assets/erp.jpeg";
+import Billing from "../assets/billing.jpeg";
+import Crm from "../assets/Crm.jpeg";
+import Website from "../assets/website.jpeg";
 
 const handleNext = () => {
   document
@@ -29,7 +33,7 @@ export default function Home() {
   const navigate = useNavigate();
   const [home, setHome] = useState(null);
 
-  /* 🔹 Fetch Home Content */
+  /* 🔹 Fetch admin content */
   useEffect(() => {
     fetch("http://localhost:5000/api/home")
       .then((res) => res.json())
@@ -37,7 +41,7 @@ export default function Home() {
       .catch(() => setHome(null));
   }, []);
 
-  /* 🔹 Why Choose animation */
+  /* 🔹 Why choose animation */
   useEffect(() => {
     setTimeout(() => {
       const items = document.querySelectorAll(".zen-why-box");
@@ -55,7 +59,6 @@ export default function Home() {
 
       window.addEventListener("scroll", animateWhy);
       animateWhy();
-      return () => window.removeEventListener("scroll", animateWhy);
     }, 300);
   }, []);
 
@@ -63,16 +66,16 @@ export default function Home() {
     <>
       <div className="hero-container-full">
         <div className="hero-inner">
-          {/* LEFT TEXT */}
+          {/* LEFT */}
           <div className="text-block slide-in">
             <h1 className="title">
               <span className="line">
                 {home?.heroLine1 || "Professional"}
-              </span>
+              </span>{" "}
               <br />
               <span className="line">
                 {home?.heroLine2 || "Software Company"}
-              </span>
+              </span>{" "}
               <br />
               <span className="line">
                 {home?.heroLine3 || "in Chennai for "}
@@ -83,21 +86,24 @@ export default function Home() {
             </h1>
           </div>
 
-          {/* RIGHT CONTENT */}
+          {/* RIGHT */}
           <div className="right-info-box slide-right">
             <p>
               {home?.heroDesc ||
                 "Billing Software | ERP | CRM | SaaS | LMS | Websites – Smart, Scalable Solutions for Your Business."}
             </p>
 
-            <button className="explore-btn" onClick={() => navigate("/about")}>
+            <button
+              className="explore-btn"
+              onClick={() => navigate("/about")}
+            >
               <span>Explore More</span>
               <span className="arrow-circle">→</span>
             </button>
           </div>
         </div>
 
-        {/* ABOUT SECTION */}
+        {/* ABOUT */}
         <section className="about-container">
           <h2 className="about-title">
             {home?.aboutTitle || "Who We Are"}
@@ -105,40 +111,31 @@ export default function Home() {
 
           <p className="about-text">
             {home?.aboutText ||
-              "Zenelait Infotech is a trusted software development company in Anna Nagar, Chennai, offering SaaS tech solutions, ERP, CRM, LMS and modern websites."}
+              "Zenelait Infotech is a trusted software development company in Anna Nagar, Chennai."}
           </p>
 
           <div className="features-row">
             <div className="feature-card">
               <FaBolt className="feature-icon" />
-              <h3 className="feature-title">
-                {home?.feature1Title || "Fast Implementation"}
-              </h3>
+              <h3 className="feature-title">Fast Implementation</h3>
               <p className="feature-desc">
-                {home?.feature1Desc ||
-                  "Quick deployment for growing businesses"}
+                Quick deployment for businesses in Chennai
               </p>
             </div>
 
             <div className="feature-card">
               <FaUserFriends className="feature-icon" />
-              <h3 className="feature-title">
-                {home?.feature2Title || "Expert Support"}
-              </h3>
+              <h3 className="feature-title">Expert Support</h3>
               <p className="feature-desc">
-                {home?.feature2Desc ||
-                  "24/7 dedicated support for all products"}
+                24/7 dedicated support for ERP, CRM, Billing & SaaS users.
               </p>
             </div>
 
             <div className="feature-card">
               <FaBullseye className="feature-icon" />
-              <h3 className="feature-title">
-                {home?.feature3Title || "Proven Results"}
-              </h3>
+              <h3 className="feature-title">Proven Results</h3>
               <p className="feature-desc">
-                {home?.feature3Desc ||
-                  "Trusted by businesses across Chennai"}
+                Trusted by companies across Anna Nagar & Chennai
               </p>
             </div>
           </div>
@@ -152,25 +149,54 @@ export default function Home() {
 
           <p className="services-banner-subtitle">
             {home?.servicesSub ||
-              "End-to-End Digital Solutions for Businesses"}
+              "End-to-End Digital Solutions — ERP, CRM, Billing Software, LMS & Website Development"}
           </p>
 
           <div className="services-banner-row">
-            {[
-              { img: Lms, title: "Learning Management", link: "/products/lms" },
-              { img: Erp, title: "ERP Systems", link: "/products/erp" },
-              { img: Billing, title: "Billing Software", link: "/products/billing" },
-              { img: Crm, title: "CRM Software", link: "/products/crm" },
-              { img: Website, title: "Web Development", link: "/service" },
-            ].map((s, i) => (
+            {(home?.services?.length
+              ? home.services
+              : [
+                  {
+                    title: "Learning Management",
+                    description: "Advanced LMS for institutes & corporates",
+                    link: "/products/lms",
+                    image: Lms,
+                  },
+                  {
+                    title: "ERP Systems",
+                    description: "Custom ERP for inventory & finance",
+                    link: "/products/erp",
+                    image: Erp,
+                  },
+                  {
+                    title: "Billing Software",
+                    description: "Smart billing & invoicing",
+                    link: "/products/billing",
+                    image: Billing,
+                  },
+                  {
+                    title: "CRM Software",
+                    description: "Lead tracking & automation CRM",
+                    link: "/products/crm",
+                    image: Crm,
+                  },
+                  {
+                    title: "Web Development",
+                    description: "Result-driven websites & web apps",
+                    link: "/service",
+                    image: Website,
+                  },
+                ]
+            ).map((s, i) => (
               <div className="services-banner-item" key={i}>
-                <img className="service-img" src={s.img} alt={s.title} />
+                <img
+                  className="service-img"
+                  src={s.image}
+                  alt={s.title}
+                />
                 <div className="services-banner-overlay">
                   <h3>{s.title}</h3>
-                  <p>
-                    {home?.servicesDesc ||
-                      "Powerful and scalable digital solutions"}
-                  </p>
+                  <p>{s.description}</p>
                   <Link to={s.link} className="services-learn">
                     Learn More →
                   </Link>
@@ -196,20 +222,20 @@ export default function Home() {
           </h2>
 
           <div className="zen-why-container">
-            {(home?.whyChoose && home.whyChoose.length > 0
+            {(home?.whyChoose?.length
               ? home.whyChoose
               : [
-                  "Product-based software expertise",
-                  "Scalable & secure IT solutions",
-                  "Custom development for startups & SMEs",
-                  "Fast local support in Anna Nagar",
-                  "Continuous updates & enhancements",
-                  "End-to-end software development",
+                  { text: "Product-Based Software Expertise" },
+                  { text: "Scalable & Secure IT Solutions" },
+                  { text: "Custom Software Development" },
+                  { text: "Fast Local Support in Anna Nagar" },
+                  { text: "Dedicated Support & Enhancements" },
+                  { text: "End-to-End Software Development" },
                 ]
-            ).map((text, i) => (
+            ).map((w, i) => (
               <div className="zen-why-box" key={i}>
                 <FaCheckCircle className="zen-why-icon" />
-                <p>{text}</p>
+                <p>{w.text}</p>
               </div>
             ))}
           </div>
@@ -217,7 +243,7 @@ export default function Home() {
       </div>
 
       <CTA />
-      
+
     </>
   );
 }

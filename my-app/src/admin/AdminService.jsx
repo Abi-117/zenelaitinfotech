@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import AdminHeader from "./AdminHeader";
-import "./AdminAbout.css"; // reuse same admin styles
+import "./AdminAbout.css";
 
 export default function AdminService() {
   const [service, setService] = useState({
@@ -15,13 +15,15 @@ export default function AdminService() {
   useEffect(() => {
     axios
       .get("http://localhost:5000/api/services")
-      .then((res) => res.data && setService(res.data));
+      .then((res) => res.data && setService(res.data))
+      .catch(console.error);
   }, []);
 
   const save = () => {
     axios
       .put("http://localhost:5000/api/services", service)
-      .then(() => alert("Service page updated"));
+      .then(() => alert("Service page updated"))
+      .catch(() => alert("Save failed"));
   };
 
   return (
@@ -75,7 +77,7 @@ export default function AdminService() {
               />
               <input
                 value={s.icon}
-                placeholder="Icon (Code2 / Palette / Rocket / Search / Settings / Smartphone)"
+                placeholder="Icon name"
                 onChange={(e) => {
                   const arr = [...service.services];
                   arr[i].icon = e.target.value;
@@ -108,7 +110,6 @@ export default function AdminService() {
             <input
               key={i}
               value={t}
-              placeholder="Technology name"
               onChange={(e) => {
                 const arr = [...service.technologies];
                 arr[i] = e.target.value;
@@ -129,7 +130,7 @@ export default function AdminService() {
           </button>
         </section>
 
-        {/* PROCESS STEPS */}
+        {/* PROCESS */}
         <section>
           <h2>Process Steps</h2>
 
@@ -137,7 +138,6 @@ export default function AdminService() {
             <div key={i} className="admin-card">
               <input
                 value={p.step}
-                placeholder="Step (01)"
                 onChange={(e) => {
                   const arr = [...service.processSteps];
                   arr[i].step = e.target.value;
@@ -146,7 +146,6 @@ export default function AdminService() {
               />
               <input
                 value={p.title}
-                placeholder="Step Title"
                 onChange={(e) => {
                   const arr = [...service.processSteps];
                   arr[i].title = e.target.value;
@@ -155,7 +154,6 @@ export default function AdminService() {
               />
               <textarea
                 value={p.desc}
-                placeholder="Step Description"
                 onChange={(e) => {
                   const arr = [...service.processSteps];
                   arr[i].desc = e.target.value;

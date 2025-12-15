@@ -1,33 +1,62 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import AdminHeader from "./AdminHeader";
-import "./admin.css";
+import "./AdminSaas.css";
+
+const API = "http://localhost:5000";
 
 export default function AdminSaas() {
   const [saas, setSaas] = useState({
     heroTitle: "",
     heroText: "",
+    heroImage: "",
+
     features: [],
     perfectFor: [],
-    whyChoose: []
+    whyChoose: [],
   });
 
-  const [feature, setFeature] = useState("");
-  const [pfTitle, setPfTitle] = useState("");
-  const [pfDesc, setPfDesc] = useState("");
-  const [whyTitle, setWhyTitle] = useState("");
-  const [whyDesc, setWhyDesc] = useState("");
+  /* FETCH */
+  const fetchSaas = async () => {
+    try {
+      const res = await axios.get(`${API}/api/saas`);
+      if (res.data) setSaas(res.data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
-  // GET
   useEffect(() => {
-    axios.get("http://localhost:5000/api/saas")
-      .then(res => res.data && setSaas(res.data));
+    fetchSaas();
   }, []);
 
-  // SAVE
-  const saveData = () => {
-    axios.put("http://localhost:5000/api/saas", saas)
-      .then(() => alert("SaaS Page Updated Successfully"));
+  /* SAVE */
+  const save = async () => {
+    try {
+      await axios.put(`${API}/api/saas`, saas);
+      alert("SaaS page updated");
+      fetchSaas();
+    } catch (err) {
+      console.error(err);
+      alert("Save failed");
+    }
+  };
+
+  const addFeature = () => {
+    setSaas({ ...saas, features: [...saas.features, ""] });
+  };
+
+  const addCard = (field) => {
+    setSaas({
+      ...saas,
+      [field]: [...saas[field], { title: "", desc: "" }],
+    });
+  };
+
+  const removeItem = (field, index) => {
+    const arr = [...saas[field]];
+    arr.splice(index, 1);
+    setSaas({ ...saas, [field]: arr });
   };
 
   return (
@@ -35,144 +64,105 @@ export default function AdminSaas() {
       <AdminHeader />
 
       <div className="admin-page">
-        <h1>SaaS Page Management</h1>
+        <h1>SaaS Page Admin</h1>
 
         {/* HERO */}
-        <h3>Hero Section</h3>
         <input
           placeholder="Hero Title"
           value={saas.heroTitle}
-          onChange={e => setSaas({ ...saas, heroTitle: e.target.value })}
+          onChange={(e) =>
+            setSaas({ ...saas, heroTitle: e.target.value })
+          }
         />
 
         <textarea
-          placeholder="Hero Description"
+          placeholder="Hero Text"
           value={saas.heroText}
-          onChange={e => setSaas({ ...saas, heroText: e.target.value })}
+          onChange={(e) =>
+            setSaas({ ...saas, heroText: e.target.value })
+          }
+        />
+
+        <input
+          placeholder="Hero Image Filename (example: saas.jpg)"
+          value={saas.heroImage}
+          onChange={(e) =>
+            setSaas({ ...saas, heroImage: e.target.value })
+          }
         />
 
         {/* FEATURES */}
-        <h3>Key Features</h3>
-        <div className="row">
-          <input
-            placeholder="Add Feature"
-            value={feature}
-            onChange={e => setFeature(e.target.value)}
-          />
-          <button
-            onClick={() => {
-              if (!feature) return;
-              setSaas({ ...saas, features: [...saas.features, feature] });
-              setFeature("");
-            }}
-          >
-            Add
-          </button>
-        </div>
-
-        <ul>
-          {saas.features.map((f, i) => (
-            <li key={i}>
-              {f}
-              <button
-                onClick={() =>
-                  setSaas({
-                    ...saas,
-                    features: saas.features.filter((_, idx) => idx !== i)
-                  })
-                }
-              >
-                ❌
-              </button>
-            </li>
-          ))}
-        </ul>
+        <h3>What We Provide</h3>
+        {saas.features.map((f, i) => (
+          <div key={i} className="row">
+            <input
+              value={f}
+              onChange={(e) => {
+                const arr = [...saas.features];
+                arr[i] = e.target.value;
+                setSaas({ ...saas, features: arr });
+              }}
+            />
+            <button onClick={() => removeItem("features", i)}>❌</button>
+          </div>
+        ))}
+        <button onClick={addFeature}>+ Add Feature</button>
 
         {/* PERFECT FOR */}
         <h3>Perfect For</h3>
-        <input
-          placeholder="Title"
-          value={pfTitle}
-          onChange={e => setPfTitle(e.target.value)}
-        />
-        <textarea
-          placeholder="Description"
-          value={pfDesc}
-          onChange={e => setPfDesc(e.target.value)}
-        />
-        <button
-          onClick={() => {
-            setSaas({
-              ...saas,
-              perfectFor: [...saas.perfectFor, { title: pfTitle, desc: pfDesc }]
-            });
-            setPfTitle("");
-            setPfDesc("");
-          }}
-        >
-          Add
-        </button>
-
         {saas.perfectFor.map((p, i) => (
-          <div key={i} className="box">
-            <b>{p.title}</b>
-            <p>{p.desc}</p>
-            <button
-              onClick={() =>
-                setSaas({
-                  ...saas,
-                  perfectFor: saas.perfectFor.filter((_, idx) => idx !== i)
-                })
-              }
-            >
-              Delete
-            </button>
+          <div key={i} className="card-row">
+            <input
+              placeholder="Title"
+              value={p.title}
+              onChange={(e) => {
+                const arr = [...saas.perfectFor];
+                arr[i].title = e.target.value;
+                setSaas({ ...saas, perfectFor: arr });
+              }}
+            />
+            <input
+              placeholder="Description"
+              value={p.desc}
+              onChange={(e) => {
+                const arr = [...saas.perfectFor];
+                arr[i].desc = e.target.value;
+                setSaas({ ...saas, perfectFor: arr });
+              }}
+            />
+            <button onClick={() => removeItem("perfectFor", i)}>❌</button>
           </div>
         ))}
+        <button onClick={() => addCard("perfectFor")}>+ Add Card</button>
 
         {/* WHY CHOOSE */}
-        <h3>Why Choose SaaS</h3>
-        <input
-          placeholder="Title"
-          value={whyTitle}
-          onChange={e => setWhyTitle(e.target.value)}
-        />
-        <textarea
-          placeholder="Description"
-          value={whyDesc}
-          onChange={e => setWhyDesc(e.target.value)}
-        />
-        <button
-          onClick={() => {
-            setSaas({
-              ...saas,
-              whyChoose: [...saas.whyChoose, { title: whyTitle, desc: whyDesc }]
-            });
-            setWhyTitle("");
-            setWhyDesc("");
-          }}
-        >
-          Add
-        </button>
-
+        <h3>Why Choose</h3>
         {saas.whyChoose.map((w, i) => (
-          <div key={i} className="box">
-            <b>{w.title}</b>
-            <p>{w.desc}</p>
-            <button
-              onClick={() =>
-                setSaas({
-                  ...saas,
-                  whyChoose: saas.whyChoose.filter((_, idx) => idx !== i)
-                })
-              }
-            >
-              Delete
-            </button>
+          <div key={i} className="card-row">
+            <input
+              placeholder="Title"
+              value={w.title}
+              onChange={(e) => {
+                const arr = [...saas.whyChoose];
+                arr[i].title = e.target.value;
+                setSaas({ ...saas, whyChoose: arr });
+              }}
+            />
+            <input
+              placeholder="Description"
+              value={w.desc}
+              onChange={(e) => {
+                const arr = [...saas.whyChoose];
+                arr[i].desc = e.target.value;
+                setSaas({ ...saas, whyChoose: arr });
+              }}
+            />
+            <button onClick={() => removeItem("whyChoose", i)}>❌</button>
           </div>
         ))}
+        <button onClick={() => addCard("whyChoose")}>+ Add Card</button>
 
-        <button className="save-btn" onClick={saveData}>
+        <button className="save-btn" onClick={save}>
           Save SaaS Page
         </button>
       </div>

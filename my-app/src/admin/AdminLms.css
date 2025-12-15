@@ -1,0 +1,117 @@
+/* Admin LMS Page */
+.admin-page {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  font-family: "Arial", sans-serif;
+}
+
+.admin-page h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #1e1e1e;
+}
+
+.admin-page h3 {
+  margin-top: 25px;
+  margin-bottom: 10px;
+  color: #333;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 5px;
+}
+
+.admin-page input,
+.admin-page textarea {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.admin-page textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.row input {
+  flex: 1;
+}
+
+.row button {
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.row button:hover {
+  background-color: #0056b3;
+}
+
+.card-row {
+  background-color: #f9f9f9;
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.card-row input,
+.card-row textarea {
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.card-row button {
+  align-self: flex-end;
+  background-color: #dc3545;
+  padding: 5px 10px;
+}
+
+.card-row button:hover {
+  background-color: #a71d2a;
+}
+
+.save-btn {
+  margin-top: 30px;
+  width: 100%;
+  padding: 12px;
+  background-color: #28a745;
+  color: #fff;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.save-btn:hover {
+  background-color: #1e7e34;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .row {
+    flex-direction: column;
+  }
+
+  .row button {
+    width: 100%;
+  }
+}

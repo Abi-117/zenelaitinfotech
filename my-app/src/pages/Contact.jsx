@@ -3,7 +3,7 @@ import Footer from "../components/Footer";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 import "./Contact.css";
 import axios from "axios";
-import emailjs from "@emailjs/browser";
+//import emailjs from "@emailjs/browser";
 
 export default function Contact() {
   const [page, setPage] = useState(null);
@@ -50,16 +50,29 @@ export default function Contact() {
             <div className="contact-form-card">
               <h2>Send us a Message</h2>
               <form onSubmit={handleSubmit}>
+                <label>Full Name *
                 <input name="name" placeholder="Name" onChange={handleChange} required />
+                </label>
+                <label>Email Address *
                 <input name="email" placeholder="Email" onChange={handleChange} required />
+                </label>
+                <label>
+                  Phone Number
                 <input name="phone" placeholder="Phone" onChange={handleChange} />
+                </label>
+                <label>
+                  Message *
                 <textarea name="message" placeholder="Message" onChange={handleChange} required />
+                </label>
                 <button type="submit">
-                  Send Message <Send />
+                  Send Message <Send className="send-icon"  />
                 </button>
               </form>
             </div>
-
+<div className="map-page">
+  <h2>Find Us Here</h2>
+              <p>Visit our campus and experience world-class facilities</p>
+            <div className="map-container">
             <iframe
               src={page?.mapUrl}
               width="100%"
@@ -69,29 +82,46 @@ export default function Contact() {
               title="Map"
             />
           </div>
+          </div>
+          </div>
 
           {/* INFO */}
           <div className="contact-right">
-            <img src={page?.image} alt="Contact" />
-
+            <div className="contact-image">
+              <img src={page?.image} alt="Contact" />
+              </div>
             <div className="contact-info-card">
+              <h2>Contact Information</h2>
               <div className="info-item">
-                <MapPin />
+                <MapPin className="info-icon" />
+                <div>
+                <h4>Address</h4>
                 <p>{page?.address}</p>
+                </div>
               </div>
               <div className="info-item">
-                <Phone />
+                <Phone className="info-icon" />
+                <div>
+                <h4>Phone</h4>
                 <p>{page?.phone}</p>
+                </div>
               </div>
               <div className="info-item">
-                <Mail />
+                <Mail className="info-icon" />
+                <div>
+                <h4>Email</h4>
+                
                 <p>{page?.email}</p>
+                  </div>
+                
               </div>
             </div>
 
             <div className="business-hours-card">
               <h3>Business Hours</h3>
+              <p>Monday - Friday: 9:30 AM - 6:30 PM</p>
               <p>{page?.businessHours}</p>
+  
             </div>
           </div>
         </div>

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Footer from "../../components/Footer";
 import CTA from "../../components/Cta";
 import "./Crmpage.css";
 import Crmimg from "../../assets/crmbg.jpeg";
@@ -89,7 +88,6 @@ export default function Crmpage() {
       </section>
 
       <CTA />
-      <Footer />
     </div>
   );
 }

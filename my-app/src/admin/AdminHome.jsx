@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./AdminHome.css";
 import AdminHeader from "./AdminHeader";
+
+const API = "http://localhost:5000";
+
 export default function AdminHome() {
   const [home, setHome] = useState({
     heroTitle: "",
@@ -12,18 +15,40 @@ export default function AdminHome() {
     whyChoose: [],
   });
 
-  useEffect(() => {
-    axios.get("http://localhost:5000/api/home").then((res) => {
-      if (res.data) setHome(res.data);
-    });
-  }, []);
-
-  const saveChanges = () => {
-    axios
-      .put("http://localhost:5000/api/home", home)
-      .then(() => alert("Home updated successfully"));
+  /* FETCH HOME DATA */
+  const fetchHome = async () => {
+    const res = await axios.get(`${API}/api/home`);
+    if (res.data) setHome(res.data);
   };
 
+  useEffect(() => {
+    fetchHome();
+  }, []);
+
+  /* SAVE HOME (with image upload) */
+  const saveChanges = async () => {
+    try {
+      const formData = new FormData();
+      formData.append("data", JSON.stringify(home));
+
+      // upload only changed images
+      home.services.forEach((s, i) => {
+        if (s.imageFile) {
+          formData.append("image", s.imageFile);
+          formData.append("serviceIndex", i);
+        }
+      });
+
+      await axios.put(`${API}/api/home`, formData);
+      alert("Home updated successfully");
+      fetchHome();
+    } catch (err) {
+      console.error(err);
+      alert("Save failed");
+    }
+  };
+
+  /* ADD SERVICE */
   const addService = () => {
     setHome({
       ...home,
@@ -34,6 +59,14 @@ export default function AdminHome() {
     });
   };
 
+  /* DELETE SERVICE */
+  const deleteService = async (id) => {
+    if (!window.confirm("Delete service?")) return;
+    await axios.delete(`${API}/api/home/service/${id}`);
+    fetchHome();
+  };
+
+  /* ADD WHY CHOOSE */
   const addWhy = () => {
     setHome({
       ...home,
@@ -41,107 +74,157 @@ export default function AdminHome() {
     });
   };
 
+  /* DELETE WHY CHOOSE */
+  const deleteWhy = async (id) => {
+    if (!window.confirm("Delete this point?")) return;
+    await axios.delete(`${API}/api/home/why/${id}`);
+    fetchHome();
+  };
+
   return (
     <>
-    <AdminHeader/>
-    <div className="admin-home">
-      <h1>Home Page Admin</h1>
+      <AdminHeader />
 
-      {/* HERO */}
-      <section>
-        <h2>Hero Section</h2>
-        <input
-          value={home.heroTitle}
-          onChange={(e) => setHome({ ...home, heroTitle: e.target.value })}
-          placeholder="Hero Title"
-        />
-        <textarea
-          value={home.heroSubtitle}
-          onChange={(e) => setHome({ ...home, heroSubtitle: e.target.value })}
-          placeholder="Hero Subtitle"
-        />
-      </section>
+      <div className="admin-home">
+        <h1>Home Page Admin</h1>
 
-      {/* ABOUT */}
-      <section>
-        <h2>About Section</h2>
-        <input
-          value={home.aboutTitle}
-          onChange={(e) => setHome({ ...home, aboutTitle: e.target.value })}
-        />
-        <textarea
-          value={home.aboutText}
-          onChange={(e) => setHome({ ...home, aboutText: e.target.value })}
-        />
-      </section>
-
-      {/* SERVICES */}
-      <section>
-        <h2>Services</h2>
-        {home.services.map((s, i) => (
-          <div className="admin-card" key={i}>
-            <input
-              placeholder="Title"
-              value={s.title}
-              onChange={(e) => {
-                const arr = [...home.services];
-                arr[i].title = e.target.value;
-                setHome({ ...home, services: arr });
-              }}
-            />
-            <textarea
-              placeholder="Description"
-              value={s.description}
-              onChange={(e) => {
-                const arr = [...home.services];
-                arr[i].description = e.target.value;
-                setHome({ ...home, services: arr });
-              }}
-            />
-            <input
-              placeholder="Image URL"
-              value={s.image}
-              onChange={(e) => {
-                const arr = [...home.services];
-                arr[i].image = e.target.value;
-                setHome({ ...home, services: arr });
-              }}
-            />
-            <input
-              placeholder="Link"
-              value={s.link}
-              onChange={(e) => {
-                const arr = [...home.services];
-                arr[i].link = e.target.value;
-                setHome({ ...home, services: arr });
-              }}
-            />
-          </div>
-        ))}
-        <button onClick={addService}>+ Add Service</button>
-      </section>
-
-      {/* WHY CHOOSE */}
-      <section>
-        <h2>Why Choose</h2>
-        {home.whyChoose.map((w, i) => (
+        {/* HERO */}
+        <section>
+          <h2>Hero</h2>
           <input
-            key={i}
-            value={w.text}
-            onChange={(e) => {
-              const arr = [...home.whyChoose];
-              arr[i].text = e.target.value;
-              setHome({ ...home, whyChoose: arr });
-            }}
+            placeholder="Hero Title"
+            value={home.heroTitle}
+            onChange={(e) =>
+              setHome({ ...home, heroTitle: e.target.value })
+            }
           />
-        ))}
-        <button onClick={addWhy}>+ Add Point</button>
-      </section>
+          <textarea
+            placeholder="Hero Subtitle"
+            value={home.heroSubtitle}
+            onChange={(e) =>
+              setHome({ ...home, heroSubtitle: e.target.value })
+            }
+          />
+        </section>
 
-      <button className="save-btn" onClick={saveChanges}>
-        Save Changes
-      </button>
-    </div>
+        {/* ABOUT */}
+        <section>
+          <h2>About</h2>
+          <input
+            placeholder="About Title"
+            value={home.aboutTitle}
+            onChange={(e) =>
+              setHome({ ...home, aboutTitle: e.target.value })
+            }
+          />
+          <textarea
+            placeholder="About Text"
+            value={home.aboutText}
+            onChange={(e) =>
+              setHome({ ...home, aboutText: e.target.value })
+            }
+          />
+        </section>
+
+        {/* SERVICES */}
+        <section>
+          <h2>Services</h2>
+
+          {home.services.map((s, i) => (
+            <div className="admin-card" key={s._id || i}>
+              <input
+                placeholder="Title"
+                value={s.title}
+                onChange={(e) => {
+                  const arr = [...home.services];
+                  arr[i].title = e.target.value;
+                  setHome({ ...home, services: arr });
+                }}
+              />
+
+              <textarea
+                placeholder="Description"
+                value={s.description}
+                onChange={(e) => {
+                  const arr = [...home.services];
+                  arr[i].description = e.target.value;
+                  setHome({ ...home, services: arr });
+                }}
+              />
+
+              <input
+                placeholder="Link"
+                value={s.link}
+                onChange={(e) => {
+                  const arr = [...home.services];
+                  arr[i].link = e.target.value;
+                  setHome({ ...home, services: arr });
+                }}
+              />
+
+              {/* IMAGE UPLOAD */}
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                  const arr = [...home.services];
+                  arr[i].imageFile = e.target.files[0];
+                  setHome({ ...home, services: arr });
+                }}
+              />
+
+              {/* PREVIEW IMAGE */}
+              {s.image && (
+                <img
+                  src={`${API}/uploads/${s.image}`}
+                  alt="service"
+                  style={{ width: "120px", marginTop: "10px" }}
+                />
+              )}
+
+              {/* DELETE */}
+              {s._id && (
+                <button className="del" onClick={() => deleteService(s._id)}>
+                  Delete Service
+                </button>
+              )}
+            </div>
+          ))}
+
+          <button onClick={addService}>+ Add Service</button>
+        </section>
+
+        {/* WHY CHOOSE */}
+        <section>
+          <h2>Why Choose</h2>
+
+          {home.whyChoose.map((w, i) => (
+            <div className="admin-card" key={w._id || i}>
+              <input
+                value={w.text}
+                placeholder="Why choose text"
+                onChange={(e) => {
+                  const arr = [...home.whyChoose];
+                  arr[i].text = e.target.value;
+                  setHome({ ...home, whyChoose: arr });
+                }}
+              />
+
+              {w._id && (
+                <button className="del" onClick={() => deleteWhy(w._id)}>
+                  Delete
+                </button>
+              )}
+            </div>
+          ))}
+
+          <button onClick={addWhy}>+ Add Point</button>
+        </section>
+
+        <button className="save-btn" onClick={saveChanges}>
+          Save Changes
+        </button>
+      </div>
     </>
   );
 }
