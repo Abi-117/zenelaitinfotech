@@ -5,18 +5,42 @@ import CTA from "../../components/Cta";
 import "./Billingpage.css";
 import Billingimg from "../../assets/billingbg.jpeg";
 
+const API = "http://localhost:5000";
+
+/* 🔥 DEFAULT SAFE STRUCTURE */
+const defaultBilling = {
+  title: "",
+  subtitle: "",
+  benefits: [],
+  perfectFor: [],
+  why: [],
+};
+
 export default function Billingpage() {
   const navigate = useNavigate();
-  const [billing, setBilling] = useState(null);
+  const [billing, setBilling] = useState(defaultBilling);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/billing")
-      .then((res) => setBilling(res.data))
-      .catch((err) => console.error(err));
+      .get(`${API}/api/billing`)
+      .then((res) => {
+        const data = res.data || {};
+
+        /* ✅ Normalize backend response */
+        setBilling({
+          title: data.title || "",
+          subtitle: data.subtitle || "",
+          benefits: Array.isArray(data.benefits) ? data.benefits : [],
+          perfectFor: Array.isArray(data.perfectFor) ? data.perfectFor : [],
+          why: Array.isArray(data.why) ? data.why : [],
+        });
+      })
+      .catch((err) => console.error("Billing API error:", err))
+      .finally(() => setLoading(false));
   }, []);
 
-  if (!billing) return <h2>Loading...</h2>;
+  if (loading) return <h2 style={{ padding: 20 }}>Loading...</h2>;
 
   return (
     <div className="billing-page">
@@ -52,9 +76,11 @@ export default function Billingpage() {
 
         <div className="billing-features-wrapper">
           <ul>
-            {billing.benefits.map((b, i) => (
-              <li key={i}>{b}</li>
-            ))}
+            {billing.benefits.length === 0 ? (
+              <li>No benefits available</li>
+            ) : (
+              billing.benefits.map((b, i) => <li key={i}>{b}</li>)
+            )}
           </ul>
 
           <img
@@ -68,32 +94,38 @@ export default function Billingpage() {
       {/* PERFECT FOR */}
       <section className="billing-perfect-for">
         <h2>Perfect For</h2>
+
         <div className="audience-grid">
-          {billing.perfectFor.map((item, i) => (
-            <div className="audience-card" key={i}>
-              <h4>{item.title}</h4>
-              <p>{item.desc}</p>
-            </div>
-          ))}
+          {billing.perfectFor.length === 0 ? (
+            <p>No data available</p>
+          ) : (
+            billing.perfectFor.map((item, i) => (
+              <div className="audience-card" key={i}>
+                <h4>{item.title}</h4>
+                <p>{item.desc}</p>
+              </div>
+            ))
+          )}
         </div>
       </section>
 
       {/* WHY BILLING */}
       <section className="billing-why">
         <h2>Why Choose Our Billing Software?</h2>
+
         <div className="why-grid">
-          {billing.why.map((item, i) => (
-            <div className="why-card" key={i}>
-              <h4>{item.title}</h4>
-              <p>{item.desc}</p>
-            </div>
-          ))}
+          {billing.why.length === 0 ? (
+            <p>No data available</p>
+          ) : (
+            billing.why.map((item, i) => (
+              <div className="why-card" key={i}>
+                <h4>{item.title}</h4>
+                <p>{item.desc}</p>
+              </div>
+            ))
+          )}
         </div>
       </section>
-
-  
-     
-      
 
       <CTA />
     </div>

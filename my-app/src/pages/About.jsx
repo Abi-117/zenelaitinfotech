@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./About.css";
 import Team from "../assets/about-image.jpg";
-import Footer from "../components/Footer";
 import { Target, Eye, Award, Users } from "lucide-react";
 
 const AboutHero = () => {
@@ -42,7 +41,7 @@ const AboutHero = () => {
           {/* LEFT IMAGE */}
           <div className="about-hero-image image-card">
             <img
-              src={about?.heroImage || Team}
+              src={Team}
               alt="Team"
               className="image-effect"
             />

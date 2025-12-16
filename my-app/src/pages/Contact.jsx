@@ -3,6 +3,7 @@ import Footer from "../components/Footer";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 import "./Contact.css";
 import axios from "axios";
+import Contactimage from "../assets/contact-image.jpg";
 //import emailjs from "@emailjs/browser";
 
 export default function Contact() {
@@ -76,7 +77,7 @@ export default function Contact() {
             <iframe
               src={page?.mapUrl}
               width="100%"
-              height="450"
+              height="350"
               style={{ border: 0 }}
               loading="lazy"
               title="Map"
@@ -88,7 +89,7 @@ export default function Contact() {
           {/* INFO */}
           <div className="contact-right">
             <div className="contact-image">
-              <img src={page?.image} alt="Contact" />
+              <img src={Contactimage} alt="Customer support" />
               </div>
             <div className="contact-info-card">
               <h2>Contact Information</h2>

@@ -3,7 +3,7 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #333;
   line-height: 1.6;
-  background-color: #f9f9f9;
+  background-color: #ffffff;
   
 }
 .services-section
@@ -54,6 +54,7 @@
   text-align: center;
   margin-bottom: 50px;
  color: #d62828;
+ 
 }
 .section-header1 {
   text-align: center;
@@ -130,7 +131,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 10px;
+  gap: 6px;
  
 }
 
@@ -193,4 +194,111 @@
 {
   text-decoration: none;
   color: #d62828;
+}
+/* ===============================
+   TABLET (max-width: 900px)
+================================ */
+@media (max-width: 900px) {
+
+  /* HERO */
+  .hero {
+    padding: 40px 20px;
+  }
+
+  .hero h1 {
+    font-size: 2.4rem;
+  }
+
+  .hero p {
+    font-size: 1.05rem;
+  }
+
+  /* SERVICES GRID */
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+  }
+
+  /* PROCESS */
+  .process-card {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .process-step {
+    margin-right: 0;
+  }
+}
+
+/* ===============================
+   MOBILE (max-width: 600px)
+================================ */
+@media (max-width: 600px) {
+
+  /* PAGE */
+  .container {
+    width: 92%;
+  }
+
+  /* HERO */
+  .hero {
+    padding: 35px 15px;
+  }
+
+  .hero h1 {
+    font-size: 1.9rem;
+    line-height: 1.3;
+  }
+
+  .hero p {
+    font-size: 0.95rem;
+  }
+
+  .hero-btn {
+    padding: 10px 22px;
+    font-size: 1rem;
+  }
+
+  /* SECTION HEADERS */
+  .section-header h2,
+  .section-header1 h2 {
+    font-size: 1.9rem;
+  }
+
+  .section-header p {
+    font-size: 0.95rem;
+  }
+
+  /* SERVICES GRID */
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .card {
+    padding: 20px;
+  }
+
+  /* TECHNOLOGIES */
+  .tech-item {
+    font-size: 0.9rem;
+    padding: 7px 16px;
+  }
+
+  /* PROCESS */
+  .process-card {
+    padding: 18px;
+  }
+
+  .process-step {
+    font-size: 1.6rem;
+  }
+
+  .process-info h3 {
+    font-size: 1.05rem;
+  }
+
+  .process-info p {
+    font-size: 0.9rem;
+  }
 }

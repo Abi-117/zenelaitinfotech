@@ -24,7 +24,7 @@ export default function Erppage() {
       <section className="erp-hero">
         <div className="hero-erpcontent">
         <h2>{erp.heroTitle}</h2>
-        <p>{erp.heroText}</p>
+        <p className="subtitle">{erp.heroText}</p>
          <div className="hero-buttons">
         
         <button

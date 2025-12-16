@@ -6,7 +6,7 @@
 }
 .hero-container-full {
   width: 100%;
-  padding: 100px 0px;
+  padding: 50px 50px 0px 0px;
   border-bottom: 3px solid #ff2a2a;
   position: relative;
   overflow: hidden;
@@ -224,8 +224,8 @@
 }
 .about-text {
   max-width: 800px;
-  margin: 0 auto 60px;
-  color: #7a7878;
+  margin: 0 auto 40px;
+  color: #ffffff;
   font-size: 18px;
   line-height: 28px;
   animation: fadeIn 1s ease-out forwards;
@@ -297,6 +297,7 @@
 
 .services-banner-section{
   background-color: transparent;
+  padding-top: 0px;
 }
 .services-banner-title {
   font-size: 38px;
@@ -357,7 +358,7 @@
 /* Tall banner item */
 .services-banner-item {
   min-width: 250px;
-  height: 350px;
+  height: 400px;
  
   padding: 10px 10px;
   position: relative;
@@ -375,7 +376,7 @@
 .services-banner-overlay {
   position: absolute;
   inset: 0;
-  padding: 20px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -394,6 +395,21 @@
 .services-banner-item:hover .services-banner-overlay{
   opacity: 1;
   transform: translateY(0);
+}
+.service-head{
+  color: #c1c1c1;
+  z-index: 3;
+}
+.services-banner-item {
+  position: relative;      /* 🔥 mandatory */
+  width: 300px;            /* adjust as needed */
+  height: 400px;           /* adjust as needed */
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: flex-start; /* h3 top */
+  padding: 15px;
+  border-radius: 10px;     /* optional */
 }
 .service-img{
  object-fit: cover;
@@ -671,5 +687,96 @@
 
   .service-card {
     width: 95%;
+  }
+}
+/* ===============================
+   MOBILE RESPONSIVE – NO COLOR CHANGE
+================================ */
+
+/* Tablets */
+@media (max-width: 900px) {
+  .hero-inner {
+    flex-direction: column;
+    align-items: center;
+    gap: 35px;
+    margin-left: 0;
+  }
+
+  .text-block {
+    text-align: center;
+    width: 100%;
+  }
+
+  .title {
+    font-size: 3rem;   /* size only */
+  }
+
+  .right-info-box {
+    width: 90%;
+    margin-right: 0;
+    border-left: none;
+    border-top: 3px solid #ff0033; /* same red */
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .hero-container-full {
+    padding: 70px 0;
+  }
+
+  .hero-inner {
+    padding: 0 16px;
+  }
+
+  .title {
+    font-size: 2.2rem;
+    line-height: 1.3;
+  }
+
+  .right-info-box {
+    width: 100%;
+    padding: 18px;
+  }
+
+  .explore-btn {
+    justify-content: center;
+    font-size: 18px;
+  }
+
+  /* ABOUT */
+  .about-title {
+    font-size: 26px;
+  }
+
+  .about-text {
+    font-size: 16px;
+  }
+
+  .feature-card {
+    width: 100%;
+  }
+
+  /* SERVICES */
+  .services-banner-item {
+    min-width: 220px;
+    height: 300px;
+  }
+.services-banner-item h3{
+ color: #eee;  
+}
+  /* WHY */
+  .zen-why {
+    width: 100%;
+    margin: 40px 0;
+    padding: 40px 15px;
+  }
+
+  .zen-why-heading {
+    font-size: 26px;
+  }
+
+  .zen-why-box p {
+    font-size: 16px;
   }
 }

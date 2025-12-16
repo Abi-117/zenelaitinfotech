@@ -16,6 +16,7 @@ import Erp from "../assets/erp.jpeg";
 import Billing from "../assets/billing.jpeg";
 import Crm from "../assets/Crm.jpeg";
 import Website from "../assets/website.jpeg";
+import Black from "../assets/black.PNG";
 
 const handleNext = () => {
   document
@@ -80,7 +81,7 @@ export default function Home() {
               <span className="line">
                 {home?.heroLine3 || "in Chennai for "}
                 <span className="highlight">
-                  {home?.heroHighlight || "ERP, LMS, CRM & SaaS"}
+                  {home?.heroHighlight || "ERP, LMS , CRM & Billing"}
                 </span>
               </span>
             </h1>
@@ -152,56 +153,28 @@ export default function Home() {
               "End-to-End Digital Solutions — ERP, CRM, Billing Software, LMS & Website Development"}
           </p>
 
-          <div className="services-banner-row">
-            {(home?.services?.length
-              ? home.services
-              : [
-                  {
-                    title: "Learning Management",
-                    description: "Advanced LMS for institutes & corporates",
-                    link: "/products/lms",
-                    image: Lms,
-                  },
-                  {
-                    title: "ERP Systems",
-                    description: "Custom ERP for inventory & finance",
-                    link: "/products/erp",
-                    image: Erp,
-                  },
-                  {
-                    title: "Billing Software",
-                    description: "Smart billing & invoicing",
-                    link: "/products/billing",
-                    image: Billing,
-                  },
-                  {
-                    title: "CRM Software",
-                    description: "Lead tracking & automation CRM",
-                    link: "/products/crm",
-                    image: Crm,
-                  },
-                  {
-                    title: "Web Development",
-                    description: "Result-driven websites & web apps",
-                    link: "/service",
-                    image: Website,
-                  },
-                ]
-            ).map((s, i) => (
+          
+           <div className="services-banner-row">
+            {[
+              { img: Lms, title: "Learning Management", link: "/products/lms" },
+              { img: Erp, title: "ERP Systems", link: "/products/erp" },
+              { img: Billing, title: "Billing Software", link: "/products/billing" },
+              { img: Crm, title: "CRM Software", link: "/products/crm" },
+              { img: Website, title: "Web Development", link: "/service" },
+            ].map((s, i) => (
               <div className="services-banner-item" key={i}>
-                <img
-                  className="service-img"
-                  src={s.image}
-                  alt={s.title}
-                />
+                <img className="service-img" src={s.img} alt={s.title} />
                 <div className="services-banner-overlay">
                   <h3>{s.title}</h3>
-                  <p>{s.description}</p>
+                  <p>
+                    {home?.servicesDesc ||
+                      "Powerful and scalable digital solutions"}
+                  </p>
                   <Link to={s.link} className="services-learn">
                     Learn More →
                   </Link>
-                </div>
-              </div>
+</div>
+</div>
             ))}
           </div>
 

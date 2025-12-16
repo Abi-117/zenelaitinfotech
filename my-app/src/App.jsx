@@ -7,7 +7,6 @@ import Products from "./pages/Products/Products";
 import Contact from "./pages/Contact";
 import Service from "./pages/Service";
 
-import Saaspage from "./pages/Products/Saaspage";
 import Crmpage from "./pages/Products/Crmpage";
 import Erppage from "./pages/Products/Erppage";
 import Lmspage from "./pages/Products/Lmspage";
@@ -29,7 +28,6 @@ import AdminService from "./admin/AdminService";
 import AdminContactEdit from "./admin/AdminContact";
 import AdminContactInbox from "./admin/AdminContactInbox";
 import AdminProducts from "./admin/AdminProducts";
-import AdminSaas from "./admin/AdminSaas";
 import AdminLms from "./admin/AdminLms";
 import AdminFooter from "./admin/AdminFooter";
 import AdminErp from "./admin/AdminErp";
@@ -66,7 +64,6 @@ export default function App() {
         <Route path="/about" element={<About />} />
         <Route path="/products" element={<Products />} />
 
-        <Route path="/products/saas" element={<Saaspage />} />
         <Route path="/products/crm" element={<Crmpage />} />
         <Route path="/products/erp" element={<Erppage />} />
         <Route path="/products/lms" element={<Lmspage />} />
@@ -84,7 +81,6 @@ export default function App() {
         <Route path="/admin/contacts" element={<AdminContactEdit />} />
         <Route path="/admin/contact-inbox" element={<AdminContactInbox />} />
         <Route path="/admin/footer" element={<AdminFooter />} />
-        <Route path="/admin/saas" element={<AdminSaas />} />
         <Route path="/admin/lms" element={<AdminLms />} />
         <Route path="/admin/erp" element={<AdminErp />} />
         <Route path="/admin/crm" element={<AdminCrm />} />   

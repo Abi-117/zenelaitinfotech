@@ -40,6 +40,7 @@
   flex-direction: column;
   gap: 2rem;
   width: 55%;
+
 }
 
 /* RIGHT COLUMN */
@@ -57,6 +58,7 @@
   border-radius: 12px;
   padding: 2rem;
   box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  
 }
 
 .contact-form-card h2 {

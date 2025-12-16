@@ -3,6 +3,8 @@ import axios from "axios";
 import AdminHeader from "./AdminHeader";
 import "./AdminAbout.css";
 
+const API = "http://localhost:5000/api/services";
+
 export default function AdminService() {
   const [service, setService] = useState({
     heroTitle: "",
@@ -12,23 +14,52 @@ export default function AdminService() {
     processSteps: [],
   });
 
+  /* GET DATA */
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/services")
+      .get(API)
       .then((res) => res.data && setService(res.data))
       .catch(console.error);
   }, []);
 
-  const save = () => {
-    axios
-      .put("http://localhost:5000/api/services", service)
-      .then(() => alert("Service page updated"))
-      .catch(() => alert("Save failed"));
+  /* SAVE PAGE */
+  const save = async () => {
+    try {
+      await axios.put(API, service);
+      alert("Service page updated");
+    } catch {
+      alert("Save failed");
+    }
+  };
+
+  /* DELETE SERVICE ITEM */
+  const deleteServiceItem = async (id) => {
+    if (!window.confirm("Delete this service?")) return;
+
+    const res = await axios.delete(`${API}/service/${id}`);
+    setService(res.data);
+  };
+
+  /* DELETE TECHNOLOGY */
+  const deleteTechnology = async (tech) => {
+    if (!window.confirm("Delete this technology?")) return;
+
+    const res = await axios.delete(`${API}/technology/${tech}`);
+    setService(res.data);
+  };
+
+  /* DELETE PROCESS STEP */
+  const deleteProcessStep = async (id) => {
+    if (!window.confirm("Delete this step?")) return;
+
+    const res = await axios.delete(`${API}/process/${id}`);
+    setService(res.data);
   };
 
   return (
     <>
       <AdminHeader />
+
       <div className="admin-about">
         <h1>Service Page Admin</h1>
 
@@ -37,17 +68,17 @@ export default function AdminService() {
           <h2>Hero Section</h2>
           <input
             value={service.heroTitle}
+            placeholder="Hero Title"
             onChange={(e) =>
               setService({ ...service, heroTitle: e.target.value })
             }
-            placeholder="Hero Title"
           />
           <textarea
             value={service.heroText}
+            placeholder="Hero Description"
             onChange={(e) =>
               setService({ ...service, heroText: e.target.value })
             }
-            placeholder="Hero Description"
           />
         </section>
 
@@ -56,7 +87,7 @@ export default function AdminService() {
           <h2>Services</h2>
 
           {service.services.map((s, i) => (
-            <div key={i} className="admin-card">
+            <div key={s._id || i} className="admin-card">
               <input
                 value={s.title}
                 placeholder="Service Title"
@@ -66,6 +97,7 @@ export default function AdminService() {
                   setService({ ...service, services: arr });
                 }}
               />
+
               <textarea
                 value={s.description}
                 placeholder="Service Description"
@@ -75,6 +107,7 @@ export default function AdminService() {
                   setService({ ...service, services: arr });
                 }}
               />
+
               <input
                 value={s.icon}
                 placeholder="Icon name"
@@ -84,6 +117,15 @@ export default function AdminService() {
                   setService({ ...service, services: arr });
                 }}
               />
+
+              {s._id && (
+                <button
+                  className="delete-btn"
+                  onClick={() => deleteServiceItem(s._id)}
+                >
+                  Delete
+                </button>
+              )}
             </div>
           ))}
 
@@ -107,15 +149,22 @@ export default function AdminService() {
           <h2>Technologies</h2>
 
           {service.technologies.map((t, i) => (
-            <input
-              key={i}
-              value={t}
-              onChange={(e) => {
-                const arr = [...service.technologies];
-                arr[i] = e.target.value;
-                setService({ ...service, technologies: arr });
-              }}
-            />
+            <div key={i} className="admin-row">
+              <input
+                value={t}
+                onChange={(e) => {
+                  const arr = [...service.technologies];
+                  arr[i] = e.target.value;
+                  setService({ ...service, technologies: arr });
+                }}
+              />
+              <button
+                className="delete-btn"
+                onClick={() => deleteTechnology(t)}
+              >
+                Delete
+              </button>
+            </div>
           ))}
 
           <button
@@ -130,36 +179,50 @@ export default function AdminService() {
           </button>
         </section>
 
-        {/* PROCESS */}
+        {/* PROCESS STEPS */}
         <section>
           <h2>Process Steps</h2>
 
           {service.processSteps.map((p, i) => (
-            <div key={i} className="admin-card">
+            <div key={p._id || i} className="admin-card">
               <input
                 value={p.step}
+                placeholder="Step"
                 onChange={(e) => {
                   const arr = [...service.processSteps];
                   arr[i].step = e.target.value;
                   setService({ ...service, processSteps: arr });
                 }}
               />
+
               <input
                 value={p.title}
+                placeholder="Title"
                 onChange={(e) => {
                   const arr = [...service.processSteps];
                   arr[i].title = e.target.value;
                   setService({ ...service, processSteps: arr });
                 }}
               />
+
               <textarea
                 value={p.desc}
+                placeholder="Description"
                 onChange={(e) => {
                   const arr = [...service.processSteps];
                   arr[i].desc = e.target.value;
                   setService({ ...service, processSteps: arr });
                 }}
               />
+
+              {p._id && (
+                <button
+                  className="delete-btn"
+                  onClick={() => deleteProcessStep(p._id)}
+                >
+                  Delete
+                </button>
+              )}
             </div>
           ))}
 

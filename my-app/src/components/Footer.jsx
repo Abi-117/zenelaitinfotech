@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import "./Footer.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Footerlogo from "../assets/logo1.png";
+import Logo1 from "../assets/blizzen.png";
+
 
 export default function Footer() {
   const [data, setData] = useState(null);
@@ -20,12 +23,24 @@ export default function Footer() {
         <div className="footer-col">
           <a href="/">
             <img
-              src={data?.logo}
+              src={Footerlogo}
               alt="Footer Logo"
               className="footer-logo"
             />
           </a>
-          <p className="footer-text">{data?.description}</p>
+            <p
+    className="footer-para"
+    style={{ display: "flex", alignItems: "center", gap: "5px" }}
+  >
+    Developed by{" "}
+    <a
+      href="https://www.blizzencreations.com/"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <img className="footerlogo" src={Logo1} alt="Blizzen Creations" />
+    </a>
+  </p>
         </div>
 
         {/* PRODUCTS */}

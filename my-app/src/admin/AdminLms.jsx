@@ -6,162 +6,150 @@ import "./AdminLms.css";
 const API = "http://localhost:5000";
 
 export default function AdminLms() {
-  const [lms, setLms] = useState({
+  const [form, setForm] = useState({
     heroTitle: "",
     heroText: "",
-    features: [],
+    features: "",
     perfectFor: [],
     whyChoose: [],
+    benefits: [],
   });
-
-  const [featureInput, setFeatureInput] = useState("");
-  const [pfTitle, setPfTitle] = useState("");
-  const [pfDesc, setPfDesc] = useState("");
-  const [whyTitle, setWhyTitle] = useState("");
-  const [whyDesc, setWhyDesc] = useState("");
 
   const [loading, setLoading] = useState(true);
 
-  /* FETCH LMS DATA */
+  /* ========== FETCH EXISTING DATA ========== */
   useEffect(() => {
     axios
       .get(`${API}/api/lms`)
       .then((res) => {
-        if (res.data) setLms(res.data);
-        setLoading(false);
+        if (res.data) {
+          setForm({
+            ...res.data,
+            features: res.data.features?.join(",") || "",
+          });
+        }
       })
-      .catch((err) => {
-        console.error(err);
-        setLoading(false);
-      });
+      .catch((err) => console.error(err))
+      .finally(() => setLoading(false));
   }, []);
 
-  /* SAVE LMS DATA */
-  const saveData = async () => {
+  /* ========== SAVE / UPDATE ========== */
+  const saveLms = async () => {
     try {
-      await axios.put(`${API}/api/lms`, lms);
-      alert("LMS Page Updated Successfully ✅");
+      const payload = {
+        ...form,
+        features: form.features.split(",").map((f) => f.trim()),
+      };
+      await axios.post(`${API}/api/lms`, payload);
+      alert("LMS saved successfully!");
     } catch (err) {
-      console.error(err);
-      alert("Update Failed ❌");
+      console.error("SAVE ERROR 👉", err);
+      alert("Save failed!");
     }
   };
 
-  /* ADD / REMOVE HANDLERS */
-  const addFeature = () => {
-    if (!featureInput) return;
-    setLms({ ...lms, features: [...lms.features, featureInput] });
-    setFeatureInput("");
+  /* ========== HELPER FUNCTIONS FOR ARRAYS ========== */
+  const addItem = (key) =>
+    setForm({ ...form, [key]: [...form[key], { title: "", desc: "" }] });
+
+  const updateItem = (key, index, field, value) => {
+    const updated = [...form[key]];
+    updated[index][field] = value;
+    setForm({ ...form, [key]: updated });
   };
 
-  const addCard = (field, title, desc, setTitle, setDesc) => {
-    if (!title || !desc) return;
-    setLms({ ...lms, [field]: [...lms[field], { title, desc }] });
-    setTitle("");
-    setDesc("");
+  const removeItem = (key, index) => {
+    const updated = [...form[key]];
+    updated.splice(index, 1);
+    setForm({ ...form, [key]: updated });
   };
 
-  const removeItem = (field, index) => {
-    const arr = [...lms[field]];
-    arr.splice(index, 1);
-    setLms({ ...lms, [field]: arr });
-  };
-
-  if (loading) return <h2>Loading LMS Data...</h2>;
+  if (loading) return <h2>Loading LMS data...</h2>;
 
   return (
     <>
       <AdminHeader />
       <div className="admin-page">
-        <h1>Admin – LMS Page</h1>
+        <h1>LMS Admin</h1>
 
         {/* HERO */}
-        <h3>Hero Section</h3>
         <input
           placeholder="Hero Title"
-          value={lms.heroTitle}
-          onChange={(e) => setLms({ ...lms, heroTitle: e.target.value })}
+          value={form.heroTitle}
+          onChange={(e) => setForm({ ...form, heroTitle: e.target.value })}
         />
         <textarea
-          placeholder="Hero Description"
-          value={lms.heroText}
-          onChange={(e) => setLms({ ...lms, heroText: e.target.value })}
+          placeholder="Hero Text"
+          value={form.heroText}
+          onChange={(e) => setForm({ ...form, heroText: e.target.value })}
         />
 
         {/* FEATURES */}
-        <h3>Key Features</h3>
-        <div className="row">
-          <input
-            placeholder="Add Feature"
-            value={featureInput}
-            onChange={(e) => setFeatureInput(e.target.value)}
-          />
-          <button onClick={addFeature}>Add</button>
-        </div>
-        <ul>
-          {lms.features.map((f, i) => (
-            <li key={i}>
-              {f} <button onClick={() => removeItem("features", i)}>❌</button>
-            </li>
-          ))}
-        </ul>
+        <textarea
+          placeholder="Features (comma separated)"
+          value={form.features}
+          onChange={(e) => setForm({ ...form, features: e.target.value })}
+        />
 
         {/* PERFECT FOR */}
         <h3>Perfect For</h3>
-        <input
-          placeholder="Title"
-          value={pfTitle}
-          onChange={(e) => setPfTitle(e.target.value)}
-        />
-        <textarea
-          placeholder="Description"
-          value={pfDesc}
-          onChange={(e) => setPfDesc(e.target.value)}
-        />
-        <button
-          onClick={() =>
-            addCard("perfectFor", pfTitle, pfDesc, setPfTitle, setPfDesc)
-          }
-        >
-          Add
-        </button>
-        {lms.perfectFor.map((p, i) => (
-          <div key={i} className="card-row">
-            <b>{p.title}</b>
-            <p>{p.desc}</p>
-            <button onClick={() => removeItem("perfectFor", i)}>❌</button>
+        {form.perfectFor.map((p, i) => (
+          <div key={i} className="row">
+            <input
+              placeholder="Title"
+              value={p.title}
+              onChange={(e) => updateItem("perfectFor", i, "title", e.target.value)}
+            />
+            <input
+              placeholder="Description"
+              value={p.desc}
+              onChange={(e) => updateItem("perfectFor", i, "desc", e.target.value)}
+            />
+            <button onClick={() => removeItem("perfectFor", i)}>X</button>
           </div>
         ))}
+        <button onClick={() => addItem("perfectFor")}>+ Add</button>
 
         {/* WHY CHOOSE */}
-        <h3>Why Choose LMS</h3>
-        <input
-          placeholder="Title"
-          value={whyTitle}
-          onChange={(e) => setWhyTitle(e.target.value)}
-        />
-        <textarea
-          placeholder="Description"
-          value={whyDesc}
-          onChange={(e) => setWhyDesc(e.target.value)}
-        />
-        <button
-          onClick={() =>
-            addCard("whyChoose", whyTitle, whyDesc, setWhyTitle, setWhyDesc)
-          }
-        >
-          Add
-        </button>
-        {lms.whyChoose.map((w, i) => (
-          <div key={i} className="card-row">
-            <b>{w.title}</b>
-            <p>{w.desc}</p>
-            <button onClick={() => removeItem("whyChoose", i)}>❌</button>
+        <h3>Why Choose</h3>
+        {form.whyChoose.map((w, i) => (
+          <div key={i} className="row">
+            <input
+              placeholder="Title"
+              value={w.title}
+              onChange={(e) => updateItem("whyChoose", i, "title", e.target.value)}
+            />
+            <input
+              placeholder="Description"
+              value={w.desc}
+              onChange={(e) => updateItem("whyChoose", i, "desc", e.target.value)}
+            />
+            <button onClick={() => removeItem("whyChoose", i)}>X</button>
           </div>
         ))}
+        <button onClick={() => addItem("whyChoose")}>+ Add</button>
 
-        <button className="save-btn" onClick={saveData}>
-          Save LMS Page
+        {/* BENEFITS */}
+        <h3>Benefits</h3>
+        {form.benefits.map((b, i) => (
+          <div key={i} className="row">
+            <input
+              placeholder="Title"
+              value={b.title}
+              onChange={(e) => updateItem("benefits", i, "title", e.target.value)}
+            />
+            <input
+              placeholder="Description"
+              value={b.desc}
+              onChange={(e) => updateItem("benefits", i, "desc", e.target.value)}
+            />
+            <button onClick={() => removeItem("benefits", i)}>X</button>
+          </div>
+        ))}
+        <button onClick={() => addItem("benefits")}>+ Add</button>
+
+        <button className="save-btn" onClick={saveLms}>
+          Save LMS
         </button>
       </div>
     </>
