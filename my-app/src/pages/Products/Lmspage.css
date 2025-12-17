@@ -1,18 +1,22 @@
 /* ============================
    LMS HERO – MODERN UPGRADE
 ============================= */
-
+.lms-page
+{
+  background: linear-gradient(135deg,#c13030, #241d1e,#000000);
+}
 .lms-hero {
   width: 100%;
+  padding: 100px 40px 60px 40px;
   max-width: 1200px;
   margin: auto;
-  padding: 100px 30px 60px 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  background-color: transparent;
+  text-align: left;
   position: relative;
   overflow: hidden;
-  animation: fadeUp 0.9s ease-in-out;
+  display: flex;
+  align-items: center;
+
 }
 
 /* Floating Blur Orbs */
@@ -32,7 +36,15 @@
   top: -90px;
   left: -90px;
 }
-
+.lms-features .back-btn
+{
+  background-color: #fa3737;
+  border-radius: 5px;
+}
+.lms-features .back-btn:hover{
+background-color: #fa3737;
+  color: #ffffff;
+}
 .lms-hero::after {
   width: 320px;
   height: 320px;
@@ -47,8 +59,16 @@
   z-index: 3;
   max-width: 1100px;
   animation: fadeIn 1.2s ease;
+  
 }
 
+.hero-lmscontent p{
+  color: #ffffff;
+}
+.lms-perfect-for
+{
+  background-color: transparent;
+}
 .lms-hero h1 {
   font-size: 3rem;
   font-weight: 700;
@@ -58,9 +78,9 @@
 }
 
 .lms-hero h2 {
-  font-size: 1.8rem;
+  font-size: 3rem;
   font-weight: 600;
-  color: #d62828;
+  color: black;
   margin-bottom: 25px;
 }
 .lms-features
@@ -147,7 +167,9 @@ padding: 1rem 4rem;
 .lms-perfect-for h2 {
   font-size: 2rem;
   margin-bottom: 1.5rem;
-  color: #d62828;}
+  color: #d62828;
+}
+  
 /* ============================
    RESPONSIVE
 ============================= */
@@ -201,6 +223,7 @@ padding: 1rem 4rem;
   max-width: 1200px;
   margin: 2rem auto;
   padding: 2rem;
+  background-color: transparent;
 }
 
 .why-lms h2 {
@@ -291,7 +314,7 @@ padding: 1rem 4rem;
 }
 
 .benefit-card:hover {
-  transform: translateY(-8px) scale(1.03);
+  transform: translateY(-5px);
   box-shadow: 0 15px 35px rgba(198, 40, 40, 0.2);
   background: #ffe5e5;
 }

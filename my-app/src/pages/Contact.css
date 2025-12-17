@@ -1,4 +1,9 @@
 /* ================= CONTACT PAGE MAIN ================= */
+
+.contact-page
+{
+  background: linear-gradient(135deg,#c13030, #241d1e,#000000);
+}
 .contact-page {
   min-height: 100vh;
   justify-content: center;
@@ -20,11 +25,12 @@
   font-size: 3rem;
   font-weight: bold;
   margin-bottom: 1rem;
+  color: #c13030;
 }
 
 .contact-hero p {
   font-size: 1.2rem;
-  color: #555;
+  color: #ffffff;
 }
 
 /* ================ GRID MAIN ================ */
@@ -76,11 +82,12 @@
 .contact-form-card input,
 .contact-form-card textarea {
   margin-top: 0.5rem;
-  padding: 0.75rem 1rem;
+  padding: 0.7rem;
   border-radius: 8px;
   border: 1px solid #ccc;
   font-size: 1rem;
   outline: none;
+
 }
 
 .contact-form-card button {
@@ -108,7 +115,7 @@
 .contact-info-card {
   background: #fff;
   border-radius: 12px;
-  padding: 1.5rem;
+  padding: 1rem;
   box-shadow: 0 4px 16px rgba(0,0,0,0.08);
 }
 
@@ -122,12 +129,17 @@
   gap: 1rem;
   margin-bottom: 1rem;
 }
-
+.info-item h4{
+  font-size: 20px;
+}
+  .info-item p{
+    width: 300px;
+}
 .info-icon {
-  font-size: 1.5rem;
+  font-size: 2rem;
   color: #d62828;
   flex-shrink: 0;
-  margin-top: 0.2rem;
+  margin: 2rem;
 }
 
 .business-hours-card {
@@ -142,6 +154,7 @@
 .map-page {
   text-align: center;
   padding: 2rem;
+  color: white;
 }
 
 .map-container {

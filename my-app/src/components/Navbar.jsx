@@ -4,9 +4,15 @@ import Logo from "../assets/zenlogo.png";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
+;
+
 
 export default function Navbar() {
   const navigate = useNavigate();
+  const location = useLocation();
+const isContactPage = location.pathname === "/contact";
+
   const [menuOpen, setMenuOpen] = useState(false);
 
   const [nav, setNav] = useState({
@@ -14,7 +20,9 @@ export default function Navbar() {
     about: "About",
     products: "Products",
     service: "Service",
+    overview: "Overview",
     contact: "Contact",
+
     button: "Get Started →"
   });
 
@@ -48,12 +56,22 @@ export default function Navbar() {
           <li><Link to="/about" onClick={() => setMenuOpen(false)}>{nav.about}</Link></li>
           <li><Link to="/products" onClick={() => setMenuOpen(false)}>{nav.products}</Link></li>
           <li><Link to="/service" onClick={() => setMenuOpen(false)}>{nav.service}</Link></li>
+          <li><Link to="/overview" onClick={() => setMenuOpen(false)}>{nav.overview} Offerings </Link></li>
           <li><Link to="/contact" onClick={() => setMenuOpen(false)}>{nav.contact}</Link></li>
-          <li>
-            <button className="btn" onClick={() => { navigate("/contact"); setMenuOpen(false); }}>
-              {nav.button}
-            </button>
-          </li>
+         {!isContactPage && (
+  <li>
+    <button
+      className="btn"
+      onClick={() => {
+        navigate("/contact");
+        setMenuOpen(false);
+      }}
+    >
+      {nav.button}
+    </button>
+  </li>
+)}
+
         </ul>
       </div>
     </nav>

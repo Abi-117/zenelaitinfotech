@@ -6,7 +6,7 @@
 }
 .about-hero-section {
   width: 100%;
-  padding: 60px 0px;
+  padding: 70px 0px;
   background: #000;
   color: white;
   display: flex;
@@ -28,7 +28,7 @@
 
 /* HEADING */
 .about-main-title {
-  font-size: 58px;
+  font-size: 48px;
   font-weight: 700;
   line-height: 1.1;
   margin-bottom: 25px;
@@ -128,7 +128,7 @@
 
 .about-story {
   max-width: 900px;
-  margin: 80px auto;
+  margin: 0px auto;
   padding: 40px 50px;
   background: #fff;
   border-radius: 18px;
@@ -261,6 +261,7 @@ height: 300px;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 30px;
   margin-top: 40px;
+  text-align: justify;
 }
 
 /* CARD BASE */
@@ -275,6 +276,21 @@ height: 300px;
   cursor: pointer;
   transition: 0.45s ease;
   transform: translateY(0px);
+  text-align: justify;
+ 
+ 
+ 
+  
+}
+.value-card p{
+  text-align: justify;
+  text-align-last: left;   /* 🔥 MAIN FIX */
+  line-height: 1.8;
+  font-size: 14px;
+  color: #cfcfcf;
+
+  word-break: normal;
+  overflow-wrap: break-word;
 }
 
 /* FLOAT ON HOVER */

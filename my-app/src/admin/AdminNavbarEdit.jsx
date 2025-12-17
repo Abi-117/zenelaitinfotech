@@ -11,7 +11,8 @@ export default function AdminNavbarEdit() {
     products: "",
     service: "",
     contact: "",
-    button: ""
+    overview:"",
+    button: "",
   });
 
   useEffect(() => {
@@ -51,6 +52,8 @@ export default function AdminNavbarEdit() {
 
           <label>Contact Text</label>
           <input name="contact" value={form.contact} onChange={handleChange} />
+          <label>Landing</label>
+          <input name="overview" value={form.overview} onChange={handleChange} />
 
           <label>Button Text</label>
           <input name="button" value={form.button} onChange={handleChange} />

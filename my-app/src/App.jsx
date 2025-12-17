@@ -6,6 +6,7 @@ import About from "./pages/About";
 import Products from "./pages/Products/Products";
 import Contact from "./pages/Contact";
 import Service from "./pages/Service";
+import Overview from "./pages/Overview";
 
 import Crmpage from "./pages/Products/Crmpage";
 import Erppage from "./pages/Products/Erppage";
@@ -33,6 +34,7 @@ import AdminFooter from "./admin/AdminFooter";
 import AdminErp from "./admin/AdminErp";
 import AdminCrm from "./admin/AdminCrm";
 import AdminBilling from "./admin/AdminBilling";
+import AdminOverview from "./admin/AdminOverview";
 
 
 export default function App() {
@@ -70,6 +72,7 @@ export default function App() {
         <Route path="/products/billing" element={<Billingpage />} />
 
         <Route path="/service" element={<Service />} />
+        <Route path="/overview" element={<Overview />} />
         <Route path="/contact" element={<Contact />} />
 
         {/* ADMIN ROUTES */}
@@ -85,6 +88,8 @@ export default function App() {
         <Route path="/admin/erp" element={<AdminErp />} />
         <Route path="/admin/crm" element={<AdminCrm />} />   
         <Route path="/admin/billing" element={<AdminBilling />} /> 
+        <Route path="/admin/overview" element={<AdminOverview />} />
+        
 
         {/* ADMIN LOGIN / DASHBOARD */}
         <Route

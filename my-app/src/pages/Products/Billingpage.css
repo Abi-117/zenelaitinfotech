@@ -1,11 +1,13 @@
 /* ---------------- HERO SECTION ---------------- */
-
+.billing-page{
+  background: linear-gradient(135deg,#c13030, #241d1e,#000000);
+}
 .billing-hero {
   width: 100%;
   padding: 100px 40px 60px 40px;
   max-width: 1200px;
   margin: auto;
-  background: linear-gradient(135deg, #f8f9ff 0%, #eef0ff 50%, #ffffff 100%);
+  background-color: transparent;
   text-align: left;
   position: relative;
   overflow: hidden;
@@ -53,7 +55,7 @@
 
 .subtitle {
   font-size: 18px;
-  color: #4b4b4b;
+  color: #ffffff;
   line-height: 1.6;
   margin: 20px 0 35px;
 }
@@ -120,7 +122,7 @@
   margin: 1rem auto;
   padding: 2rem;
   max-width: 1100px;
-  background: #f9f9f9;
+  background:#f9f9f9;
   border-radius: 12px;
   box-shadow: 0 4px 16px rgba(0,0,0,0.08);
 }
@@ -184,6 +186,7 @@
 
 .billing-perfect-for {
   padding: 1rem 4rem;
+  background-color: transparent;
 
 }
 .billing-perfect-for h2 {
@@ -204,9 +207,36 @@
   padding: 1.5rem;
   box-shadow: 0 4px 16px rgba(0,0,0,0.08);
   text-align: center;
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  border: 2px solid transparent; /* 👈 IMPORTANT */
+  box-sizing: border-box;
+
+  transition: 
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border 0.3s ease;
 }
 
+.audience-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 22px rgba(255, 0, 0, 0.15);
+  border: 2px solid rgb(255, 0, 0);
+}
+.audience-card h4{
+  font-size:20px;
+}
 
+.billing-features .back-btn{
+background-color: #fa3737;
+  border-radius: 5px;
+
+}
+
+.billing-features .back-btn:hover{
+  background-color: #fa3737;
+  color: #ffffff;
+}
 /* ---------------- RESPONSIVE BREAKPOINTS ---------------- */
 
 /* Tablets */
@@ -294,9 +324,9 @@
   margin: 3rem auto;
   padding: 2.5rem;
   border-radius: 20px;
-  background: rgba(255,255,255,0.25);
+  background-color: transparent;
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,255,255,0.4);
+ 
   box-shadow: 0 8px 30px rgba(0,0,0,0.12);
 }
 

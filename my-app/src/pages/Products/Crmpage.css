@@ -1,5 +1,7 @@
 /* ---------------- HERO SECTION ---------------- */
-
+.crm-page{
+ background: linear-gradient(135deg,#c13030, #241d1e,#000000);
+}
 .crm-hero {
   width: 100%;
   max-width: 1200px;
@@ -7,10 +9,10 @@
   padding: 100px 40px 60px 40px;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(135deg, #f8f9ff 0%, #eef0ff 50%, #ffffff 100%);
   text-align: justify;
   position: relative;
   overflow: hidden;
+  background-color: transparent;
 }
 
 /* Background glow shapes */
@@ -49,18 +51,19 @@
 
 .crm-hero h2 {
   font-size: 1.8rem;
-  color: #d62828;
+  color: #000000;
   margin-bottom: 1.5rem;
   z-index: 2;
 }
 
 .crm-hero .subtitle {
   font-size: 1.2rem;
-  color: #555;
+  color: #ffffff;
   margin-bottom: 2rem;
   line-height: 1.6;
   max-width: 1200px;
   z-index: 2;
+  text-align: justify;
 }
 
 /* HERO BUTTONS */
@@ -171,6 +174,7 @@ position: relative;
 
 .crm-perfect-for {
    padding: 1rem 4rem; /* a bit more spacing for emphasis */
+   background-color: transparent;
 
 }
 
@@ -232,8 +236,23 @@ position: relative;
 .details-btn:hover {
   opacity: 0.9;
 }
-
-
+.why-saas
+{
+  background-color: transparent;
+}
+.why-saas h2{
+  color: #d62828;
+  text-align: center;
+  font-size: 2.2rem;
+}
+.crm-benefits .back-btn{
+  background-color: #fa3737;
+  border-radius: 5px;
+}
+.crm-benefits .back-btn:hover{
+  background-color: #fa3737;
+  color: #fff;
+}
 /* ---------------- RESPONSIVE ---------------- */
 
 /* Tablets */
@@ -321,11 +340,12 @@ position: relative;
   max-width: 1100px;
   margin: 2rem auto;
   padding: 2rem;
+  
 }
 
 .why-erp h2 {
   text-align: center;
-  font-size: 2rem;
+  font-size: 2.2rem;
   color: #d62828;
   margin-bottom: 1.8rem;
 }
@@ -354,7 +374,7 @@ position: relative;
 
 .why-card h4 {
   margin-bottom: 0.6rem; /* slightly smaller spacing */
-  color: #d62828;
+  color: #cb3b3b;
   font-size: 1.1rem;     /* optional: smaller font like CRM */
 }
 

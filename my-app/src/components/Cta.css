@@ -49,8 +49,8 @@
 /* Button */
 .cta-btn {
   padding: 15px 40px;
-  background: #111;
-  color: white;
+  background: #ffffff;
+  color: rgb(0, 0, 0);
   font-size: 18px;
   border: none;
   border-radius: 10px;

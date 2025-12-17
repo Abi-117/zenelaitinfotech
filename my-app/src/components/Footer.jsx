@@ -21,14 +21,7 @@ export default function Footer() {
 
         {/* LOGO */}
         <div className="footer-col">
-          <a href="/">
-            <img
-              src={Footerlogo}
-              alt="Footer Logo"
-              className="footer-logo"
-            />
-          </a>
-            <p
+                   <p
     className="footer-para"
     style={{ display: "flex", alignItems: "center", gap: "5px" }}
   >
@@ -41,6 +34,8 @@ export default function Footer() {
       <img className="footerlogo" src={Logo1} alt="Blizzen Creations" />
     </a>
   </p>
+          
+   
         </div>
 
         {/* PRODUCTS */}
@@ -79,6 +74,13 @@ export default function Footer() {
             <li>{data?.phone}</li>
             <li>{data?.email}</li>
           </ul>
+          <a href="/">
+            <img
+              src={Footerlogo}
+              alt="Footer Logo"
+              className="footer-logo"
+            />
+          </a>
         </div>
 
       </div>

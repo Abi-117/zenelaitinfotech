@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Products.css";
-import Footer from "../../components/Footer";
 import CTA from "../../components/Cta";
 
 export default function Products() {

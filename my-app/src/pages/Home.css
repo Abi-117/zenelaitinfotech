@@ -6,7 +6,7 @@
 }
 .hero-container-full {
   width: 100%;
-  padding: 50px 50px 0px 0px;
+  padding: 70px 50px 0px 0px;
   border-bottom: 3px solid #ff2a2a;
   position: relative;
   overflow: hidden;
@@ -42,6 +42,7 @@
   opacity: 0;
   animation: fadeUp 0.9s ease forwards;
   animation-delay: 0.8s;
+  font-size:65px;
 }
 
 /* Keyframes */

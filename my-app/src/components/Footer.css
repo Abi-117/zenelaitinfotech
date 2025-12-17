@@ -1,6 +1,6 @@
 /* ---------------- FOOTER ---------------- */
 .footer {
-  background: linear-gradient(90deg, #000000, #d62828);
+  background: linear-gradient(250deg, #000000, #d62828 , #000000);
   border-top: 1px solid #eee;
   overflow: hidden;
   font-family: "Inter", sans-serif;
@@ -53,9 +53,10 @@
 }
 
 .footerlogo {
-  width: 100px;
-  height: 80px;
-  border-radius: 50px;
+  width: 130px;
+  height: 50px;
+  border-radius: 25px;
+  background-color: #ffffff;
   object-fit: cover;
 
 }
@@ -71,8 +72,8 @@
 .footer-bottom {
   text-align: center;
   font-size: 13px;
-  color: #555;
-  background-color: #fdecec;
+  color: #ffffff;
+  background-color: #2b0f12;
   height: 30px;
   align-items: center;
   padding-top: 10px;
@@ -81,6 +82,7 @@
 .footer-para {
   display: flex;
   color: white;
+  font-size: 20px;
  
 }
 

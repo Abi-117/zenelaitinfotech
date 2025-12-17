@@ -81,7 +81,7 @@ export default function Home() {
               <span className="line">
                 {home?.heroLine3 || "in Chennai for "}
                 <span className="highlight">
-                  {home?.heroHighlight || "ERP, LMS , CRM & Billing"}
+                  {home?.heroHighlight || "ERP, LMS, CRM & Billing Software"}
                 </span>
               </span>
             </h1>
