@@ -1,13 +1,20 @@
 import mongoose from "mongoose";
 
+const cardSchema = new mongoose.Schema(
+  {
+    title: { type: String, default: "" },
+    desc: { type: String, default: "" },
+  },
+  { _id: false }
+);
+
 const billingSchema = new mongoose.Schema(
   {
-    productId: { type: String, unique: true },
-    label: String,
-    title: String,
-    desc: String,
-    benefits: [String],
-    image: String,
+    title: { type: String, default: "" },
+    subtitle: { type: String, default: "" },
+    benefits: { type: [String], default: [] },
+    perfectFor: { type: [cardSchema], default: [] },
+    why: { type: [cardSchema], default: [] },
   },
   { timestamps: true }
 );
