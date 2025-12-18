@@ -91,7 +91,7 @@ export default function Home() {
           <div className="right-info-box slide-right">
             <p>
               {home?.heroDesc ||
-                "Billing Software | ERP | CRM | SaaS | LMS | Websites – Smart, Scalable Solutions for Your Business."}
+                "Billing Software | ERP | CRM | LMS | Websites – Smart, Scalable Solutions for Your Business."}
             </p>
 
             <button

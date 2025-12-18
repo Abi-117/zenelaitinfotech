@@ -12,7 +12,7 @@ export default function AdminHeader() {
 
   return (
     <nav className="admin-navbar">
-      <div className="logo">ZENELAIT ADMIN</div>
+      <div className="logo">ZENELAIT INFO TECH ADMIN</div>
 
       <ul className="admin-nav-links">
         <li><Link to="/admin">Dashboard</Link></li>
