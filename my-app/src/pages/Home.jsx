@@ -8,7 +8,7 @@ import {
 } from "react-icons/fa";
 import { useNavigate, Link } from "react-router-dom";
 import CTA from "../components/Cta";
-
+import heroVideo from "../assets/bg19.mp4";
 
 /* fallback images */
 import Lms from "../assets/lms.jpeg";
@@ -65,8 +65,20 @@ export default function Home() {
 
   return (
     <>
-      <div className="hero-container-full">
+    <div className="hero-container-full">
+     <section className="video-hero">
+    <video
+        className="bg-video"
+        src={heroVideo}
+        autoPlay
+        loop
+        muted
+        playsInline
+      />
+        <div className="overlay"></div>
         <div className="hero-inner">
+     
+
           {/* LEFT */}
           <div className="text-block slide-in">
             <h1 className="title">
@@ -103,6 +115,11 @@ export default function Home() {
             </button>
           </div>
         </div>
+        </section>
+      
+        
+
+        
 
         {/* ABOUT */}
         <section className="about-container">
@@ -220,3 +237,4 @@ export default function Home() {
     </>
   );
 }
+

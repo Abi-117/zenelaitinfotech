@@ -36,7 +36,6 @@ import AdminCrm from "./admin/AdminCrm";
 import AdminBilling from "./admin/AdminBilling";
 import AdminOverview from "./admin/AdminOverview";
 
-
 export default function App() {
   const [isAdmin, setIsAdmin] = useState(false);
   const location = useLocation();

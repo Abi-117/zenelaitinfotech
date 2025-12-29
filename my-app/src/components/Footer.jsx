@@ -88,20 +88,7 @@ export default function Footer() {
       <div className="footer-bottom">
         {data?.copyrightText}
 
-        <p className="footer-para">
-          Developed by{" "}
-          <a
-            href={data?.developerLink}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              className="footerlogo"
-              src={data?.developerLogo}
-              alt="Developer"
-            />
-          </a>
-        </p>
+       
       </div>
     </footer>
   );

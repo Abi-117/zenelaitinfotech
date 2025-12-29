@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./AdminNavbarEdit.css"
-import AdminHeader from "./AdminHeader";
 import "./AdminNavbarEdit.css";
+import AdminHeader from "./AdminHeader";
 
 export default function AdminNavbarEdit() {
   const [form, setForm] = useState({
@@ -10,24 +9,37 @@ export default function AdminNavbarEdit() {
     about: "",
     products: "",
     service: "",
+    overview: "",
     contact: "",
-    overview:"",
     button: "",
   });
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/navbar").then((res) => {
-      if (res.data) setForm(res.data);
-    });
+    const fetchNavbar = async () => {
+      try {
+        const res = await axios.get("http://localhost:5000/api/navbar");
+        if (res.data) setForm(res.data);
+      } catch (error) {
+        console.error("Failed to fetch navbar data:", error);
+      }
+    };
+
+    fetchNavbar();
   }, []);
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
   };
 
   const updateNavbar = async () => {
-    await axios.put("http://localhost:5000/api/navbar/update", form);
-    alert("Navbar Updated Successfully!");
+    try {
+      await axios.put("http://localhost:5000/api/navbar/update", form);
+      alert("Navbar Updated Successfully!");
+    } catch (error) {
+      console.error("Failed to update navbar:", error);
+      alert("Failed to update navbar");
+    }
   };
 
   return (
@@ -39,24 +51,25 @@ export default function AdminNavbarEdit() {
 
         <div className="admin-form">
           <label>Home Text</label>
-          <input name="home" value={form.home} onChange={handleChange} />
+          <input type="text" name="home" value={form.home} onChange={handleChange} />
 
           <label>About Text</label>
-          <input name="about" value={form.about} onChange={handleChange} />
+          <input type="text" name="about" value={form.about} onChange={handleChange} />
 
           <label>Products Text</label>
-          <input name="products" value={form.products} onChange={handleChange} />
+          <input type="text" name="products" value={form.products} onChange={handleChange} />
 
           <label>Service Text</label>
-          <input name="service" value={form.service} onChange={handleChange} />
+          <input type="text" name="service" value={form.service} onChange={handleChange} />
+
+          <label>Overview</label>
+          <input type="text" name="overview" value={form.overview} onChange={handleChange} />
 
           <label>Contact Text</label>
-          <input name="contact" value={form.contact} onChange={handleChange} />
-          <label>Landing</label>
-          <input name="overview" value={form.overview} onChange={handleChange} />
+          <input type="text" name="contact" value={form.contact} onChange={handleChange} />
 
           <label>Button Text</label>
-          <input name="button" value={form.button} onChange={handleChange} />
+          <input type="text" name="button" value={form.button} onChange={handleChange} />
 
           <button className="save-btn" onClick={updateNavbar}>
             Save Changes
