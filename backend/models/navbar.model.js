@@ -5,6 +5,7 @@ const NavbarSchema = new mongoose.Schema({
   about: String,
   products: String,
   service: String,
+  overview: String,
   contact: String,
   button: String,
 });

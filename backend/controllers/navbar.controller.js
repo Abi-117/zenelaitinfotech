@@ -2,27 +2,33 @@ import Navbar from "../models/navbar.model.js";
 
 export const getNavbar = async (req, res) => {
   try {
-    const data = await Navbar.findOne();
-    res.json(data);
-  } catch (err) {
+    const navbar = await Navbar.findOne();
+    res.status(200).json(navbar);
+  } catch (error) {
+    console.error(error);
     res.status(500).json({ message: "Server Error" });
   }
 };
 
 export const updateNavbar = async (req, res) => {
   try {
-    let navbar = await Navbar.findOne();
+    console.log("REQ BODY 👉", req.body); // DEBUG
 
-    // if no navbar doc create one
-    if (!navbar) {
-      navbar = new Navbar(req.body);
-      await navbar.save();
-      return res.json({ message: "Navbar Created!" });
-    }
+    const navbar = await Navbar.findOneAndUpdate(
+      {},                 // update first doc
+      req.body,           // new data
+      {
+        new: true,
+        upsert: true,     // create if not exists
+      }
+    );
 
-    await Navbar.updateOne({}, req.body);
-    res.json({ message: "Navbar Updated!" });
-  } catch (err) {
+    res.status(200).json({
+      message: "Navbar Updated Successfully",
+      data: navbar,
+    });
+  } catch (error) {
+    console.error(error);
     res.status(500).json({ message: "Server Error" });
   }
 };
