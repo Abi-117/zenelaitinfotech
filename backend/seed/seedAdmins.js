@@ -11,9 +11,9 @@ mongoose
     console.log("MongoDB Connected for Seeding");
 
     const adminUsers = [
-      { username: "admin1", password: "Zenelait@123" },
-      { username: "admin2", password: "Zenelait@456" },
-      { username: "admin3", password: "Zenelait@789" },
+      { username: "admin1@gmail.com", password: "Zenelait@123" },
+      { username: "admin2@gmail.com", password: "Zenelait@456" },
+      { username: "admin3@gmail.com", password: "Zenelait@789" },
     ];
 
     await Admin.deleteMany();

@@ -2,45 +2,27 @@ import Admin from "../models/admin.model.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-export const adminLogin = async (req, res) => {
+
+// @desc    Admin login
+// @route   POST /api/admin/login
+// @access  Public
+export const loginAdmin = async (req, res) => {
   try {
     const { username, password } = req.body;
+
+    if (!username || !password)
+      return res.status(400).json({ message: "All fields are required" });
 
     const admin = await Admin.findOne({ username });
-    if (!admin) return res.status(400).json({ message: "Invalid Username" });
+    if (!admin) return res.status(401).json({ message: "Invalid credentials" });
 
     const isMatch = await bcrypt.compare(password, admin.password);
-    if (!isMatch) return res.status(400).json({ message: "Invalid Password" });
+    if (!isMatch) return res.status(401).json({ message: "Invalid credentials" });
 
-    const token = jwt.sign(
-      { id: admin._id },
-      process.env.JWT_SECRET,
-      { expiresIn: "7d" }
-    );
-
-    res.json({ message: "Login Successful", token });
-
+    // Login success
+    res.status(200).json({ message: "Login successful", admin: admin.username });
   } catch (err) {
-    res.status(500).json({ message: "Server Error" });
-  }
-};
-
-
-export const updateAdmin = async (req, res) => {
-  try {
-    const { username, password } = req.body;
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    const updatedAdmin = await Admin.findByIdAndUpdate(
-      req.params.id,
-      { username, password: hashedPassword },
-      { new: true }
-    );
-
-    res.json({ message: "Admin Updated", admin: updatedAdmin });
-
-  } catch (err) {
-    res.status(500).json({ message: "Server Error" });
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
   }
 };
