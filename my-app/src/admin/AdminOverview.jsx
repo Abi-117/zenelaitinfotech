@@ -2,6 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import AdminHeader from "./AdminHeader";
 
+/**
+ * ✅ Default = localhost
+ * ✅ Override via VITE_API_BASE_URL
+ */
+const API = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+
 export default function AdminLanding() {
   const [data, setData] = useState({
     heroTitle: "",
@@ -18,7 +24,7 @@ export default function AdminLanding() {
      FETCH DATA
   ========================= */
   useEffect(() => {
-    axios.get("http://localhost:5000/api/landing").then((res) => {
+    axios.get(`${API}/api/landing`).then((res) => {
       if (res.data) setData(res.data);
     });
   }, []);
@@ -27,7 +33,7 @@ export default function AdminLanding() {
      SAVE DATA
   ========================= */
   const saveData = () => {
-    axios.post("http://localhost:5000/api/landing", data);
+    axios.post(`${API}/api/landing`, data);
     alert("Landing Page Updated Successfully");
   };
 
@@ -77,155 +83,139 @@ export default function AdminLanding() {
 
   return (
     <>
-    <AdminHeader></AdminHeader>
-    <div style={{ padding: 30 }}>
-      <h2>Admin – Landing Page</h2>
+      <AdminHeader />
 
-      {/* ================= HERO ================= */}
-      <h3>Hero Section</h3>
-      <input
-        placeholder="Hero Title"
-        value={data.heroTitle}
-        onChange={(e) =>
-          setData({ ...data, heroTitle: e.target.value })
-        }
-      />
-      <br />
-      <input
-        placeholder="Highlight Text"
-        value={data.heroHighlight}
-        onChange={(e) =>
-          setData({ ...data, heroHighlight: e.target.value })
-        }
-      />
-      <br />
-      <input
-        placeholder="Services Line"
-        value={data.heroServices}
-        onChange={(e) =>
-          setData({ ...data, heroServices: e.target.value })
-        }
-      />
-      <br />
-      <input
-        placeholder="Trust Text"
-        value={data.heroTrust}
-        onChange={(e) =>
-          setData({ ...data, heroTrust: e.target.value })
-        }
-      />
+      <div style={{ padding: 30 }}>
+        <h2>Admin – Landing Page</h2>
 
-      {/* ================= SERVICES ================= */}
-      <h3>Services</h3>
-      {data.services.map((s, i) => (
-        <div
-          key={i}
-          style={{
-            border: "1px solid #ccc",
-            padding: 10,
-            marginBottom: 10,
-          }}
-        >
-          <input
-            placeholder="Service Title"
-            value={s.title}
-            onChange={(e) =>
-              updateService(i, "title", e.target.value)
-            }
-          />
-          <br />
-          <input
-            placeholder="Service Description"
-            value={s.desc}
-            onChange={(e) =>
-              updateService(i, "desc", e.target.value)
-            }
-          />
-          <br />
-          <input
-            placeholder="Icon key (web / erp / lms)"
-            value={s.icon}
-            onChange={(e) =>
-              updateService(i, "icon", e.target.value)
-            }
-          />
-          <br />
-          <button
-            style={{ background: "red", color: "#fff", marginTop: 5 }}
-            onClick={() => deleteService(i)}
+        {/* ================= HERO ================= */}
+        <h3>Hero Section</h3>
+        <input
+          placeholder="Hero Title"
+          value={data.heroTitle}
+          onChange={(e) => setData({ ...data, heroTitle: e.target.value })}
+        />
+        <br />
+        <input
+          placeholder="Highlight Text"
+          value={data.heroHighlight}
+          onChange={(e) =>
+            setData({ ...data, heroHighlight: e.target.value })
+          }
+        />
+        <br />
+        <input
+          placeholder="Services Line"
+          value={data.heroServices}
+          onChange={(e) =>
+            setData({ ...data, heroServices: e.target.value })
+          }
+        />
+        <br />
+        <input
+          placeholder="Trust Text"
+          value={data.heroTrust}
+          onChange={(e) =>
+            setData({ ...data, heroTrust: e.target.value })
+          }
+        />
+
+        {/* ================= SERVICES ================= */}
+        <h3>Services</h3>
+        {data.services.map((s, i) => (
+          <div
+            key={i}
+            style={{
+              border: "1px solid #ccc",
+              padding: 10,
+              marginBottom: 10,
+            }}
           >
-            Delete
-          </button>
-        </div>
-      ))}
-      <button onClick={addService}>+ Add Service</button>
+            <input
+              placeholder="Service Title"
+              value={s.title}
+              onChange={(e) => updateService(i, "title", e.target.value)}
+            />
+            <br />
+            <input
+              placeholder="Service Description"
+              value={s.desc}
+              onChange={(e) => updateService(i, "desc", e.target.value)}
+            />
+            <br />
+            <input
+              placeholder="Icon key (web / erp / lms)"
+              value={s.icon}
+              onChange={(e) => updateService(i, "icon", e.target.value)}
+            />
+            <br />
+            <button
+              style={{ background: "red", color: "#fff", marginTop: 5 }}
+              onClick={() => deleteService(i)}
+            >
+              Delete
+            </button>
+          </div>
+        ))}
+        <button onClick={addService}>+ Add Service</button>
 
-      {/* ================= WHY CHOOSE ================= */}
-      <h3>Why Choose</h3>
-      {data.whyChoose.map((w, i) => (
-        <div
-          key={i}
-          style={{
-            border: "1px solid #ccc",
-            padding: 10,
-            marginBottom: 10,
-          }}
-        >
-          <input
-            placeholder="Title"
-            value={w.title}
-            onChange={(e) =>
-              updateWhy(i, "title", e.target.value)
-            }
-          />
-          <br />
-          <input
-            placeholder="Description"
-            value={w.desc}
-            onChange={(e) =>
-              updateWhy(i, "desc", e.target.value)
-            }
-          />
-          <br />
-          <input
-            placeholder="Icon key"
-            value={w.icon}
-            onChange={(e) =>
-              updateWhy(i, "icon", e.target.value)
-            }
-          />
-          <br />
-          <button
-            style={{ background: "red", color: "#fff", marginTop: 5 }}
-            onClick={() => deleteWhy(i)}
+        {/* ================= WHY CHOOSE ================= */}
+        <h3>Why Choose</h3>
+        {data.whyChoose.map((w, i) => (
+          <div
+            key={i}
+            style={{
+              border: "1px solid #ccc",
+              padding: 10,
+              marginBottom: 10,
+            }}
           >
-            Delete
-          </button>
-        </div>
-      ))}
-      <button onClick={addWhy}>+ Add Why Choose</button>
+            <input
+              placeholder="Title"
+              value={w.title}
+              onChange={(e) => updateWhy(i, "title", e.target.value)}
+            />
+            <br />
+            <input
+              placeholder="Description"
+              value={w.desc}
+              onChange={(e) => updateWhy(i, "desc", e.target.value)}
+            />
+            <br />
+            <input
+              placeholder="Icon key"
+              value={w.icon}
+              onChange={(e) => updateWhy(i, "icon", e.target.value)}
+            />
+            <br />
+            <button
+              style={{ background: "red", color: "#fff", marginTop: 5 }}
+              onClick={() => deleteWhy(i)}
+            >
+              Delete
+            </button>
+          </div>
+        ))}
+        <button onClick={addWhy}>+ Add Why Choose</button>
 
-      {/* ================= CTA ================= */}
-      <h3>CTA</h3>
-      <input
-        placeholder="CTA Title"
-        value={data.ctaTitle}
-        onChange={(e) =>
-          setData({ ...data, ctaTitle: e.target.value })
-        }
-      />
-      <br />
-      <input
-        placeholder="CTA Text"
-        value={data.ctaText}
-        onChange={(e) =>
-          setData({ ...data, ctaText: e.target.value })
-        }
-      />
+        {/* ================= CTA ================= */}
+        <h3>CTA</h3>
+        <input
+          placeholder="CTA Title"
+          value={data.ctaTitle}
+          onChange={(e) => setData({ ...data, ctaTitle: e.target.value })}
+        />
+        <br />
+        <input
+          placeholder="CTA Text"
+          value={data.ctaText}
+          onChange={(e) => setData({ ...data, ctaText: e.target.value })}
+        />
 
-      <br /><br />
-      <button onClick={saveData}>SAVE ALL</button>
-    </div>
+        <br />
+        <br />
+        <button onClick={saveData}>SAVE ALL</button>
+      </div>
     </>
   );
 }

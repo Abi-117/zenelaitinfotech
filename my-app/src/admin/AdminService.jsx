@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../api/axiosBase";
 import AdminHeader from "./AdminHeader";
 import "./AdminAbout.css";
 
-const API = "http://localhost:5000/api/services";
+const API = "/api/services";
 
 export default function AdminService() {
   const [service, setService] = useState({
@@ -16,7 +16,7 @@ export default function AdminService() {
 
   /* GET DATA */
   useEffect(() => {
-    axios
+    api
       .get(API)
       .then((res) => res.data && setService(res.data))
       .catch(console.error);
@@ -25,7 +25,7 @@ export default function AdminService() {
   /* SAVE PAGE */
   const save = async () => {
     try {
-      await axios.put(API, service);
+      await api.put(API, service);
       alert("Service page updated");
     } catch {
       alert("Save failed");
@@ -36,7 +36,7 @@ export default function AdminService() {
   const deleteServiceItem = async (id) => {
     if (!window.confirm("Delete this service?")) return;
 
-    const res = await axios.delete(`${API}/service/${id}`);
+    const res = await api.delete(`${API}/service/${id}`);
     setService(res.data);
   };
 
@@ -44,7 +44,7 @@ export default function AdminService() {
   const deleteTechnology = async (tech) => {
     if (!window.confirm("Delete this technology?")) return;
 
-    const res = await axios.delete(`${API}/technology/${tech}`);
+    const res = await api.delete(`${API}/technology/${tech}`);
     setService(res.data);
   };
 
@@ -52,7 +52,7 @@ export default function AdminService() {
   const deleteProcessStep = async (id) => {
     if (!window.confirm("Delete this step?")) return;
 
-    const res = await axios.delete(`${API}/process/${id}`);
+    const res = await api.delete(`${API}/process/${id}`);
     setService(res.data);
   };
 

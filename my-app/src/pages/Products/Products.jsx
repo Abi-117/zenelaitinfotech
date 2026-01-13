@@ -2,37 +2,45 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Products.css";
 import CTA from "../../components/Cta";
+import api from "../../api/axiosBase"; // centralized axios instance
 
 export default function Products() {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
-  const [activeProduct, setActiveProduct] = useState("billing");
+  const [activeProduct, setActiveProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   /* 🔹 FETCH PRODUCTS FROM BACKEND */
   useEffect(() => {
-    fetch("http://localhost:5000/api/products")
-      .then((res) => res.json())
-      .then((data) => {
+    const fetchProducts = async () => {
+      try {
+        const res = await api.get("/api/products");
+        const data = res.data || [];
+
         setProducts(data);
 
-        // default product
-        if (data.length > 0) {
-          setActiveProduct(data[0].productId);
-        }
-      })
-      .catch((err) => console.error(err));
+        // Set default active product
+        if (data.length > 0) setActiveProduct(data[0].productId);
+      } catch (err) {
+        console.error("Failed to fetch products:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
   }, []);
 
   /* 🔹 PRODUCT LIST (LEFT SIDEBAR) */
   const productList = products.map((p) => ({
     id: p.productId,
-    name: p.title,
+    name: p.title || p.productId,
   }));
 
   /* 🔹 ACTIVE PRODUCT DATA */
-  const activeData = products.find(
-    (p) => p.productId === activeProduct
-  );
+  const activeData = products.find((p) => p.productId === activeProduct);
+
+  if (loading) return <h2 style={{ padding: 20 }}>Loading products...</h2>;
 
   return (
     <div className="product-topic">
@@ -52,35 +60,40 @@ export default function Products() {
         <div className="product-left">
           <h2 className="sidebar-title">Products</h2>
           <ul className="sidebar-list">
-            {productList.map((item) => (
-              <li
-                key={item.id}
-                className={activeProduct === item.id ? "active" : ""}
-                onClick={() => setActiveProduct(item.id)}
-              >
-                {item.name}
-              </li>
-            ))}
+            {productList.length === 0 ? (
+              <li>No products available</li>
+            ) : (
+              productList.map((item) => (
+                <li
+                  key={item.id}
+                  className={activeProduct === item.id ? "active" : ""}
+                  onClick={() => setActiveProduct(item.id)}
+                >
+                  {item.name}
+                </li>
+              ))
+            )}
           </ul>
         </div>
 
         {/* RIGHT CONTENT */}
         <div className="product-right">
           {!activeData ? (
-            <p>Loading...</p>
+            <p>Select a product to see details</p>
           ) : (
             <>
-              <p className="label">{activeData.label}</p>
-
-              <h1 className="title">{activeData.title}</h1>
-
-              <p className="desc">{activeData.desc}</p>
+              <p className="label">{activeData.label || ""}</p>
+              <h1 className="title">{activeData.title || ""}</h1>
+              <p className="desc">{activeData.desc || ""}</p>
 
               <h3 className="benefits-title">Key Benefits:</h3>
               <ul className="benefits-list">
-                {activeData.benefits.map((b, i) => (
-                  <li key={i}>{b}</li>
-                ))}
+                {Array.isArray(activeData.benefits) &&
+                activeData.benefits.length > 0 ? (
+                  activeData.benefits.map((b, i) => <li key={i}>{b}</li>)
+                ) : (
+                  <li>No benefits listed</li>
+                )}
               </ul>
 
               <div className="btn-row">
@@ -106,7 +119,6 @@ export default function Products() {
       </div>
 
       <CTA />
-     
     </div>
   );
 }

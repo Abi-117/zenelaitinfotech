@@ -3,6 +3,12 @@ import axios from "axios";
 import "./AdminNavbarEdit.css";
 import AdminHeader from "./AdminHeader";
 
+/**
+ * ✅ Default = localhost
+ * ✅ Override via VITE_API_BASE_URL (for production)
+ */
+const API = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+
 export default function AdminNavbarEdit() {
   const [form, setForm] = useState({
     home: "",
@@ -17,7 +23,7 @@ export default function AdminNavbarEdit() {
   useEffect(() => {
     const fetchNavbar = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/navbar");
+        const res = await axios.get(`${API}/api/navbar`);
         if (res.data) setForm(res.data);
       } catch (error) {
         console.error("Failed to fetch navbar data:", error);
@@ -34,7 +40,7 @@ export default function AdminNavbarEdit() {
 
   const updateNavbar = async () => {
     try {
-      await axios.put("http://localhost:5000/api/navbar/update", form);
+      await axios.put(`${API}/api/navbar/update`, form);
       alert("Navbar Updated Successfully!");
     } catch (error) {
       console.error("Failed to update navbar:", error);

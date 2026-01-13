@@ -1,7 +1,7 @@
 import "./Navbar.css";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import axios from "axios";
+import api from "../api/axiosBase"; // <-- use base axios instance
 
 import Logo from "../assets/logo-hover.png";
 import HoverLogo from "../assets/zenlogo.png";
@@ -25,7 +25,7 @@ export default function Navbar() {
   useEffect(() => {
     const fetchNavbar = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/navbar");
+        const res = await api.get("/api/navbar"); // <-- relative path
         if (res.data) setNav(res.data);
       } catch (error) {
         console.error("Failed to fetch navbar data:", error);
@@ -65,7 +65,7 @@ export default function Navbar() {
           <li><Link to="/about" onClick={() => setMenuOpen(false)}>{nav.about}</Link></li>
           <li><Link to="/products" onClick={() => setMenuOpen(false)}>{nav.products}</Link></li>
           <li><Link to="/service" onClick={() => setMenuOpen(false)}>{nav.service}</Link></li>
-          <li><Link to="/overview" onClick={() => setMenuOpen(false)}>{nav.overview} </Link></li>
+          <li><Link to="/overview" onClick={() => setMenuOpen(false)}>{nav.overview}</Link></li>
           <li><Link to="/contact" onClick={() => setMenuOpen(false)}>{nav.contact}</Link></li>
 
           {!isContactPage && (

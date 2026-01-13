@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../../api/axiosBase"; // <-- use base axios
 import CTA from "../../components/Cta";
 import "./Billingpage.css";
 import Billingimg from "../../assets/billingbg.jpeg";
-
-const API = "http://localhost:5000";
 
 /* 🔥 DEFAULT SAFE STRUCTURE */
 const defaultBilling = {
@@ -22,9 +20,9 @@ export default function Billingpage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios
-      .get(`${API}/api/billing`)
-      .then((res) => {
+    const fetchBilling = async () => {
+      try {
+        const res = await api.get("/api/billing"); // <-- relative path
         const data = res.data || {};
 
         /* ✅ Normalize backend response */
@@ -35,9 +33,14 @@ export default function Billingpage() {
           perfectFor: Array.isArray(data.perfectFor) ? data.perfectFor : [],
           why: Array.isArray(data.why) ? data.why : [],
         });
-      })
-      .catch((err) => console.error("Billing API error:", err))
-      .finally(() => setLoading(false));
+      } catch (err) {
+        console.error("Billing API error:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBilling();
   }, []);
 
   if (loading) return <h2 style={{ padding: 20 }}>Loading...</h2>;

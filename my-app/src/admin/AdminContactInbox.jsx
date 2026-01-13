@@ -3,13 +3,20 @@ import axios from "axios";
 import AdminHeader from "./AdminHeader";
 import "./AdminAbout.css";
 
+/**
+ * ✅ Default = localhost
+ * ✅ If VITE_API_BASE_URL exists, it overrides
+ */
+const API = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+
 export default function AdminContactInbox() {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/contact-message")
-      .then((res) => setMessages(res.data));
+      .get(`${API}/api/contact-message`)
+      .then((res) => setMessages(res.data))
+      .catch((err) => console.error("Fetch failed:", err));
   }, []);
 
   return (

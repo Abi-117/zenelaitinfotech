@@ -566,3 +566,187 @@ height: 300px;
   color: #555;
 }
 */
+/* ================================
+   MOBILE RESPONSIVE PATCH
+   (NO CONTENT / NO COLOR CHANGE)
+================================ */
+
+/* ---------- TABLET (<= 900px) ---------- */
+@media (max-width: 900px) {
+
+  .about-hero-inner {
+    grid-template-columns: 1fr;
+    gap: 35px;
+    padding: 0 24px;
+    text-align: center;
+  }
+
+  .image-card {
+    margin: 0 auto;
+    max-width: 520px;
+  }
+
+  .about-main-title {
+    font-size: 40px;
+  }
+
+  .about-main-text {
+    font-size: 18px;
+    text-align: justify;
+  }
+
+  .about-story {
+    padding: 35px 30px;
+  }
+
+  .mission-vision {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .mv-card {
+    height: auto;
+  }
+
+  .mv-card:hover {
+    height: auto; /* disable height jump on mobile */
+  }
+
+  .values-section {
+    padding: 0 24px;
+  }
+}
+
+/* ---------- MOBILE (<= 600px) ---------- */
+@media (max-width: 600px) {
+
+  .about-page {
+    padding-top: 20px;
+  }
+
+  .about-hero-section {
+    padding: 40px 0;
+  }
+
+  .about-hero-inner {
+    gap: 28px;
+    padding: 0 16px;
+  }
+
+  .about-main-title {
+    font-size: 30px;
+    line-height: 1.2;
+  }
+
+  .about-main-text {
+    font-size: 16px;
+    line-height: 1.65;
+  }
+
+  .image-card {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .image-effect {
+    border-radius: 14px;
+  }
+
+  /* STORY */
+  .about-story {
+    padding: 28px 22px;
+    border-radius: 14px;
+  }
+
+  .section-title {
+    font-size: 24px;
+  }
+
+  .about-story p {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* MISSION / VISION */
+  .mission-vision {
+    margin-top: 40px;
+  }
+
+  .mv-card {
+    padding: 22px;
+    margin: 0;
+    text-align: justify;
+  }
+
+  .mv-icon {
+    width: 42px;
+    height: 42px;
+  }
+
+  .mv-card h3 {
+    font-size: 1.4rem;
+  }
+
+  .mv-card p {
+    opacity: 1;               /* always visible on mobile */
+    transform: translateY(0);
+    font-size: 15px;
+  }
+
+  /* VALUES */
+  .values-section {
+    margin: 40px auto;
+    padding: 0 16px;
+  }
+
+  .section-title1 {
+    font-size: 26px;
+    text-align: center;
+  }
+
+  .values-grid {
+    gap: 20px;
+  }
+
+  .value-card {
+    padding: 26px 22px;
+  }
+
+  .value-icon {
+    width: 38px;
+    height: 38px;
+  }
+
+  .value-card h4 {
+    font-size: 18px;
+  }
+
+  .value-card p {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+}
+
+/* ---------- SMALL MOBILE (<= 400px) ---------- */
+@media (max-width: 400px) {
+
+  .about-main-title {
+    font-size: 26px;
+  }
+
+  .about-main-text {
+    font-size: 15px;
+  }
+
+  .about-story {
+    padding: 22px 18px;
+  }
+
+  .mv-card h3 {
+    font-size: 1.3rem;
+  }
+
+  .value-card {
+    padding: 22px 18px;
+  }
+}

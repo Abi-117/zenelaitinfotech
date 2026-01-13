@@ -1,41 +1,39 @@
 import React, { useEffect, useState } from "react";
-import "./Footer.css";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import api from "../api/axiosBase"; // <-- use axios base
 import Footerlogo from "../assets/logo1.png";
 import Logo1 from "../assets/blizzen.png";
-
+import "./Footer.css";
 
 export default function Footer() {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/api/footer")
-      .then((res) => setData(res.data));
+    api
+      .get("/api/footer") // <-- relative path
+      .then((res) => setData(res.data))
+      .catch(console.error);
   }, []);
 
   return (
     <footer className="footer">
       <div className="footer-container">
 
-        {/* LOGO */}
+        {/* LOGO / Developed by */}
         <div className="footer-col">
-                   <p
-    className="footer-para"
-    style={{ display: "flex", alignItems: "center", gap: "5px" }}
-  >
-    Developed by{" "}
-    <a
-      href="https://www.blizzencreations.com/"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <img className="footerlogo" src={Logo1} alt="Blizzen Creations" />
-    </a>
-  </p>
-          
-   
+          <p
+            className="footer-para"
+            style={{ display: "flex", alignItems: "center", gap: "5px" }}
+          >
+            Developed by{" "}
+            <a
+              href="https://www.blizzencreations.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img className="footerlogo" src={Logo1} alt="Blizzen Creations" />
+            </a>
+          </p>
         </div>
 
         {/* PRODUCTS */}
@@ -75,20 +73,13 @@ export default function Footer() {
             <li>{data?.email}</li>
           </ul>
           <a href="/">
-            <img
-              src={Footerlogo}
-              alt="Footer Logo"
-              className="footer-logo"
-            />
+            <img src={Footerlogo} alt="Footer Logo" className="footer-logo" />
           </a>
         </div>
-
       </div>
 
       <div className="footer-bottom">
         {data?.copyrightText}
-
-       
       </div>
     </footer>
   );

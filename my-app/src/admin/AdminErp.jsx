@@ -3,7 +3,11 @@ import axios from "axios";
 import AdminHeader from "./AdminHeader";
 import "./AdminErp.css";
 
-const API = "http://localhost:5000";
+/**
+ * ✅ Default = localhost
+ * ✅ If VITE_API_BASE_URL exists, it overrides
+ */
+const API = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
 
 export default function AdminErp() {
   const [erp, setErp] = useState({
@@ -60,13 +64,13 @@ export default function AdminErp() {
         <input
           placeholder="Hero Title"
           value={erp.heroTitle}
-          onChange={e => setErp({ ...erp, heroTitle: e.target.value })}
+          onChange={(e) => setErp({ ...erp, heroTitle: e.target.value })}
         />
 
         <textarea
           placeholder="Hero Text"
           value={erp.heroText}
-          onChange={e => setErp({ ...erp, heroText: e.target.value })}
+          onChange={(e) => setErp({ ...erp, heroText: e.target.value })}
         />
 
         <h3>Features</h3>
@@ -74,7 +78,7 @@ export default function AdminErp() {
           <div key={i} className="row">
             <input
               value={f}
-              onChange={e => {
+              onChange={(e) => {
                 const arr = [...erp.features];
                 arr[i] = e.target.value;
                 setErp({ ...erp, features: arr });
@@ -83,7 +87,9 @@ export default function AdminErp() {
             <button onClick={() => removeItem("features", i)}>❌</button>
           </div>
         ))}
-        <button onClick={() => setErp({ ...erp, features: [...erp.features, ""] })}>
+        <button
+          onClick={() => setErp({ ...erp, features: [...erp.features, ""] })}
+        >
           + Add Feature
         </button>
 
@@ -93,7 +99,7 @@ export default function AdminErp() {
             <input
               placeholder="Title"
               value={p.title}
-              onChange={e => {
+              onChange={(e) => {
                 const arr = [...erp.perfectFor];
                 arr[i].title = e.target.value;
                 setErp({ ...erp, perfectFor: arr });
@@ -102,7 +108,7 @@ export default function AdminErp() {
             <input
               placeholder="Description"
               value={p.desc}
-              onChange={e => {
+              onChange={(e) => {
                 const arr = [...erp.perfectFor];
                 arr[i].desc = e.target.value;
                 setErp({ ...erp, perfectFor: arr });
@@ -119,7 +125,7 @@ export default function AdminErp() {
             <input
               placeholder="Title"
               value={w.title}
-              onChange={e => {
+              onChange={(e) => {
                 const arr = [...erp.why];
                 arr[i].title = e.target.value;
                 setErp({ ...erp, why: arr });
@@ -128,7 +134,7 @@ export default function AdminErp() {
             <input
               placeholder="Description"
               value={w.desc}
-              onChange={e => {
+              onChange={(e) => {
                 const arr = [...erp.why];
                 arr[i].desc = e.target.value;
                 setErp({ ...erp, why: arr });

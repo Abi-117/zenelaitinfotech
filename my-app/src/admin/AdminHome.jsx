@@ -3,7 +3,11 @@ import axios from "axios";
 import "./AdminHome.css";
 import AdminHeader from "./AdminHeader";
 
-const API = "http://localhost:5000";
+/**
+ * ✅ Default = localhost
+ * ✅ If VITE_API_BASE_URL exists, it overrides
+ */
+const API = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
 
 export default function AdminHome() {
   const [home, setHome] = useState({
@@ -17,8 +21,12 @@ export default function AdminHome() {
 
   /* FETCH HOME DATA */
   const fetchHome = async () => {
-    const res = await axios.get(`${API}/api/home`);
-    if (res.data) setHome(res.data);
+    try {
+      const res = await axios.get(`${API}/api/home`);
+      if (res.data) setHome(res.data);
+    } catch (err) {
+      console.error("Fetch failed:", err);
+    }
   };
 
   useEffect(() => {
@@ -62,8 +70,12 @@ export default function AdminHome() {
   /* DELETE SERVICE */
   const deleteService = async (id) => {
     if (!window.confirm("Delete service?")) return;
-    await axios.delete(`${API}/api/home/service/${id}`);
-    fetchHome();
+    try {
+      await axios.delete(`${API}/api/home/service/${id}`);
+      fetchHome();
+    } catch (err) {
+      console.error("Delete failed:", err);
+    }
   };
 
   /* ADD WHY CHOOSE */
@@ -77,8 +89,12 @@ export default function AdminHome() {
   /* DELETE WHY CHOOSE */
   const deleteWhy = async (id) => {
     if (!window.confirm("Delete this point?")) return;
-    await axios.delete(`${API}/api/home/why/${id}`);
-    fetchHome();
+    try {
+      await axios.delete(`${API}/api/home/why/${id}`);
+      fetchHome();
+    } catch (err) {
+      console.error("Delete failed:", err);
+    }
   };
 
   return (
@@ -94,9 +110,7 @@ export default function AdminHome() {
           <input
             placeholder="Hero Title"
             value={home.heroTitle}
-            onChange={(e) =>
-              setHome({ ...home, heroTitle: e.target.value })
-            }
+            onChange={(e) => setHome({ ...home, heroTitle: e.target.value })}
           />
           <textarea
             placeholder="Hero Subtitle"
@@ -113,16 +127,12 @@ export default function AdminHome() {
           <input
             placeholder="About Title"
             value={home.aboutTitle}
-            onChange={(e) =>
-              setHome({ ...home, aboutTitle: e.target.value })
-            }
+            onChange={(e) => setHome({ ...home, aboutTitle: e.target.value })}
           />
           <textarea
             placeholder="About Text"
             value={home.aboutText}
-            onChange={(e) =>
-              setHome({ ...home, aboutText: e.target.value })
-            }
+            onChange={(e) => setHome({ ...home, aboutText: e.target.value })}
           />
         </section>
 

@@ -3,7 +3,12 @@ import axios from "axios";
 import "./AdminAbout.css";
 import AdminHeader from "./AdminHeader";
 
-const API = "http://localhost:5000";
+/**
+ * ✅ Default localhost
+ * ✅ If VITE_API_BASE_URL exists, it will override
+ */
+const API =
+  import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
 
 export default function AdminAbout() {
   const [about, setAbout] = useState({
@@ -49,6 +54,7 @@ export default function AdminAbout() {
         {/* HERO */}
         <section>
           <h2>Hero Section</h2>
+
           <input
             value={about.heroTitle}
             onChange={(e) =>
@@ -73,7 +79,6 @@ export default function AdminAbout() {
             placeholder="Paragraph 2"
           />
 
-          {/* IMAGE UPLOAD */}
           <input
             type="file"
             accept="image/*"
@@ -85,7 +90,6 @@ export default function AdminAbout() {
             }
           />
 
-          {/* PREVIEW */}
           {about.heroImage && (
             <img
               src={`${API}/uploads/${about.heroImage}`}
@@ -98,6 +102,7 @@ export default function AdminAbout() {
         {/* STORY */}
         <section>
           <h2>Our Story</h2>
+
           <input
             value={about.storyTitle}
             onChange={(e) =>
@@ -163,6 +168,7 @@ export default function AdminAbout() {
                   setAbout({ ...about, values: arr });
                 }}
               />
+
               <textarea
                 value={v.text}
                 placeholder="Text"
@@ -172,6 +178,7 @@ export default function AdminAbout() {
                   setAbout({ ...about, values: arr });
                 }}
               />
+
               <input
                 value={v.icon}
                 placeholder="Icon name"

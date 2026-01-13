@@ -3,7 +3,11 @@ import axios from "axios";
 import AdminHeader from "./AdminHeader";
 import "./admin.css";
 
-const API = "http://localhost:5000";
+/**
+ * ✅ Default = localhost
+ * ✅ If VITE_API_BASE_URL exists, it overrides
+ */
+const API = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
 
 export default function AdminCrm() {
   const [crm, setCrm] = useState({

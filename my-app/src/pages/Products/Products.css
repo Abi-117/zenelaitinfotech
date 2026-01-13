@@ -167,13 +167,104 @@
   cursor: pointer;
 }
 
-/* Mobile */
-@media (max-width: 900px) {
-  .product-page {
-    flex-direction: column;
+/* ==================================
+   MOBILE LAYOUT FIX – PRODUCTS PAGE
+   (NO COLOR / NO DESKTOP CHANGE)
+================================== */
+
+@media (max-width: 600px) {
+
+  /* MAIN WRAPPER */
+  .product-topic {
+    width: 100%;
+    overflow-x: hidden;
   }
 
-  .product-left {
+  .product-page {
+    flex-direction: column;
+    gap: 20px;
+    padding: 16px;
     width: 100%;
+  }
+
+  /* LEFT SIDEBAR FIX */
+  .product-left {
+    width: 80%;
+    height: auto;              /* 🔥 important */
+    padding: 20px;
+    border-radius: 14px;
+  }
+
+  .sidebar-title {
+    font-size: 26px;
+    text-align: center;
+  }
+
+  .sidebar-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .sidebar-list li {
+    margin-bottom: 0;
+    padding: 14px;
+    font-size: 15px;
+    text-align: center;
+  }
+
+  /* RIGHT CONTENT FIX */
+  .product-right {
+    width: 100%;
+    padding: 0;
+    margin-top: 10px;
+  }
+
+  .label {
+    font-size: 15px;
+  }
+
+  .title {
+    font-size: 32px !important;
+    line-height: 1.25;
+    text-align: left;
+  }
+
+  .desc {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .benefits-title {
+    font-size: 17px;
+  }
+
+  .benefits-list li {
+    font-size: 14px;
+  }
+
+  /* BUTTON STACK */
+  .btn-row {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .details-btnn,
+  .demo-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 15px;
+  }
+}
+
+/* SMALL MOBILE */
+@media (max-width: 400px) {
+
+  .product-heading-section .main-heading {
+    font-size: 28px;
+  }
+
+  .title {
+    font-size: 26px !important;
   }
 }

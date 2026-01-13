@@ -167,69 +167,129 @@
 /* ===================== RESPONSIVE ====================== */
 
 /* ----------- TABLETS BELOW 1024px ----------- */
-@media (max-width: 1024px) {
+/* =====================================
+   CONTACT PAGE – MOBILE FIX ONLY
+   NO DESKTOP / COLOR CHANGE
+===================================== */
+
+@media (max-width: 600px) {
+
+  /* PAGE WRAPPER */
+  .contact-page {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .contact-main {
+    padding: 4rem 1rem 2rem;
+  }
+
+  /* HERO */
+  .contact-hero {
+    margin-bottom: 2rem;
+  }
+
+  .contact-hero h1 {
+    font-size: 1.9rem;
+  }
+
+  .contact-hero p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  /* GRID STACK */
   .contact-grid {
     flex-direction: column;
+    gap: 1.5rem;
   }
 
-  .left-column {
+  .left-column,
+  .contact-right {
     width: 100%;
   }
 
-  .contact-image img {
-    height: 230px;
-  }
-}
-
-/* ----------- MOBILE BELOW 768px ----------- */
-@media (max-width: 768px) {
-  .contact-hero h1 {
-    font-size: 2.4rem;
-  }
-
-  .contact-hero p {
-    font-size: 1rem;
-  }
-
+  /* FORM CARD */
   .contact-form-card {
-    padding: 1.5rem;
+    padding: 2rem;
   }
 
+  .contact-form-card h2 {
+    font-size: 1.4rem;
+    text-align: center;
+  }
+
+  /* MAP */
+  .map-page {
+    padding: 1.2rem;
+  }
+
+  .map-page h2 {
+    font-size: 1.4rem;
+  }
+
+  .map-page p {
+    font-size: 0.9rem;
+  }
+
+  iframe {
+    height: 260px;
+  }
+
+  /* IMAGE */
   .contact-image img {
-    height: 200px;
+    height: 180px;
+    border-radius: 10px;
   }
 
-  .info-item {
-    align-items: flex-start;
-  }
-}
-
-/* ----------- SMALL MOBILES BELOW 480px ----------- */
-@media (max-width: 480px) {
-  .contact-hero h1 {
-    font-size: 2rem;
-  }
-
-  .contact-hero p {
-    font-size: 0.9rem;
-  }
-
-  .contact-form-card input,
-  .contact-form-card textarea {
-    font-size: 0.9rem;
-    padding: 0.65rem 0.9rem;
-  }
-
-  .contact-form-card button {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .info-item {
-    flex-direction: row;
+  /* INFO CARD */
+  .contact-info-card {
+    padding: 1.2rem;
   }
 
   .contact-info-card h2 {
     font-size: 1.4rem;
+    text-align: center;
+  }
+
+  .info-item {
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+    align-items: flex-start;
+  }
+
+  .info-icon {
+    margin: 0;
+    font-size: 1.6rem;
+  }
+
+  .info-item h4 {
+    font-size: 1rem;
+  }
+
+  .info-item p {
+    width: auto;
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+
+  /* BUSINESS HOURS */
+  .business-hours-card {
+    padding: 1rem;
+  }
+
+  .business-hours-card h3 {
+    font-size: 1.2rem;
+  }
+
+  .business-hours-card p {
+    font-size: 0.9rem;
+  }
+
+  /* BUTTON */
+  .contact-form-card button {
+    width: 100%;
+    justify-content: center;
   }
 }
+

@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import api, { API_BASE_URL } from "../api/axiosBase";
 import AdminHeader from "./AdminHeader";
 import "./AdminProduct.css";
-
-const API = "http://localhost:5000";
 
 export default function AdminProduct() {
   const [products, setProducts] = useState([]);
@@ -21,7 +19,7 @@ export default function AdminProduct() {
   /* ===================== FETCH PRODUCTS ===================== */
   const fetchProducts = async () => {
     try {
-      const res = await axios.get(`${API}/api/products`);
+      const res = await api.get("/api/products");
       setProducts(res.data);
     } catch (err) {
       console.error("Failed to fetch products:", err);
@@ -53,11 +51,11 @@ export default function AdminProduct() {
 
       if (form._id) {
         // UPDATE
-        await axios.put(`${API}/api/products/${form._id}`, formData);
+        await api.put(`/api/products/${form._id}`, formData);
         alert("Product updated successfully!");
       } else {
         // CREATE
-        await axios.post(`${API}/api/products`, formData);
+        await api.post("/api/products", formData);
         alert("Product created successfully!");
       }
 
@@ -102,7 +100,7 @@ export default function AdminProduct() {
     if (!window.confirm("Are you sure you want to delete this product?")) return;
 
     try {
-      await axios.delete(`${API}/api/products/${id}`);
+      await api.delete(`/api/products/${id}`);
       fetchProducts();
     } catch (err) {
       alert("Delete failed");
@@ -120,24 +118,30 @@ export default function AdminProduct() {
           <input
             placeholder="Product ID (billing / crm / erp)"
             value={form.productId}
-            onChange={(e) => setForm({ ...form, productId: e.target.value })}
-            disabled={!!form._id} // prevent changing ID on edit
+            onChange={(e) =>
+              setForm({ ...form, productId: e.target.value })
+            }
+            disabled={!!form._id}
           />
+
           <input
             placeholder="Label"
             value={form.label}
             onChange={(e) => setForm({ ...form, label: e.target.value })}
           />
+
           <input
             placeholder="Title"
             value={form.title}
             onChange={(e) => setForm({ ...form, title: e.target.value })}
           />
+
           <textarea
             placeholder="Description"
             value={form.desc}
             onChange={(e) => setForm({ ...form, desc: e.target.value })}
           />
+
           <textarea
             placeholder="Benefits (comma separated)"
             value={form.benefits}
@@ -148,7 +152,9 @@ export default function AdminProduct() {
           <input
             type="file"
             accept="image/*"
-            onChange={(e) => setForm({ ...form, imageFile: e.target.files[0] })}
+            onChange={(e) =>
+              setForm({ ...form, imageFile: e.target.files[0] })
+            }
           />
 
           {/* IMAGE PREVIEW */}
@@ -160,7 +166,7 @@ export default function AdminProduct() {
             />
           ) : form.image ? (
             <img
-              src={`${API}/uploads/${form.image}`}
+              src={`${API_BASE_URL}/uploads/${form.image}`}
               alt="Current"
               style={{ width: "120px", marginTop: "10px" }}
             />
@@ -182,16 +188,21 @@ export default function AdminProduct() {
           {products.map((p) => (
             <div className="admin-card" key={p._id}>
               <h3>{p.title}</h3>
+
               {p.image && (
                 <img
-                  src={`${API}/uploads/${p.image}`}
+                  src={`${API_BASE_URL}/uploads/${p.image}`}
                   alt={p.title}
                   style={{ width: "80px" }}
                 />
               )}
+
               <div className="admin-card-buttons">
                 <button onClick={() => editProduct(p)}>Edit</button>
-                <button className="del" onClick={() => deleteProduct(p._id)}>
+                <button
+                  className="del"
+                  onClick={() => deleteProduct(p._id)}
+                >
                   Delete
                 </button>
               </div>

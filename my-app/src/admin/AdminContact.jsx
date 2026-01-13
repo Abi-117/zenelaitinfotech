@@ -3,7 +3,11 @@ import axios from "axios";
 import AdminHeader from "./AdminHeader";
 import "./AdminAbout.css";
 
-const API = "http://localhost:5000";
+/**
+ * ✅ Default = localhost
+ * ✅ If VITE_API_BASE_URL exists, it overrides
+ */
+const API = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
 
 export default function AdminContact() {
   const [data, setData] = useState({
@@ -21,8 +25,12 @@ export default function AdminContact() {
 
   /* FETCH */
   const fetchData = async () => {
-    const res = await axios.get(`${API}/api/contact-page`);
-    if (res.data) setData(res.data);
+    try {
+      const res = await axios.get(`${API}/api/contact-page`);
+      if (res.data) setData(res.data);
+    } catch (err) {
+      console.error("Fetch failed:", err);
+    }
   };
 
   useEffect(() => {
@@ -60,16 +68,12 @@ export default function AdminContact() {
           <h2>Hero Section</h2>
           <input
             value={data.heroTitle}
-            onChange={(e) =>
-              setData({ ...data, heroTitle: e.target.value })
-            }
+            onChange={(e) => setData({ ...data, heroTitle: e.target.value })}
             placeholder="Hero Title"
           />
           <textarea
             value={data.heroText}
-            onChange={(e) =>
-              setData({ ...data, heroText: e.target.value })
-            }
+            onChange={(e) => setData({ ...data, heroText: e.target.value })}
             placeholder="Hero Text"
           />
         </section>
@@ -79,23 +83,17 @@ export default function AdminContact() {
           <h2>Contact Info</h2>
           <textarea
             value={data.address}
-            onChange={(e) =>
-              setData({ ...data, address: e.target.value })
-            }
+            onChange={(e) => setData({ ...data, address: e.target.value })}
             placeholder="Address"
           />
           <input
             value={data.phone}
-            onChange={(e) =>
-              setData({ ...data, phone: e.target.value })
-            }
+            onChange={(e) => setData({ ...data, phone: e.target.value })}
             placeholder="Phone"
           />
           <input
             value={data.email}
-            onChange={(e) =>
-              setData({ ...data, email: e.target.value })
-            }
+            onChange={(e) => setData({ ...data, email: e.target.value })}
             placeholder="Email"
           />
         </section>
@@ -112,9 +110,7 @@ export default function AdminContact() {
           />
           <input
             value={data.mapUrl}
-            onChange={(e) =>
-              setData({ ...data, mapUrl: e.target.value })
-            }
+            onChange={(e) => setData({ ...data, mapUrl: e.target.value })}
             placeholder="Google Map Embed URL"
           />
 

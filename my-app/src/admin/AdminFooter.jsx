@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import AdminHeader from "./AdminHeader";
-//import "./AdminAbout.css";
+// import "./AdminAbout.css";
+
+/**
+ * ✅ Default = localhost
+ * ✅ If VITE_API_BASE_URL exists, it overrides
+ */
+const API = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
 
 export default function AdminFooter() {
   const [footer, setFooter] = useState({
@@ -19,14 +25,19 @@ export default function AdminFooter() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/footer")
-      .then((res) => res.data && setFooter(res.data));
+      .get(`${API}/api/footer`)
+      .then((res) => res.data && setFooter(res.data))
+      .catch((err) => console.error("Fetch failed:", err));
   }, []);
 
   const save = () => {
     axios
-      .put("http://localhost:5000/api/footer", footer)
-      .then(() => alert("Footer updated"));
+      .put(`${API}/api/footer`, footer)
+      .then(() => alert("Footer updated"))
+      .catch((err) => {
+        console.error("Save failed:", err);
+        alert("Save failed ❌");
+      });
   };
 
   return (
@@ -134,16 +145,12 @@ export default function AdminFooter() {
           />
           <input
             value={footer.phone}
-            onChange={(e) =>
-              setFooter({ ...footer, phone: e.target.value })
-            }
+            onChange={(e) => setFooter({ ...footer, phone: e.target.value })}
             placeholder="Phone"
           />
           <input
             value={footer.email}
-            onChange={(e) =>
-              setFooter({ ...footer, email: e.target.value })
-            }
+            onChange={(e) => setFooter({ ...footer, email: e.target.value })}
             placeholder="Email"
           />
         </section>
